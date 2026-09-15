@@ -1,4 +1,4 @@
-# Agent Harnessing
+# Memory Loom
 
 A source-backed depot of reusable patterns for **steering, equipping, running, validating, and improving coding agents**.
 
