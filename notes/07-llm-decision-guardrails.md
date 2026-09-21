@@ -1,8 +1,9 @@
 ---
 id: AH-007
 title: LLM decision guardrails
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -61,12 +62,10 @@ An **LLM policy step** should declare:
 - batch size and token budget;
 - audit fields.
 
-## Plugin Implication
+## Design Relevance
 
-- Provide a reusable structured-classification adapter.
-- Require explicit fallback policy before activation.
-- Generate tests for missing IDs, duplicates, malformed payloads, refusal, timeout, and partial responses.
-- Capture prompt version and model metadata alongside the verdict when available.
+- Supports deterministic scope and lifecycle filters before any future model-assisted memory decision.
+- The first Memory Loom study avoids model-based admission entirely, so this pattern is deferred rather than assumed effective.
 
 ## Evidence
 

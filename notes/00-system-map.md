@@ -1,8 +1,9 @@
 ---
 id: AH-000
 title: Harnessing system map
-status: initial
-maturity: inferred
+kind: evidence-note
+claim_status: inferred
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -48,20 +49,18 @@ task intent
 - **Configuration vs implementation:** Capability declarations can evolve separately from runtime code.
 - **Tool behavior vs identity privilege:** A read-only tool surface does not prove the enclosing process has read-only credentials.
 
-## Generalized Primitive
+## Inference
 
-The future tool should orchestrate these planes through composable interfaces rather than embed one monolithic agent loop.
+The five-plane model is a synthesis, not a structure named by the source. It is useful because it prevents instructions, evidence, workflow state, execution privileges, and durable learning from collapsing into one prompt or store.
 
-## Continual Personalization Extension
+## Limits
 
-The learning plane can extend beyond repository guidance into user-scoped, evolving memory:
+- One repository demonstrates the ingredients, not the completeness or superiority of the five-plane taxonomy.
+- The source concerns repository and operational harnessing, not personalized memory.
 
-```text
-interaction -> candidate -> consolidation -> typed memory
-            -> retrieval -> behavior -> feedback -> interaction
-```
+## Design Relevance
 
-This extension is specified in `AH-010` through `AH-016`. It remains separate from active task state so temporary work, user beliefs, and reusable agent lessons do not collapse into one store.
+Memory Loom reuses two narrow lessons: keep memory separate from current task state, and preserve provenance through validation. This source does not show that user memory improves behavior.
 
 ## Evidence
 
@@ -71,6 +70,6 @@ This extension is specified in `AH-010` through `AH-016`. It remains separate fr
 - `pipeline-fl-control-plane@df513fa4:docs/design/handler-model.md` — declarative execution model.
 - `pipeline-fl-control-plane@df513fa4:docs/agent-long-task-notes.md` — durable task state.
 
-## Open Questions
+## Open Question
 
-- Which plane should own policy conflicts when a plugin contributes instructions, tools, and validators together?
+- Does the five-plane taxonomy remain useful when tested against other agent systems?

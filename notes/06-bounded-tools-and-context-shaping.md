@@ -1,8 +1,9 @@
 ---
 id: AH-006
 title: Bounded tools and context shaping
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -50,11 +51,10 @@ task scope -> focus summary -> evidence references -> bounded reads -> exact art
 - Process-local read-only tools do not automatically imply least-privilege process credentials.
 - Tool names and storage layouts are product-specific; the progressive access pattern is portable.
 
-## Plugin Implication
+## Design Relevance
 
-- Tool manifests should declare scope, mutability, input/output schemas, payload limits, and credential needs.
-- A context-pack builder should prefer summaries and references over raw evidence.
-- A policy check should compare declared tool mutability with actual credential capability.
+- Supports bounded context manifests with provenance and progressive access to evidence.
+- Read-only tool shape alone does not establish authorization or prevent data leakage.
 
 ## Evidence
 

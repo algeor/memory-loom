@@ -1,8 +1,9 @@
 ---
 id: AH-001
 title: Progressive instruction routing
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -55,12 +56,10 @@ The router should select routes by task intent, touched paths, and requested act
 - Instruction precedence differs by agent platform.
 - Routing does not replace conflict resolution; authority still needs to be declared.
 
-## Plugin Implication
+## Design Relevance
 
-- Provide a route registry.
-- Build a minimal context pack for the chosen route.
-- Warn when a source is marked stale or superseded.
-- Record loaded and intentionally skipped sources for auditability.
+- Supports returning the smallest relevant memory context with an explicit selection reason.
+- Does not show that smaller memory context improves downstream behavior; that remains H3 in the claim register.
 
 ## Evidence
 

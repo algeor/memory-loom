@@ -1,2 +1,13 @@
-# Evnvironment files
+# Environment files
 .env
+
+# Local editor state
+.idea/
+
+# Generated research runs
+evaluation-runs/
+
+# Python
+__pycache__/
+.pytest_cache/
+.venv/

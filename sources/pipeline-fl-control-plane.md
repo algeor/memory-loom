@@ -58,14 +58,14 @@ Source instructions are analyzed as artifacts. They are not automatically inheri
 | `handler_orchestrator/relevance_evaluator.py` | Structured, fail-closed LLM decision | AH-007 |
 | `tests/handler_orchestrator/test_relevance_evaluator.py` | Guardrail verification | AH-007 |
 
-## Not Yet Fully Extracted
+## Unextracted And Outside Current Scope
 
 - Compatibility strategy between native skills and source-command wrappers.
 - Hook lifecycle design; `.codex/hooks.json` is currently empty and provides no implemented pattern yet.
 - Deployment command safety as a generic privileged-operation workflow.
 - Interactive API exploration from `.agents/skills/hdlf-query/` as a reusable investigation shell.
 - How source-backed doc corrections were found and prioritized across the large commit.
-- Metrics for whether progressive disclosure improves task success, latency, or token usage.
+- Metrics for whether progressive disclosure improves task success, latency, or token usage; the source does not provide this result.
 - Plugin packaging, discovery, conflict resolution, and version negotiation.
 
 ## Excluded From Generalization
@@ -81,5 +81,5 @@ Source instructions are analyzed as artifacts. They are not automatically inheri
 1. Record the new source commit or range.
 2. Inventory changed harness, docs, runtime, and validation files.
 3. Update this coverage table before adding conclusions.
-4. Add or revise focused notes with observed/inferred/proposed labels.
+4. Add or revise focused notes with observed or inferred labels.
 5. Update `STATUS.md` with the single next extraction step.

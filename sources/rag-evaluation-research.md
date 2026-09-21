@@ -4,32 +4,30 @@
 
 - Reviewed: 2026-09-21.
 - Subject: Retrieval, RAG, and long-term memory evaluation methods.
-- Evidence class: Primary research papers plus proposed product-specific test gates.
+- Evidence class: Primary research papers.
 
 ## Verified Sources
 
 | Source | Verified contribution | Used in |
 |---|---|---|
-| `RAGAS` (`arXiv:2309.15217v2`) | Separates retrieval relevance, response faithfulness, and response quality; proposes reference-free automated metrics | RAG stage separation and optional model-assisted diagnostics |
-| `BEIR` (`arXiv:2104.08663v4`) | Evaluates lexical, sparse, dense, late-interaction, and reranking approaches across heterogeneous retrieval datasets | Retrieval baselines and standard ranking metrics |
-| `LongMemEval` (`arXiv:2410.10813v2`) | Evaluates extraction, multi-session reasoning, temporal reasoning, knowledge updates, and abstention over long interaction histories | Memory-specific gold-set slices and longitudinal replay |
+| [RAGAS](https://arxiv.org/abs/2309.15217) (`arXiv:2309.15217v2`) | Separates retrieval relevance, response faithfulness, and response quality; proposes reference-free automated metrics | Stage separation and limits on model-assisted diagnostics |
+| [BEIR](https://arxiv.org/abs/2104.08663) (`arXiv:2104.08663v4`) | Compares retrieval approaches across heterogeneous datasets using standard ranking metrics | Retrieval metrics and later retriever comparisons |
+| [LongMemEval](https://arxiv.org/abs/2410.10813) (`arXiv:2410.10813v2`) | Includes multi-session reasoning, temporal reasoning, knowledge updates, and abstention | Longitudinal scenario design |
 
 ## Interpretation Limits
 
 - RAGAS is an evaluation framework, not proof that a system is correct or safe.
 - BEIR evaluates general information retrieval, not personalized memory policy or deletion semantics.
 - LongMemEval supplies a useful benchmark taxonomy, but product-specific preferences, privacy boundaries, and tool behavior still require local cases.
-- Numeric release thresholds in the implementation architecture are proposed starting points, not values established by these papers.
+- None of these papers establishes a universal success threshold for Memory Loom.
 
-## Resulting Architecture Decisions
+## Use In This Repository
 
-- Maintain a human-reviewed, product-specific gold set.
-- Evaluate retrieval and generation separately.
-- Include lexical, vector, hybrid, no-memory, and oracle baselines.
-- Add temporal update, abstention, scope isolation, deletion, and prompt-injection cases.
-- Use model-based judges only after calibration against human labels.
-- Gate releases on grounded claims, prompt-injection resistance, independent tool authorization, and paired regression results.
+- [`../research/protocol.md`](../research/protocol.md) separates retrieval from generation outcomes.
+- The dataset includes temporal updates, abstention, and hard negatives.
+- Human labels remain primary; model judges require calibration.
+- Vector and hybrid retrieval are deferred comparisons, not assumed improvements.
 
 ## Next Evidence Step
 
-Implement the first 100-case development set, measure inter-reviewer disagreement, and calibrate release thresholds from observed baseline distributions.
+Verify additional personalized-memory benchmarks from primary papers, then justify each added dataset slice or metric explicitly.

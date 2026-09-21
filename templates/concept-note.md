@@ -1,46 +1,44 @@
 ---
 id: AH-XXX
 title: Concept title
-status: draft
-maturity: observed
-source_repo: pipeline-fl-control-plane
-source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
+kind: evidence-note
+claim_status: observed
+verification: unverified
+source_repo: repository-name
+source_commit: full-commit-hash
 ---
 
 # Concept Title
 
-## Use When
+## Claim
 
-- The task or design situation where this concept applies.
+One concise source-backed or explicitly inferred statement.
 
-## Core Pattern
+## Why It Matters
 
-One concise statement of the reusable idea.
+- The concrete failure mode or cost this pattern addresses.
 
-## Problem It Solves
+## Source Observation
 
-- The failure mode or cost avoided by this pattern.
+- What the cited source directly does.
 
-## Observed Implementation
+## Inference
 
-- What the source repository actually does.
+- The portable principle derived from the observation, if any.
 
-## Generalized Primitive
+## Limits
 
-- The smallest portable abstraction suggested by the evidence.
+- What the source does not prove.
+- Source-specific assumptions that should not be generalized.
 
-## Portability Limits
+## Design Relevance
 
-- Source-specific assumptions that must not be generalized blindly.
-
-## Plugin Implication
-
-- How a tool could expose, configure, or validate this concept.
+- How the evidence informs, but does not validate, a Memory Loom design decision.
 
 ## Evidence
 
-- `repo@commit:path#section-or-symbol` — what this source proves.
+- `repo@commit:path#symbol-or-section` — what this reference demonstrates.
 
-## Open Questions
+## Open Question
 
-- The next uncertainty worth resolving.
+- The next uncertainty that needs source evidence or an experiment.

@@ -1,8 +1,9 @@
 ---
 id: AH-002
 title: Durable task memory and learning
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -47,7 +48,7 @@ Promotion should be evidence-based: repeated occurrence, stable repository rule,
 
 - This note covers resumable work state and repository-level learning.
 - User preferences, evolving beliefs, reusable behavioral lessons, and cross-session retrieval require a separate lifecycle.
-- See [Continual personalized memory loop](10-continual-personalized-memory.md) for that extension.
+- See the [Memory Loom research boundary](../research/README.md) for the separate cross-session study.
 
 ## Portability Limits
 
@@ -55,12 +56,10 @@ Promotion should be evidence-based: repeated occurrence, stable repository rule,
 - Retention periods are policy, not universal truth.
 - Notes must never contain secrets or raw credential-bearing logs.
 
-## Plugin Implication
+## Design Relevance
 
-- `note start|resume|update|close`
-- `retrospective collect|triage|promote|cleanup`
-- Schema validation for required note sections.
-- Refuse deletion when blockers, open next steps, or unique unpromoted evidence remain.
+- Supports separating active task state, source evidence, and durable memory records.
+- Does not justify storing user preferences or inferring them from task notes.
 
 ## Evidence
 

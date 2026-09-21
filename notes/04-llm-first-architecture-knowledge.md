@@ -1,8 +1,9 @@
 ---
 id: AH-004
 title: LLM-first architecture knowledge
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -58,12 +59,10 @@ The validator runs in pre-commit and CI with strict spec validation.
 
 Treat knowledge documents like tools: each has a description, applicability conditions, boundaries, inputs, outputs, failure modes, implementation links, and update triggers.
 
-## Plugin Implication
+## Design Relevance
 
-- Generate and validate focused-doc skeletons.
-- Build a route index from metadata.
-- Report uncovered legacy sections and broken evidence links.
-- Assemble a task context pack from only the selected documents.
+- Supports the separation between research authority, design documents, evidence notes, and source ledgers used in this repository.
+- Documentation structure is not evidence for the Memory Loom hypotheses.
 
 ## Evidence
 

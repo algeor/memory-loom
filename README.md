@@ -1,92 +1,74 @@
-# Agent Harnessing
+# Memory Loom
 
-A source-backed depot of reusable patterns for **steering, equipping, running, validating, and improving coding agents**.
+Memory Loom is a research project about **external memory for coding assistants**.
 
-This repository does not copy the product architecture of `pipeline-fl-control-plane`. It extracts the harnessing ideas demonstrated by that repository and reformulates them as portable building blocks.
+The first question is deliberately narrow:
 
-## Core Model
+> Does a small store of explicit, user-approved preferences improve behavior across sessions compared with no memory, recent history, or a rolling summary?
 
-```text
-request
-  │
-  ▼
-instruction router ──► focused knowledge pack
-  │                         │
-  ▼                         ▼
-change workflow ─────► capability/runtime adapter
-  │                         │
-  ▼                         ▼
-validation + evidence ◄── structured result
-  │
-  ▼
-durable notes ──► retrospective ──► improved guidance
-```
+This repository currently contains a research protocol and a reference design. It does **not** contain a working memory service or experimental results.
 
-The central idea is a **closed-loop harness**:
+## Current Maturity
 
-1. Route the task to the smallest relevant instructions.
-2. Ground decisions in code, specs, tests, and ownership boundaries.
-3. Execute through declared capabilities and typed contracts.
-4. Validate with risk-shaped checks.
-5. Persist task state and promote repeated lessons back into the harness.
+| Item | State |
+|---|---|
+| Source-backed agent-harness patterns | Documented from one source repository |
+| Research questions and hypotheses | Defined, not yet tested |
+| Experimental protocol | Specified, not yet run |
+| Reference implementation | Designed, not implemented |
+| Scientific conclusions | None |
 
-## Catalog
+Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.
 
-- [System map](notes/00-system-map.md)
-- [Progressive instruction routing](notes/01-progressive-instruction-routing.md)
-- [Durable task memory and learning](notes/02-durable-task-memory.md)
-- [Spec-driven change lifecycle](notes/03-spec-driven-change-lifecycle.md)
-- [LLM-first architecture knowledge](notes/04-llm-first-architecture-knowledge.md)
-- [Declarative agent runtime](notes/05-declarative-agent-runtime.md)
-- [Bounded tools and context shaping](notes/06-bounded-tools-and-context-shaping.md)
-- [LLM decision guardrails](notes/07-llm-decision-guardrails.md)
-- [Review, validation, and failure attribution](notes/08-review-and-validation.md)
-- [Pluggable tool blueprint](notes/09-pluggable-tool-blueprint.md)
-- [Continual personalized memory loop](notes/10-continual-personalized-memory.md)
-- [Memory candidate admission](notes/11-memory-candidate-admission.md)
-- [Typed evolving memory](notes/12-typed-evolving-memory.md)
-- [Adaptive memory retrieval](notes/13-adaptive-memory-retrieval.md)
-- [Memory governance and safety](notes/14-memory-governance-and-safety.md)
-- [Personalized-memory evaluation](notes/15-personalized-memory-evaluation.md)
-- [Personalized-memory prototype](notes/16-personalized-memory-prototype.md)
+## Scope
 
-## Implementation Architecture
+The first study includes only:
 
-- [Architecture overview](implementation-architecture/README.md)
-- [System architecture](implementation-architecture/01-system-architecture.md)
-- [Storage and data model](implementation-architecture/02-storage-and-data-model.md)
-- [Retrieval and context](implementation-architecture/03-retrieval-and-context.md)
-- [Client integrations](implementation-architecture/04-client-integrations.md)
-- [Privacy and security](implementation-architecture/05-privacy-and-security.md)
-- [Delivery plan](implementation-architecture/06-delivery-plan.md)
-- [Anonymisation and pseudonymisation](implementation-architecture/07-de-identification.md)
-- [RAG evaluation and testing](implementation-architecture/08-rag-evaluation-and-testing.md)
-- [Anonymisation and pseudonymisation](implementation-architecture/07-de-identification.md)
+- explicit communication or workflow preferences;
+- direct corrections to prior assistant behavior;
+- user approval before durable storage;
+- scoped retrieval with provenance;
+- correction and deletion;
+- controlled comparison against simpler baselines.
 
-## Evidence Model
+The first study excludes:
 
-Each note distinguishes:
+- inferred personal traits;
+- autonomous memory promotion;
+- psychological profiling;
+- continuous fine-tuning;
+- multi-user hosting;
+- claims of production security or legal compliance.
 
-- **Observed** — directly present in source code or committed guidance.
-- **Inferred** — a reusable principle derived from multiple observed choices.
-- **Proposed** — a design direction for the future pluggable tool.
+## Repository Map
 
-Source references use this form:
+| Area | Authority |
+|---|---|
+| [`research/`](research/README.md) | Questions, hypotheses, claims, and experimental protocol |
+| [`design/`](design/README.md) | Minimal system being proposed for evaluation |
+| [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
+| [`sources/`](sources/README.md) | Provenance and literature ledgers |
+| [`STATUS.md`](STATUS.md) | Current work, decisions, and next milestone |
 
-```text
-pipeline-fl-control-plane@df513fa4:path/to/file#section-or-symbol
-```
+These layers are intentionally separate:
 
-See the source ledgers for [the source repository](sources/pipeline-fl-control-plane.md), [the personalization brief](sources/continual-personalization-brief.md), and [RAG evaluation research](sources/rag-evaluation-research.md).
+- **Evidence** records what a source actually demonstrates.
+- **Inference** generalizes across observations.
+- **Hypothesis** states a falsifiable expected effect.
+- **Design decision** defines the system to test.
+- **Result** requires completed experiments and does not exist yet.
 
-## Working Method
+## Start Here
 
-- Add one focused concept note at a time.
-- Keep routing metadata near the top.
-- Link deep evidence instead of duplicating it.
-- Record rejected assumptions and portability limits.
-- Treat `STATUS.md` as the durable continuation point.
+1. Read the [research overview](research/README.md).
+2. Check the [claim register](research/claims.md) before repeating a claim.
+3. Use the [experiment protocol](research/protocol.md) for study design.
+4. Use the [reference design](design/README.md) only when implementing the system under test.
 
-## Current State
+## Origin
 
-The depot now covers repository-oriented agent harnessing, a proposed continual-personalization extension, and a local-first implementation architecture for Claude Code and Codex CLI. The next pass should turn the memory event, candidate, record, retrieval, feedback, and egress contracts into machine-readable schemas and a reference prototype.
+The project began as an extraction of reusable coding-agent harness patterns from `pipeline-fl-control-plane`. Those observations remain in [`notes/`](notes/README.md), but they are supporting evidence—not proof of the Memory Loom hypothesis.
+
+## License
+
+See [`LICENSE`](LICENSE).

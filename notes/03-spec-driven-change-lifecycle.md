@@ -1,8 +1,9 @@
 ---
 id: AH-003
 title: Spec-driven change lifecycle
-status: initial
-maturity: observed
+kind: evidence-note
+claim_status: observed
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -56,12 +57,10 @@ idea -> proposal -> design/specs -> tasks -> implementation -> verification -> a
 
 Actions can be entered fluidly, but each action has permissions, preconditions, and output contracts.
 
-## Plugin Implication
+## Design Relevance
 
-- Workflow adapters for different spec systems.
-- Action-level capability restrictions.
-- Machine-readable artifact status and dependency graph.
-- Checkpoints when ambiguity, blockers, or spec drift appear.
+- Supports versioned research artifacts, explicit phase gates, and protocol changes before held-out evaluation.
+- Does not establish which memory architecture or experimental condition will perform best.
 
 ## Evidence
 

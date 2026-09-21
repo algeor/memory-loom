@@ -1,8 +1,9 @@
 ---
 id: AH-005
 title: Declarative agent runtime
-status: initial
-maturity: inferred
+kind: evidence-note
+claim_status: inferred
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -62,12 +63,10 @@ capability:
 - Environment variables are one transport; a local process or remote worker may use another.
 - Open-ended JSON output increases flexibility but requires a factual output description and preserved raw evidence.
 
-## Plugin Implication
+## Design Relevance
 
-- Capability registry with typed descriptors.
-- Runtime adapters for local process, container job, and remote agent service.
-- Secret-provider interface with explicit required/optional semantics.
-- Result envelope with primary output, artifacts, telemetry, and trace identity.
+- Supports typed experiment conditions and replaceable model/client adapters.
+- Kubernetes, secret injection, remote execution, and a capability registry are outside the initial study.
 
 ## Evidence
 

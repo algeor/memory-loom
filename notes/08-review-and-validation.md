@@ -1,8 +1,9 @@
 ---
 id: AH-008
 title: Review, validation, and failure attribution
-status: initial
-maturity: inferred
+kind: evidence-note
+claim_status: inferred
+verification: source-checked
 source_repo: pipeline-fl-control-plane
 source_commit: df513fa41484fc3e218d836d951ee46d0abc7513
 ---
@@ -57,13 +58,10 @@ escalation:
 - Live environments may be expensive or destructive and need explicit lifecycle policy.
 - File classification is a heuristic; contract metadata is a stronger long-term signal.
 
-## Plugin Implication
+## Design Relevance
 
-- Reviewer registry keyed by risk and file type.
-- Structured finding schema and deduplication engine.
-- Evidence challenges before final publication.
-- Test-plan generator mapping contracts to checks.
-- Failure attribution taxonomy to stop application debugging when the harness itself is broken.
+- Supports paired stage-level evaluation and explicit attribution of capture, retrieval, generation, and labeling failures.
+- Multi-agent review is not required by the initial research protocol.
 
 ## Evidence
 

@@ -1,62 +1,54 @@
 # Source Ledger: Continual Personalization Brief
 
-## Snapshot
+## Source
 
-- Artifact: User-provided design and research brief.
-- Received: 2026-09-14.
-- Subject: External, evolving memory for long-term user adaptation and repeated-error correction.
-- Evidence class: Proposed architecture and research direction; not an implemented source repository.
+- Artifact: user-provided design and research brief
+- Received: 2026-09-14
+- Subject: external memory for user adaptation and repeated-error correction
+- Evidence status: design input, not empirical evidence
 
-## Scope Rule
+The brief is not a published implementation, dataset, benchmark, or result. It can motivate hypotheses but cannot validate them.
 
-This brief is design input, not proof that the proposed mechanisms work. Notes derived from it use `maturity: proposed`. Existing source-backed harness patterns remain labeled observed or inferred.
+## Retained For The Initial Study
 
-## Coverage
-
-| Brief concept | Extracted note |
+| Input idea | Current location |
 |---|---|
-| External memory instead of continuous weight updates | AH-010 |
-| User personalization and repeated-error learning | AH-010 |
-| Candidate extraction and admission factors | AH-011 |
-| Episodic, semantic, procedural, and higher-order memory | AH-012 |
-| Periodic or event-triggered consolidation | AH-012 |
-| Confidence updates and contradiction handling | AH-012 |
-| Filtered, reranked, budgeted retrieval | AH-013 |
-| Privacy, deletion, consent, and training boundary | AH-014, proposed enhancement |
-| Comparative baselines and longitudinal experiment | AH-015 |
-| External memory versus fine-tuning | AH-015 |
-| Python, FastAPI, PostgreSQL, pgvector, scheduler | AH-016 |
+| External memory instead of continuous weight updates | [`research/README.md`](../research/README.md) |
+| Explicit user preferences and direct corrections | [`design/memory-model.md`](../design/memory-model.md) |
+| Longitudinal comparison with simpler baselines | [`research/protocol.md`](../research/protocol.md) |
+| Stage-level failure attribution | [`research/protocol.md`](../research/protocol.md) |
+| Inspectable provenance and revision history | [`design/memory-model.md`](../design/memory-model.md) |
 
-## Research Pointers To Verify
+## Deferred
 
-- Generative Agents, Reflexion, MemGPT, MemoryBank, LoCoMo, LongMemEval, and LOCCO.
-- Reflective Memory Management for Long-term Personalized Dialogue Agents, PREMem, PRIME, *Hello Again!*, Persona-Plug, and *Learning to Remember User Conversations*.
+The following ideas are plausible research directions but add unmeasured variables to the first study:
 
-These names are retained as a literature search queue. Claims, versions, authorship, and applicability have not been independently checked during this pass.
+- inferred preferences and personal facts;
+- episodic, semantic, procedural, and metacognitive hierarchies;
+- confidence-weighted admission;
+- periodic or event-triggered consolidation;
+- autonomous contradiction resolution;
+- vector or hybrid retrieval;
+- memory-derived fine-tuning.
 
-## Enhancements Added During Extraction
+Admission hard gates, candidate-specific evidence thresholds, typed revision operations, contradiction classes, and their proposed evaluation metrics are preserved as deferred work in [`design/memory-model.md`](../design/memory-model.md).
 
-- Explicit user/tenant isolation and consent gates.
-- Sensitive-data policy and prompt-injection treatment.
-- Auditable deletion and derived-memory invalidation.
-- Stage-level failure attribution and experiment reproducibility.
-- A narrow first vertical slice for explicit communication preferences.
-- A candidate-class admission matrix with hard gates, evidence-accumulation rules, explicit decision paths, and admission-specific evaluation metrics.
-- Typed-memory boundaries, immutable revision events, lifecycle invariants, contradiction classes, consolidation decisions, and evolution-specific evaluation metrics.
+## Rejected As Premature Defaults
 
-## Implementation Translation
+- Python/FastAPI as a required service boundary;
+- PostgreSQL and `pgvector` before a lexical baseline exists;
+- a local daemon and MCP bridge before the experiment runner needs them;
+- arbitrary confidence weights, retrieval limits, latency targets, or quality thresholds;
+- production privacy or compliance claims from a documentation-only design.
 
-The proposed concepts are translated into local-first implementation decisions under [`implementation-architecture/`](../implementation-architecture/README.md):
+These may become justified engineering choices later, but the brief itself does not supply that evidence.
 
-- one local daemon with thin MCP bridges for Claude Code and Codex CLI;
-- SQLite, FTS5, and local embeddings as the initial persistence and retrieval stack;
-- explicit context and egress manifests;
-- manual promotion for the first explicit-preference vertical slice;
-- denied network egress by default, with remote extraction and consolidation kept optional.
-- a versioned RAG gold set with stage-level metrics, controlled baselines, and privacy regression gates.
+## Literature Queue
 
-These are proposed implementation choices, not evidence supplied by the source brief.
+The brief named Generative Agents, Reflexion, MemGPT, MemoryBank, LoCoMo, LongMemEval, LOCCO, Reflective Memory Management, PREMem, PRIME, *Hello Again!*, Persona-Plug, and *Learning to Remember User Conversations*.
+
+Only sources recorded in [`rag-evaluation-research.md`](rag-evaluation-research.md) are treated as checked. All other names remain an unverified search queue.
 
 ## Next Evidence Step
 
-Verify the research pointers against primary papers, then attach each supported design choice to a precise citation or mark it as an original proposal.
+Verify the most relevant memory benchmarks and personalized-dialogue studies from primary papers. Add only claims that can be tied to a precise source and to a decision in the research protocol.

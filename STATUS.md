@@ -1,48 +1,46 @@
-# Task: Build the agent-harnessing and continual-memory concept depot
+# Project Status
 
 ## Goal
 
-Extract reusable agent-harnessing ideas from source systems and develop an evidence-labeled continual-personalization design that can drive a future pluggable tool.
+Test whether explicit, user-approved external memory improves coding-assistant behavior across sessions without unacceptable relevance, privacy, or control failures.
 
 ## Current State
 
-The depot has seventeen focused concept notes, a reusable note template, three source ledgers, a pluggable harness blueprint, a complete proposed lifecycle for confidence-weighted personalized memory, and a local-first implementation architecture for Claude Code and Codex CLI.
+- Documentation only; no executable prototype exists.
+- Source-backed harness patterns are cataloged in `notes/00` through `notes/08`.
+- Research questions, hypotheses, claims, and protocol are now separated from implementation design.
+- The first system under test is limited to explicit preferences and direct corrections.
+- Earlier admission and memory-revision material is retained only as later-phase design material.
 
 ## Decisions
 
-- Store reusable patterns rather than mirror product documentation because the target is a portable harness.
-- Label ideas as observed, inferred, or proposed because source behavior and future-tool design must not blur together.
-- Use focused notes with a common contract because progressive disclosure is itself a core harnessing pattern.
-- Track source coverage separately because “everything” requires an auditable extraction queue, not one giant summary.
-- Treat source-repository instructions as evidence, not inherited target-repository rules.
-- Keep active task state separate from user beliefs and reusable agent lessons.
-- Start personalization with reversible external memory; evaluate fine-tuning only as a later comparison.
-- Split the memory system into lifecycle notes so schemas, policies, retrieval, safety, and evaluation remain independently testable.
-- Use one local daemon and one portable MCP contract for Claude Code and Codex CLI; keep vendor-specific hooks optional.
-- Default to local storage, local embeddings, deterministic retrieval, and denied network egress.
-- Pseudonymise identifiers required for local ownership and scope; anonymise telemetry, evaluation data, default exports, and provider egress when identity is unnecessary.
-- Treat a versioned human-reviewed gold set as the source of truth; use model-based RAG metrics only as calibrated diagnostics.
-- Compare no-memory, lexical, vector, hybrid, and oracle baselines so retrieval and generation failures remain separable.
-- Make grounding, prompt-injection resistance, tool authorization, and quality-regression detection release-blocking gates.
+- Treat Memory Loom as a research project, not a generic agent-platform specification.
+- Keep source observations, hypotheses, and engineering choices in separate documents.
+- Use no-memory, recent-history, rolling-summary, and structured-memory baselines.
+- Start with manual approval and deterministic retrieval.
+- Defer inferred traits, autonomous consolidation, vector retrieval, and fine-tuning.
+- Do not set numerical quality targets before a pilot establishes baseline distributions.
 
-## Progress Log
+## Next Milestone
 
-- 2026-09-14: Inspected the source branch, its harnessing commit, agent skills, OpenSpec workflow, architecture routing, validation scripts, agent runtime, MCP tools, and LLM relevance evaluator.
-- 2026-09-14: Created the initial depot structure and concept catalog.
-- 2026-09-14: Captured the first implementation blueprint for a pluggable harness tool.
-- 2026-09-14: Validated all local Markdown links and representative source references.
-- 2026-09-14: Converted the continual-personalization brief into seven focused notes covering the full memory loop, governance, evaluation, and a research prototype.
-- 2026-09-21: Added implementation architecture for the local daemon, storage model, local RAG pipeline, MCP client adapters, privacy controls, and phased delivery.
-- 2026-09-21: Added purpose-specific anonymisation and pseudonymisation architecture, including identity mappings, redaction manifests, re-identification controls, and delivery gates.
-- 2026-09-21: Added the RAG evaluation architecture with gold-set contracts, staged metrics, baselines, CI cadence, privacy gates, and failure attribution.
-- 2026-09-21: Promoted grounding, hallucination control, prompt-injection resistance, tool authorization, and regression detection into explicit release gates.
-- 2026-09-21: Expanded memory admission into a testable policy with candidate-class thresholds, deterministic hard gates, evidence accumulation, explicit decisions, and stage-specific metrics.
-- 2026-09-21: Expanded typed evolving memory with type boundaries, revision contracts, lifecycle invariants, contradiction classification, consolidation decisions, and measurable evolution quality.
+Implement the experiment contracts and a lexical-retrieval vertical slice for explicit preferences.
+
+Exit conditions:
+
+- the dataset and run manifests validate against versioned schemas;
+- every retrieved preference has scope and provenance;
+- deleted or out-of-scope records are never returned;
+- all four baseline conditions run from the same fixture;
+- results report paired effects and uncertainty rather than a single aggregate score.
 
 ## Blockers
 
-- None.
+- No benchmark dataset has been created.
+- No prototype has been implemented.
+- Most literature pointers in the original brief still require primary-source verification.
 
-## Next Step
+## History
 
-Define machine-readable schemas and the first 100-case RAG development dataset; then implement and benchmark the explicit-preference vertical slice against no-memory, lexical, vector, hybrid, and oracle baselines.
+- 2026-09-14: Extracted coding-agent harness patterns and drafted a personalized-memory concept.
+- 2026-09-21: Added local-first architecture, privacy, de-identification, and RAG evaluation material.
+- 2026-09-21: Reorganized the repository around an explicit scientific claim and removed duplicate speculative architecture.
