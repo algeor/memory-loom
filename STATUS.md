@@ -36,6 +36,8 @@ The depot has seventeen focused concept notes, a reusable note template, three s
 - 2026-09-21: Added purpose-specific anonymisation and pseudonymisation architecture, including identity mappings, redaction manifests, re-identification controls, and delivery gates.
 - 2026-09-21: Added the RAG evaluation architecture with gold-set contracts, staged metrics, baselines, CI cadence, privacy gates, and failure attribution.
 - 2026-09-21: Promoted grounding, hallucination control, prompt-injection resistance, tool authorization, and regression detection into explicit release gates.
+- 2026-09-21: Expanded memory admission into a testable policy with candidate-class thresholds, deterministic hard gates, evidence accumulation, explicit decisions, and stage-specific metrics.
+- 2026-09-21: Expanded typed evolving memory with type boundaries, revision contracts, lifecycle invariants, contradiction classification, consolidation decisions, and measurable evolution quality.
 
 ## Blockers
 

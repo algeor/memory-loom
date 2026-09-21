@@ -41,6 +41,8 @@ These names are retained as a literature search queue. Claims, versions, authors
 - Auditable deletion and derived-memory invalidation.
 - Stage-level failure attribution and experiment reproducibility.
 - A narrow first vertical slice for explicit communication preferences.
+- A candidate-class admission matrix with hard gates, evidence-accumulation rules, explicit decision paths, and admission-specific evaluation metrics.
+- Typed-memory boundaries, immutable revision events, lifecycle invariants, contradiction classes, consolidation decisions, and evolution-specific evaluation metrics.
 
 ## Implementation Translation
 
