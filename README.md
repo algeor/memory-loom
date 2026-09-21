@@ -50,6 +50,19 @@ The central idea is a **closed-loop harness**:
 - [Personalized-memory evaluation](notes/15-personalized-memory-evaluation.md)
 - [Personalized-memory prototype](notes/16-personalized-memory-prototype.md)
 
+## Implementation Architecture
+
+- [Architecture overview](implementation-architecture/README.md)
+- [System architecture](implementation-architecture/01-system-architecture.md)
+- [Storage and data model](implementation-architecture/02-storage-and-data-model.md)
+- [Retrieval and context](implementation-architecture/03-retrieval-and-context.md)
+- [Client integrations](implementation-architecture/04-client-integrations.md)
+- [Privacy and security](implementation-architecture/05-privacy-and-security.md)
+- [Delivery plan](implementation-architecture/06-delivery-plan.md)
+- [Anonymisation and pseudonymisation](implementation-architecture/07-de-identification.md)
+- [RAG evaluation and testing](implementation-architecture/08-rag-evaluation-and-testing.md)
+- [Anonymisation and pseudonymisation](implementation-architecture/07-de-identification.md)
+
 ## Evidence Model
 
 Each note distinguishes:
@@ -64,7 +77,7 @@ Source references use this form:
 pipeline-fl-control-plane@df513fa4:path/to/file#section-or-symbol
 ```
 
-See [the source ledger](sources/pipeline-fl-control-plane.md) for scope and extraction status.
+See the source ledgers for [the source repository](sources/pipeline-fl-control-plane.md), [the personalization brief](sources/continual-personalization-brief.md), and [RAG evaluation research](sources/rag-evaluation-research.md).
 
 ## Working Method
 
@@ -76,4 +89,4 @@ See [the source ledger](sources/pipeline-fl-control-plane.md) for scope and extr
 
 ## Current State
 
-The depot now covers both repository-oriented agent harnessing and a proposed continual-personalization extension. The next pass should turn the memory event, candidate, record, retrieval, and feedback contracts into machine-readable schemas and a reference prototype.
+The depot now covers repository-oriented agent harnessing, a proposed continual-personalization extension, and a local-first implementation architecture for Claude Code and Codex CLI. The next pass should turn the memory event, candidate, record, retrieval, feedback, and egress contracts into machine-readable schemas and a reference prototype.

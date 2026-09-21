@@ -42,6 +42,19 @@ These names are retained as a literature search queue. Claims, versions, authors
 - Stage-level failure attribution and experiment reproducibility.
 - A narrow first vertical slice for explicit communication preferences.
 
+## Implementation Translation
+
+The proposed concepts are translated into local-first implementation decisions under [`implementation-architecture/`](../implementation-architecture/README.md):
+
+- one local daemon with thin MCP bridges for Claude Code and Codex CLI;
+- SQLite, FTS5, and local embeddings as the initial persistence and retrieval stack;
+- explicit context and egress manifests;
+- manual promotion for the first explicit-preference vertical slice;
+- denied network egress by default, with remote extraction and consolidation kept optional.
+- a versioned RAG gold set with stage-level metrics, controlled baselines, and privacy regression gates.
+
+These are proposed implementation choices, not evidence supplied by the source brief.
+
 ## Next Evidence Step
 
 Verify the research pointers against primary papers, then attach each supported design choice to a precise citation or mark it as an original proposal.
