@@ -29,10 +29,10 @@ There are currently **no result claims**.
 
 | ID | Claim | Required evidence |
 |---|---|---|
-| H1 | Structured memory improves later preference adherence. | Paired comparison against all preregistered baselines |
+| H1 | Structured memory improves later preference adherence. | Predeclared paired contrasts against all baselines with clustered uncertainty and multiplicity control |
 | H2 | Structured memory reduces recurrence after a direct correction. | Longitudinal correction scenarios with adjudicated outcomes |
 | H3 | Structured memory reduces irrelevant context at a fixed budget. | Context relevance labels and token counts |
-| H4 | Lifecycle filters prevent forbidden retrieval. | Zero out-of-scope, superseded, and deleted hits in adversarial fixtures |
+| H4 | Lifecycle filters prevent forbidden retrieval in the evaluated test corpus. | Zero out-of-scope, superseded, and deleted hits in adversarial fixtures |
 
 All four remain untested.
 
@@ -43,7 +43,7 @@ All four remain untested.
 | D1 | Begin with explicit, user-approved preferences only. | Scope choice intended to reduce ambiguity and risk |
 | D2 | Use an external local store rather than model-weight updates. | Makes inspection, correction, and deletion testable |
 | D3 | Start with deterministic lexical retrieval. | Provides an interpretable baseline before adding vectors |
-| D4 | Store immutable evidence and revision events. | Supports replay and audit; effectiveness remains to be measured |
+| D4 | Keep append-only provenance metadata and revision events while storing user-authored content in erasable fields. | Supports replay and testable deletion; effectiveness remains to be measured |
 | D5 | Integrate through replaceable adapters. | Prevents one client implementation from defining the research claim |
 
 ## Prohibited Claims

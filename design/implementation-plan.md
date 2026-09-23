@@ -4,6 +4,11 @@
 
 Build only what the next experiment needs. Add complexity as a new controlled condition, not as an unmeasured default.
 
+## Progress
+
+- Phase 0 completed on 2026-09-23.
+- Phase 1 is next.
+
 ## Phase 0: Experiment Contracts
 
 Deliver:
@@ -11,8 +16,10 @@ Deliver:
 - scenario schema;
 - evidence, memory, revision, and retrieval schemas;
 - run manifest;
+- baseline construction manifests;
 - labeling guide;
 - metric definitions;
+- clustered analysis and multiplicity rules;
 - deterministic safety fixtures.
 
 Exit gate:
@@ -20,6 +27,7 @@ Exit gate:
 - one scenario can be validated and replayed without calling a model;
 - all artifact versions are recorded;
 - forbidden and expected memory IDs are explicit.
+- every condition can reconstruct its exact context without future queries or labels.
 
 ## Phase 1: Memory Core
 
@@ -36,7 +44,9 @@ Exit gate:
 - explicit preferences survive restart;
 - revision history is complete;
 - forbidden records never reach ranking;
-- deletion removes eligibility and lexical index entries.
+- narrower rules displace broader rules before ranking;
+- equal-scope conflicts return no record;
+- deletion erases user-authored content, eligibility, and lexical index entries while retaining only tombstone metadata.
 
 ## Phase 2: Baseline Runner
 

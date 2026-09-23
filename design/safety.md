@@ -6,7 +6,7 @@ These are design requirements for the prototype and test corpus. They are not a 
 
 ## Data Boundary
 
-The first experiment should use synthetic or explicitly consented data. Durable memory contains only the minimum preference statement, scope, evidence reference, and lifecycle state required by the study.
+The first controlled experiment uses synthetic data. Durable memory contains only the minimum preference statement, scope, evidence reference, and lifecycle state required by the study. Any study with real-user data requires the later privacy protocol before collection begins.
 
 Do not store credentials, secrets, health data, protected attributes, unrelated third-party data, or full conversation transcripts.
 
@@ -36,10 +36,14 @@ Do not store credentials, secrets, health data, protected attributes, unrelated 
 
 For the prototype:
 
-1. mark the record deleted in one transaction;
-2. remove lexical index entries in the same operation;
-3. exclude deleted evidence from future derived records;
-4. retain only a non-content revision marker required for the test trace.
+1. mark the full logical memory lineage deleted in one transaction;
+2. replace statements in every stored version with `null`;
+3. replace linked evidence content with `null` and mark it erased;
+4. remove all lineage entries from lexical indexes;
+5. erase the statement from stored context manifests and serialized retrieval payloads while retaining non-content IDs, scores, and decision codes;
+6. append only a non-content revision marker with IDs, timestamps, and a reason code.
+
+Deletion tests must inspect the primary tables, indexes, stored manifests, serialized retrieval payloads, retrieval output, and newly generated traces. Append-only provenance applies to metadata, not to user-authored content. Logical erasure in the prototype is not a claim of forensic media sanitization or recall from a model provider that already received the text.
 
 Backup, export, replicas, and cryptographic erasure are deferred because the initial design has none of those features.
 

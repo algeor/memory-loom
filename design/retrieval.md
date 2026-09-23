@@ -10,6 +10,7 @@ Design decision for the structured-memory condition in the initial experiment.
 query + user/project/task scope
   -> authorize scope
   -> select active records
+  -> resolve rule scope and conflicts
   -> lexical search
   -> deterministic tie-break
   -> context-budget selection
@@ -29,9 +30,20 @@ A record is eligible only when:
 
 Text from an ineligible record must not be exposed to ranking, logs, or the caller.
 
+## Pre-Ranking Resolution
+
+Apply the `rule_key` procedure in [`memory-model.md`](memory-model.md) before text scoring:
+
+1. group eligible records by `rule_key`;
+2. remove broader matches when a narrower match exists;
+3. remove distinct, equally specific conflicts;
+4. send only surviving records to lexical ranking.
+
+This step is mandatory rather than a ranking preference. A broad rule cannot displace its applicable narrow exception because of a higher lexical score.
+
 ## Initial Ranking
 
-Use a documented lexical method such as SQLite FTS5/BM25. Break score ties deterministically by scope specificity, then recency, then stable record ID.
+Use a documented lexical method such as SQLite FTS5/BM25. After pre-ranking resolution, break score ties deterministically by scope specificity, then recency, then stable record ID.
 
 Do not add hand-tuned confidence, importance, freshness, or usefulness multipliers to the first experiment. They would introduce uncalibrated variables and make the baseline harder to interpret.
 
@@ -45,11 +57,13 @@ items:
   - memory_id: uuid
     statement: string
     scope: string
-    reason: string
+    reason_code: string
     evidence_ids: [uuid]
 excluded_counts:
   scope: integer
   state: integer
+  specificity: integer
+  conflict: integer
   budget: integer
 ```
 
@@ -69,6 +83,8 @@ Persist:
 - the exact serialized context.
 
 These traces support recall, precision, context relevance, cost, and stage-level failure attribution.
+
+Trace text is erasable. A deletion keeps non-content IDs, scores, positions, and decision codes, but removes the deleted statement from stored manifests and serialized-context payloads. Exact reconstruction of erased content is intentionally impossible.
 
 ## Later Retrieval Experiments
 

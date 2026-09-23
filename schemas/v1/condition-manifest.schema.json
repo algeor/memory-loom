@@ -1,0 +1,281 @@
+{
+  "$defs": {
+    "Conditions": {
+      "additionalProperties": false,
+      "properties": {
+        "B0": {
+          "$ref": "#/$defs/NoMemoryCondition"
+        },
+        "B1": {
+          "$ref": "#/$defs/RecentHistoryCondition"
+        },
+        "B2": {
+          "$ref": "#/$defs/RollingSummaryCondition"
+        },
+        "B3": {
+          "$ref": "#/$defs/StructuredMemoryCondition"
+        }
+      },
+      "required": [
+        "B0",
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "title": "Conditions",
+      "type": "object"
+    },
+    "NoMemoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "const": "",
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "no_memory",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header"
+      ],
+      "title": "NoMemoryCondition",
+      "type": "object"
+    },
+    "RecentHistoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "recent_history",
+          "title": "Kind",
+          "type": "string"
+        },
+        "partial_messages": {
+          "const": false,
+          "title": "Partial Messages",
+          "type": "boolean"
+        },
+        "selection": {
+          "const": "newest-complete-contiguous-suffix",
+          "title": "Selection",
+          "type": "string"
+        },
+        "serialization_order": {
+          "const": "chronological",
+          "title": "Serialization Order",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "selection",
+        "serialization_order",
+        "partial_messages"
+      ],
+      "title": "RecentHistoryCondition",
+      "type": "object"
+    },
+    "RollingSummaryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "rolling_summary",
+          "title": "Kind",
+          "type": "string"
+        },
+        "summary_generation": {
+          "$ref": "#/$defs/SummaryGeneration"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "summary_generation"
+      ],
+      "title": "RollingSummaryCondition",
+      "type": "object"
+    },
+    "SerializerConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "memory-loom-context",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "const": "1",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "SerializerConfig",
+      "type": "object"
+    },
+    "StructuredMemoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "include_raw_approval_messages": {
+          "const": false,
+          "title": "Include Raw Approval Messages",
+          "type": "boolean"
+        },
+        "kind": {
+          "const": "structured_memory",
+          "title": "Kind",
+          "type": "string"
+        },
+        "selection_source": {
+          "const": "retrieval_decisions",
+          "title": "Selection Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "selection_source",
+        "include_raw_approval_messages"
+      ],
+      "title": "StructuredMemoryCondition",
+      "type": "object"
+    },
+    "SummaryGeneration": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Prompt Hash",
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "temperature": {
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "update_schedule": {
+          "minLength": 1,
+          "title": "Update Schedule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "prompt_hash",
+        "temperature",
+        "seed",
+        "update_schedule"
+      ],
+      "title": "SummaryGeneration",
+      "type": "object"
+    },
+    "TokenizerConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "whitespace",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "const": "1",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "TokenizerConfig",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/condition-manifest.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "condition_manifest",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "conditions": {
+      "$ref": "#/$defs/Conditions"
+    },
+    "manifest_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Manifest Id",
+      "type": "string"
+    },
+    "max_context_tokens": {
+      "minimum": 1,
+      "title": "Max Context Tokens",
+      "type": "integer"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "serializer": {
+      "$ref": "#/$defs/SerializerConfig"
+    },
+    "tokenizer": {
+      "$ref": "#/$defs/TokenizerConfig"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "manifest_id",
+    "tokenizer",
+    "serializer",
+    "max_context_tokens",
+    "conditions"
+  ],
+  "title": "ConditionManifest",
+  "type": "object"
+}

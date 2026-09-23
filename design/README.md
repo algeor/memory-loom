@@ -41,8 +41,8 @@ The first implementation should be one process or library. A daemon, MCP server,
 
 - Only explicit preferences and direct corrections are durable in the first study.
 - A user approves each durable record.
-- Every record links to source evidence and revision history.
-- Scope and lifecycle filters run before ranking.
+- Every record links to source evidence and revision history; provenance metadata is append-only while user-authored content remains erasable.
+- Scope, lifecycle, specificity, and conflict filters run before ranking.
 - Deleted, superseded, and out-of-scope records are ineligible.
 - Memory is labeled as fallible context, never as system instruction.
 - The current request overrides conflicting memory.

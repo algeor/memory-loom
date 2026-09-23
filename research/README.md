@@ -23,7 +23,7 @@ Does structured, user-approved memory improve preference adherence on later codi
 |---|---|---|
 | H1 | Structured memory increases preference adherence on memory-dependent tasks. | Untested |
 | H2 | Structured memory reduces repeated corrected behavior. | Untested |
-| H3 | Structured memory supplies less irrelevant context than recent-history and summary baselines at equal budget. | Untested |
+| H3 | Structured memory supplies less irrelevant context than recent-history and summary baselines under the same maximum budget. | Untested |
 | H4 | Deterministic scope and lifecycle filters prevent retrieval of out-of-scope, superseded, or deleted records in the test corpus. | Untested |
 
 H4 is a safety invariant and should be reported as a failure count, not averaged into a utility score.

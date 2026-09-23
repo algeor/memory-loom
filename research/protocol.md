@@ -2,7 +2,7 @@
 
 ## Protocol Status
 
-- Version: draft 0.1
+- Version: draft 0.2
 - Study type: controlled offline evaluation
 - Registration: not preregistered
 - Data: not yet created
@@ -22,6 +22,19 @@ Estimate whether explicit, user-approved structured memory changes later assista
 | B3 | Approved structured memory using deterministic lexical retrieval |
 
 Vector retrieval, autonomous consolidation, and fine-tuning are later experiments. They are not part of the initial comparison.
+
+### Condition Construction
+
+Each scenario contains one immutable timeline of prior interactions and lifecycle events. Every condition reads the same timeline up to the current query. The approval interaction is present in that source timeline for every condition; B3 does not receive an additional approval message at generation time.
+
+The condition manifest must freeze the tokenizer, serializer, truncation rules, and maximum injected-context budget:
+
+- **B0:** inject no cross-session context.
+- **B1:** select the newest complete prior messages by walking backward until the budget is full, then serialize the selected messages in their original chronological order. Never include a partial message.
+- **B2:** inject the latest rolling summary that existed before the current query. Generate summaries only from prior timeline events using a versioned prompt, model, decoding configuration, and update schedule. Freeze summaries before outcome generation; they must not access future queries, expected-memory labels, or held-out outcomes.
+- **B3:** inject only records selected by the approved structured-memory pipeline. Raw approval messages are not separately injected.
+
+The budget is a shared maximum, not a requirement to pad contexts to equal length. Token counts apply to the exact serialized injected context. Record B2 summarization cost separately from answer-generation cost.
 
 ## Dataset
 
@@ -45,7 +58,7 @@ Human reviewers label:
 - behaviors that would violate the active preference;
 - whether abstention or no memory context is correct.
 
-Record the labeling guide and reviewer disagreements. Synthetic data is acceptable for the first systems experiment but does not establish real-user validity.
+Record the labeling guide and reviewer disagreements. Use synthetic data for the first systems experiment; it does not establish real-user validity.
 
 ## Sample Size
 
@@ -72,6 +85,8 @@ Keep constant across conditions:
 - decoding parameters where exposed;
 - scenario order or randomized order assignment;
 - evaluation code and label version.
+
+Condition-specific context headers may identify the artifact as history, summary, or fallible memory, but their exact text must be frozen in the condition manifest. No header may contain scenario-specific guidance.
 
 Store provider, model, prompt hash, dataset version, code revision, seed, time, and raw output for every run.
 
@@ -108,15 +123,20 @@ Count these directly; do not hide them in an average:
 ## Analysis
 
 - Compare conditions on the same scenarios.
-- Treat H1 as the primary confirmatory comparison; label H2 and H3 secondary and H4 a safety invariant.
+- Treat H1 as one confirmatory family containing the predeclared B3-B0, B3-B1, and B3-B2 contrasts; label H2 and H3 secondary and H4 a safety invariant.
 - Report absolute and relative differences with uncertainty intervals.
-- Use paired bootstrap confidence intervals for aggregate paired metrics unless the final data structure requires another method.
+- For each condition-query pair, aggregate repeated stochastic runs using the frozen rule. Then aggregate memory-dependent queries within each scenario so scenarios receive equal weight.
+- Estimate every contrast within the same scenario. Resample the highest independent scenario-construction unit—template family when scenarios share a template, otherwise scenario—while carrying all conditions, queries, and repeated runs together.
+- Do not bootstrap individual queries or model repeats as independent observations.
+- Use simultaneous confidence intervals or a frozen multiplicity adjustment for the three H1 contrasts. State before held-out evaluation whether H1 requires improvement over every baseline or uses another global decision rule.
 - Report results by scenario type, scope, and memory dependency.
 - Report all exclusions and failed runs.
 - Treat model-judge scores as secondary unless calibrated against blinded human review.
 - State how repeated stochastic runs are aggregated and retain run-level outcomes.
 - Correct or clearly label multiplicity when testing additional confirmatory outcomes.
 - Do not choose a success threshold after seeing held-out results.
+
+The run manifest must name the repeat aggregation rule, scenario weighting rule, independent resampling unit, confidence-interval method, multiplicity method, and H1 decision rule. If the realized data structure invalidates the preregistered analysis, report the deviation and treat the replacement analysis as exploratory.
 
 A pilot should estimate variance and reveal annotation problems. It should not be reported as confirmatory evidence.
 

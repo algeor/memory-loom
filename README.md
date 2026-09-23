@@ -15,7 +15,7 @@ This repository currently contains a research protocol and a reference design. I
 | Source-backed agent-harness patterns | Documented from one source repository |
 | Research questions and hypotheses | Defined, not yet tested |
 | Experimental protocol | Specified, not yet run |
-| Reference implementation | Designed, not implemented |
+| Reference implementation | Phase 0 contracts implemented; memory core not implemented |
 | Scientific conclusions | None |
 
 Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.
@@ -48,6 +48,10 @@ The first study excludes:
 | [`design/`](design/README.md) | Minimal system being proposed for evaluation |
 | [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
 | [`sources/`](sources/README.md) | Provenance and literature ledgers |
+| [`schemas/`](schemas/v1/) | Versioned machine-readable experiment contracts |
+| [`contracts/`](contracts/v1/README.md) | Labeling, metrics, analysis, and replay documentation |
+| [`fixtures/`](fixtures/) | Synthetic scenarios and frozen manifests |
+| [`src/memory_loom/`](src/memory_loom/) | Contract validation and deterministic context replay |
 | [`STATUS.md`](STATUS.md) | Current work, decisions, and next milestone |
 
 These layers are intentionally separate:
@@ -64,6 +68,17 @@ These layers are intentionally separate:
 2. Check the [claim register](research/claims.md) before repeating a claim.
 3. Use the [experiment protocol](research/protocol.md) for study design.
 4. Use the [reference design](design/README.md) only when implementing the system under test.
+
+## Contract Replay
+
+```bash
+PYTHONPATH=src python3 -m memory_loom validate-all
+PYTHONPATH=src python3 -m memory_loom replay \
+  fixtures/scenarios/v1/scope-deletion-001.json \
+  fixtures/manifests/v1/default-conditions.json \
+  query-001
+pytest
+```
 
 ## Origin
 

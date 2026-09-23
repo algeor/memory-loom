@@ -1,0 +1,92 @@
+{
+  "$id": "https://memory-loom.local/schemas/v1/revision-event.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "actor": {
+      "enum": [
+        "user",
+        "research_fixture"
+      ],
+      "title": "Actor",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "evidence_ids": {
+      "items": {
+        "format": "uuid",
+        "type": "string"
+      },
+      "title": "Evidence Ids",
+      "type": "array"
+    },
+    "from_version": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "From Version"
+    },
+    "id": {
+      "format": "uuid",
+      "title": "Id",
+      "type": "string"
+    },
+    "memory_id": {
+      "format": "uuid",
+      "title": "Memory Id",
+      "type": "string"
+    },
+    "operation": {
+      "enum": [
+        "approve",
+        "correct",
+        "supersede",
+        "delete"
+      ],
+      "title": "Operation",
+      "type": "string"
+    },
+    "reason_code": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Reason Code",
+      "type": "string"
+    },
+    "to_version": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "To Version"
+    }
+  },
+  "required": [
+    "id",
+    "memory_id",
+    "operation",
+    "evidence_ids",
+    "actor",
+    "reason_code",
+    "created_at"
+  ],
+  "title": "RevisionEvent",
+  "type": "object"
+}

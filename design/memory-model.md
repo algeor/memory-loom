@@ -8,18 +8,19 @@ Design decision for the initial experiment. Field names may change during implem
 
 ### Evidence Event
 
-An immutable reference to the interaction in which the user stated a preference or correction.
+An append-only metadata record for the interaction in which the user stated a preference or correction. Event identity and provenance are immutable; user-authored content remains erasable.
 
 ```yaml
 id: uuid
 scenario_id: string
 kind: explicit_preference|direct_correction
-text: string
+content: string|null
+content_state: present|erased
 user_scope: string
 project_scope: string|null
 task_scope: string|null
 recorded_at: timestamp
-consent: approved|declined
+consent: approved
 ```
 
 ### Memory Record
@@ -28,7 +29,8 @@ The user-approved statement available for retrieval.
 
 ```yaml
 id: uuid
-statement: string
+rule_key: string
+statement: string|null
 kind: preference|correction
 user_scope: string
 project_scope: string|null
@@ -53,7 +55,7 @@ from_version: integer|null
 to_version: integer|null
 evidence_ids: [uuid]
 actor: user|research_fixture
-rationale: string
+reason_code: string
 created_at: timestamp
 ```
 
@@ -65,30 +67,34 @@ The trace needed to evaluate retrieval independently from generation.
 query_id: uuid
 memory_id: uuid
 eligible: boolean
-decision: selected|scope_filtered|state_filtered|budget_filtered
+decision: selected|scope_filtered|state_filtered|specificity_filtered|conflict_filtered|budget_filtered
 lexical_score: number|null
-reason: string
+reason_code: string
 position: integer|null
 ```
 
 ## State Rules
 
-- New evidence is not durable until explicitly approved.
+- New evidence is not durable until explicitly approved. A declined candidate remains ephemeral and creates no evidence event.
 - Correction creates a new version; it does not mutate history in place.
 - A newer explicit preference may supersede an older one in the same scope.
 - A narrower exception coexists with a broader preference and wins only in its scope.
-- Deletion makes the record immediately ineligible and removes it from indexes.
+- `id` identifies one logical memory lineage; `version` increments within that lineage.
+- `rule_key` is a non-sensitive fixture or approval-time identifier for records that govern the same behavior. The initial system does not infer it autonomously.
+- Active and superseded versions require a statement. Deletion makes the entire lineage ineligible, erases its statements and evidence content, and removes its index entries while retaining non-content tombstone metadata.
 - Experiment fixtures may simulate approval but must record that actor explicitly.
 
 ## Scope Resolution
 
-Apply the most specific eligible record:
+Resolve scope before lexical ranking. Group eligible records by `rule_key`, then keep only records at the most specific matching scope:
 
 1. user + project + task;
 2. user + project;
 3. user only.
 
-If equally specific active records conflict, return neither and flag the case for review. The initial system does not invent a resolution.
+Broader records in the same group receive `specificity_filtered` decisions and cannot compete in ranking. If distinct, equally specific active records in a group have different statements, return none of them with `conflict_filtered` decisions and flag the case for review. Byte-identical duplicates may collapse deterministically. Only surviving records proceed to lexical ranking.
+
+Evidence content belongs to one logical memory lineage in the initial prototype. This keeps deletion deterministic; shared evidence requires a later retention and reference-counting design.
 
 ## Deferred Admission Research
 

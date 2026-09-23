@@ -1,0 +1,76 @@
+{
+  "$id": "https://memory-loom.local/schemas/v1/retrieval-decision.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "decision": {
+      "enum": [
+        "selected",
+        "scope_filtered",
+        "state_filtered",
+        "specificity_filtered",
+        "conflict_filtered",
+        "budget_filtered"
+      ],
+      "title": "Decision",
+      "type": "string"
+    },
+    "eligible": {
+      "title": "Eligible",
+      "type": "boolean"
+    },
+    "lexical_score": {
+      "anyOf": [
+        {
+          "type": "number"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "title": "Lexical Score"
+    },
+    "memory_id": {
+      "format": "uuid",
+      "title": "Memory Id",
+      "type": "string"
+    },
+    "position": {
+      "anyOf": [
+        {
+          "minimum": 1,
+          "type": "integer"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Position"
+    },
+    "query_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Query Id",
+      "type": "string"
+    },
+    "reason_code": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Reason Code",
+      "type": "string"
+    }
+  },
+  "required": [
+    "query_id",
+    "memory_id",
+    "eligible",
+    "decision",
+    "lexical_score",
+    "reason_code"
+  ],
+  "title": "RetrievalDecision",
+  "type": "object"
+}

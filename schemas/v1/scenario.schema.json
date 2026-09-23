@@ -1,0 +1,835 @@
+{
+  "$defs": {
+    "ApprovalTimelineEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "const": "research_fixture",
+          "title": "Actor",
+          "type": "string"
+        },
+        "event_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "memory_id": {
+          "format": "uuid",
+          "title": "Memory Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "type": {
+          "const": "approval",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "sequence",
+        "occurred_at",
+        "type",
+        "memory_id",
+        "evidence_ids",
+        "actor"
+      ],
+      "title": "ApprovalTimelineEvent",
+      "type": "object"
+    },
+    "EvidenceEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "consent": {
+          "const": "approved",
+          "title": "Consent",
+          "type": "string"
+        },
+        "content": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Content"
+        },
+        "content_state": {
+          "enum": [
+            "present",
+            "erased"
+          ],
+          "title": "Content State",
+          "type": "string"
+        },
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "explicit_preference",
+            "direct_correction"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "recorded_at": {
+          "format": "date-time",
+          "title": "Recorded At",
+          "type": "string"
+        },
+        "scenario_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        }
+      },
+      "required": [
+        "id",
+        "scenario_id",
+        "kind",
+        "content",
+        "content_state",
+        "scope",
+        "recorded_at",
+        "consent"
+      ],
+      "title": "EvidenceEvent",
+      "type": "object"
+    },
+    "MemoryRecord": {
+      "additionalProperties": false,
+      "properties": {
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "kind": {
+          "enum": [
+            "preference",
+            "correction"
+          ],
+          "title": "Kind",
+          "type": "string"
+        },
+        "rule_key": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Rule Key",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "statement": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Statement"
+        },
+        "status": {
+          "enum": [
+            "active",
+            "superseded",
+            "deleted"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "valid_from": {
+          "format": "date-time",
+          "title": "Valid From",
+          "type": "string"
+        },
+        "valid_until": {
+          "anyOf": [
+            {
+              "format": "date-time",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Valid Until"
+        },
+        "version": {
+          "minimum": 1,
+          "title": "Version",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "id",
+        "rule_key",
+        "statement",
+        "kind",
+        "scope",
+        "status",
+        "evidence_ids",
+        "created_at",
+        "valid_from",
+        "valid_until",
+        "version"
+      ],
+      "title": "MemoryRecord",
+      "type": "object"
+    },
+    "MessageEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "event_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "role": {
+          "enum": [
+            "user",
+            "assistant"
+          ],
+          "title": "Role",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "type": {
+          "const": "message",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "sequence",
+        "occurred_at",
+        "type",
+        "role",
+        "scope",
+        "content"
+      ],
+      "title": "MessageEvent",
+      "type": "object"
+    },
+    "QueryLabels": {
+      "additionalProperties": false,
+      "properties": {
+        "abstention_correct": {
+          "title": "Abstention Correct",
+          "type": "boolean"
+        },
+        "acceptable_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Acceptable Memory Ids",
+          "type": "array"
+        },
+        "forbidden_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Forbidden Memory Ids",
+          "type": "array"
+        },
+        "memory_needed": {
+          "title": "Memory Needed",
+          "type": "boolean"
+        },
+        "relevant_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Relevant Memory Ids",
+          "type": "array"
+        },
+        "required_behavior": {
+          "minLength": 1,
+          "title": "Required Behavior",
+          "type": "string"
+        },
+        "violating_behaviors": {
+          "items": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": "Violating Behaviors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "memory_needed",
+        "relevant_memory_ids",
+        "acceptable_memory_ids",
+        "forbidden_memory_ids",
+        "required_behavior",
+        "violating_behaviors",
+        "abstention_correct"
+      ],
+      "title": "QueryLabels",
+      "type": "object"
+    },
+    "RetrievalDecision": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "enum": [
+            "selected",
+            "scope_filtered",
+            "state_filtered",
+            "specificity_filtered",
+            "conflict_filtered",
+            "budget_filtered"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "eligible": {
+          "title": "Eligible",
+          "type": "boolean"
+        },
+        "lexical_score": {
+          "anyOf": [
+            {
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Lexical Score"
+        },
+        "memory_id": {
+          "format": "uuid",
+          "title": "Memory Id",
+          "type": "string"
+        },
+        "position": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Position"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "reason_code": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Reason Code",
+          "type": "string"
+        }
+      },
+      "required": [
+        "query_id",
+        "memory_id",
+        "eligible",
+        "decision",
+        "lexical_score",
+        "reason_code"
+      ],
+      "title": "RetrievalDecision",
+      "type": "object"
+    },
+    "RevisionEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "enum": [
+            "user",
+            "research_fixture"
+          ],
+          "title": "Actor",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "evidence_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Evidence Ids",
+          "type": "array"
+        },
+        "from_version": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "From Version"
+        },
+        "id": {
+          "format": "uuid",
+          "title": "Id",
+          "type": "string"
+        },
+        "memory_id": {
+          "format": "uuid",
+          "title": "Memory Id",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "approve",
+            "correct",
+            "supersede",
+            "delete"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "reason_code": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Reason Code",
+          "type": "string"
+        },
+        "to_version": {
+          "anyOf": [
+            {
+              "minimum": 1,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "To Version"
+        }
+      },
+      "required": [
+        "id",
+        "memory_id",
+        "operation",
+        "evidence_ids",
+        "actor",
+        "reason_code",
+        "created_at"
+      ],
+      "title": "RevisionEvent",
+      "type": "object"
+    },
+    "RevisionTimelineEvent": {
+      "additionalProperties": false,
+      "properties": {
+        "actor": {
+          "const": "research_fixture",
+          "title": "Actor",
+          "type": "string"
+        },
+        "event_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Event Id",
+          "type": "string"
+        },
+        "memory_id": {
+          "format": "uuid",
+          "title": "Memory Id",
+          "type": "string"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "operation": {
+          "enum": [
+            "correct",
+            "supersede",
+            "delete"
+          ],
+          "title": "Operation",
+          "type": "string"
+        },
+        "revision_id": {
+          "format": "uuid",
+          "title": "Revision Id",
+          "type": "string"
+        },
+        "sequence": {
+          "minimum": 1,
+          "title": "Sequence",
+          "type": "integer"
+        },
+        "type": {
+          "const": "revision",
+          "title": "Type",
+          "type": "string"
+        }
+      },
+      "required": [
+        "event_id",
+        "sequence",
+        "occurred_at",
+        "type",
+        "memory_id",
+        "revision_id",
+        "operation",
+        "actor"
+      ],
+      "title": "RevisionTimelineEvent",
+      "type": "object"
+    },
+    "ScenarioQuery": {
+      "additionalProperties": false,
+      "properties": {
+        "after_sequence": {
+          "minimum": 1,
+          "title": "After Sequence",
+          "type": "integer"
+        },
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "labels": {
+          "$ref": "#/$defs/QueryLabels"
+        },
+        "occurred_at": {
+          "format": "date-time",
+          "title": "Occurred At",
+          "type": "string"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "scope": {
+          "$ref": "#/$defs/Scope"
+        }
+      },
+      "required": [
+        "query_id",
+        "after_sequence",
+        "occurred_at",
+        "content",
+        "scope",
+        "labels"
+      ],
+      "title": "ScenarioQuery",
+      "type": "object"
+    },
+    "Scope": {
+      "additionalProperties": false,
+      "properties": {
+        "project_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9][a-z0-9._-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Project Id"
+        },
+        "task_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9][a-z0-9._-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Task Id"
+        },
+        "user_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "User Id",
+          "type": "string"
+        }
+      },
+      "required": [
+        "user_id",
+        "project_id",
+        "task_id"
+      ],
+      "title": "Scope",
+      "type": "object"
+    },
+    "SummarySnapshot": {
+      "additionalProperties": false,
+      "properties": {
+        "content": {
+          "minLength": 1,
+          "title": "Content",
+          "type": "string"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "generator": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Generator",
+          "type": "string"
+        },
+        "snapshot_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Snapshot Id",
+          "type": "string"
+        },
+        "through_sequence": {
+          "minimum": 1,
+          "title": "Through Sequence",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "snapshot_id",
+        "through_sequence",
+        "created_at",
+        "generator",
+        "content"
+      ],
+      "title": "SummarySnapshot",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/scenario.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "scenario",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "evidence_events": {
+      "items": {
+        "$ref": "#/$defs/EvidenceEvent"
+      },
+      "minItems": 1,
+      "title": "Evidence Events",
+      "type": "array"
+    },
+    "memory_records": {
+      "items": {
+        "$ref": "#/$defs/MemoryRecord"
+      },
+      "minItems": 1,
+      "title": "Memory Records",
+      "type": "array"
+    },
+    "queries": {
+      "items": {
+        "$ref": "#/$defs/ScenarioQuery"
+      },
+      "minItems": 1,
+      "title": "Queries",
+      "type": "array"
+    },
+    "retrieval_decisions": {
+      "items": {
+        "$ref": "#/$defs/RetrievalDecision"
+      },
+      "title": "Retrieval Decisions",
+      "type": "array"
+    },
+    "revision_events": {
+      "items": {
+        "$ref": "#/$defs/RevisionEvent"
+      },
+      "minItems": 1,
+      "title": "Revision Events",
+      "type": "array"
+    },
+    "scenario_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Scenario Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "split": {
+      "enum": [
+        "development",
+        "held_out"
+      ],
+      "title": "Split",
+      "type": "string"
+    },
+    "summary_snapshots": {
+      "items": {
+        "$ref": "#/$defs/SummarySnapshot"
+      },
+      "title": "Summary Snapshots",
+      "type": "array"
+    },
+    "synthetic": {
+      "const": true,
+      "title": "Synthetic",
+      "type": "boolean"
+    },
+    "template_family": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Template Family",
+      "type": "string"
+    },
+    "timeline": {
+      "items": {
+        "discriminator": {
+          "mapping": {
+            "approval": "#/$defs/ApprovalTimelineEvent",
+            "message": "#/$defs/MessageEvent",
+            "revision": "#/$defs/RevisionTimelineEvent"
+          },
+          "propertyName": "type"
+        },
+        "oneOf": [
+          {
+            "$ref": "#/$defs/MessageEvent"
+          },
+          {
+            "$ref": "#/$defs/ApprovalTimelineEvent"
+          },
+          {
+            "$ref": "#/$defs/RevisionTimelineEvent"
+          }
+        ]
+      },
+      "minItems": 1,
+      "title": "Timeline",
+      "type": "array"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "scenario_id",
+    "template_family",
+    "split",
+    "synthetic",
+    "timeline",
+    "summary_snapshots",
+    "evidence_events",
+    "memory_records",
+    "revision_events",
+    "retrieval_decisions",
+    "queries"
+  ],
+  "title": "Scenario",
+  "type": "object"
+}
