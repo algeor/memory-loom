@@ -11,7 +11,8 @@ from memory_loom.contracts import (
     validate_path,
     validate_schema_catalog,
 )
-from memory_loom.replay import replay_query_contexts
+from memory_loom.replay import replay_query_contexts, replay_query_contexts_live
+from memory_loom.runner import NoModelAdapter, run_scenario
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -32,6 +33,24 @@ def build_parser() -> argparse.ArgumentParser:
     replay_parser.add_argument("scenario", type=Path)
     replay_parser.add_argument("condition_manifest", type=Path)
     replay_parser.add_argument("query_id")
+    replay_parser.add_argument(
+        "--frozen-retrieval",
+        action="store_true",
+        help="use fixture retrieval decisions instead of running SQLite FTS",
+    )
+
+    run_parser = subparsers.add_parser(
+        "run", help="execute all conditions for every query in a scenario"
+    )
+    run_parser.add_argument("scenario", type=Path)
+    run_parser.add_argument("condition_manifest", type=Path)
+    run_parser.add_argument("run_manifest", type=Path)
+    run_parser.add_argument("--output", type=Path, required=True)
+    run_parser.add_argument(
+        "--frozen-retrieval",
+        action="store_true",
+        help="use fixture retrieval decisions instead of running SQLite FTS",
+    )
     return parser
 
 
@@ -51,10 +70,29 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "replay":
             scenario = validate_path(args.scenario)
             condition_manifest = validate_path(args.condition_manifest)
-            contexts = replay_query_contexts(
-                scenario, condition_manifest, args.query_id
+            replay = (
+                replay_query_contexts
+                if args.frozen_retrieval
+                else replay_query_contexts_live
             )
+            contexts = replay(scenario, condition_manifest, args.query_id)
             print(json.dumps([context.to_dict() for context in contexts], indent=2))
+        elif args.command == "run":
+            artifact = run_scenario(
+                validate_path(args.scenario),
+                validate_path(args.condition_manifest),
+                validate_path(args.run_manifest),
+                NoModelAdapter(),
+                frozen_retrieval=args.frozen_retrieval,
+            )
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(
+                artifact.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(
+                f"{artifact.status}: {len(artifact.results)} condition runs written "
+                f"to {args.output}"
+            )
     except (ContractValidationError, ValueError) as error:
         print(f"error: {error}")
         return 1

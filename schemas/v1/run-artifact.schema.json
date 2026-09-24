@@ -1,0 +1,767 @@
+{
+  "$defs": {
+    "AnalysisConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "h1_decision_rule": {
+          "minLength": 1,
+          "title": "H1 Decision Rule",
+          "type": "string"
+        },
+        "independent_unit": {
+          "enum": [
+            "scenario",
+            "template_family"
+          ],
+          "title": "Independent Unit",
+          "type": "string"
+        },
+        "interval_method": {
+          "minLength": 1,
+          "title": "Interval Method",
+          "type": "string"
+        },
+        "multiplicity_method": {
+          "minLength": 1,
+          "title": "Multiplicity Method",
+          "type": "string"
+        },
+        "repeat_aggregation": {
+          "minLength": 1,
+          "title": "Repeat Aggregation",
+          "type": "string"
+        },
+        "scenario_weighting": {
+          "minLength": 1,
+          "title": "Scenario Weighting",
+          "type": "string"
+        }
+      },
+      "required": [
+        "repeat_aggregation",
+        "scenario_weighting",
+        "independent_unit",
+        "interval_method",
+        "multiplicity_method",
+        "h1_decision_rule"
+      ],
+      "title": "AnalysisConfig",
+      "type": "object"
+    },
+    "ConditionManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "artifact_type": {
+          "const": "condition_manifest",
+          "title": "Artifact Type",
+          "type": "string"
+        },
+        "conditions": {
+          "$ref": "#/$defs/Conditions"
+        },
+        "manifest_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Manifest Id",
+          "type": "string"
+        },
+        "max_context_tokens": {
+          "minimum": 1,
+          "title": "Max Context Tokens",
+          "type": "integer"
+        },
+        "schema_version": {
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "serializer": {
+          "$ref": "#/$defs/SerializerConfig"
+        },
+        "tokenizer": {
+          "$ref": "#/$defs/TokenizerConfig"
+        }
+      },
+      "required": [
+        "artifact_type",
+        "schema_version",
+        "manifest_id",
+        "tokenizer",
+        "serializer",
+        "max_context_tokens",
+        "conditions"
+      ],
+      "title": "ConditionManifest",
+      "type": "object"
+    },
+    "ConditionRunResult": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "context_token_count": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Context Token Count"
+        },
+        "failure": {
+          "anyOf": [
+            {
+              "$ref": "#/$defs/RunFailure"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "included_ids": {
+          "anyOf": [
+            {
+              "items": {
+                "type": "string"
+              },
+              "type": "array"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Included Ids"
+        },
+        "injected_context": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Injected Context"
+        },
+        "latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Latency Ms"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "raw_output": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Raw Output"
+        },
+        "repeat": {
+          "minimum": 1,
+          "title": "Repeat",
+          "type": "integer"
+        },
+        "scenario_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "completed",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        },
+        "system_prompt": {
+          "minLength": 1,
+          "title": "System Prompt",
+          "type": "string"
+        },
+        "user_prompt": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "User Prompt"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "query_id",
+        "condition",
+        "repeat",
+        "provider",
+        "model",
+        "seed",
+        "system_prompt",
+        "user_prompt",
+        "injected_context",
+        "included_ids",
+        "status",
+        "raw_output",
+        "failure"
+      ],
+      "title": "ConditionRunResult",
+      "type": "object"
+    },
+    "Conditions": {
+      "additionalProperties": false,
+      "properties": {
+        "B0": {
+          "$ref": "#/$defs/NoMemoryCondition"
+        },
+        "B1": {
+          "$ref": "#/$defs/RecentHistoryCondition"
+        },
+        "B2": {
+          "$ref": "#/$defs/RollingSummaryCondition"
+        },
+        "B3": {
+          "$ref": "#/$defs/StructuredMemoryCondition"
+        }
+      },
+      "required": [
+        "B0",
+        "B1",
+        "B2",
+        "B3"
+      ],
+      "title": "Conditions",
+      "type": "object"
+    },
+    "DecodingConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "max_output_tokens": {
+          "minimum": 1,
+          "title": "Max Output Tokens",
+          "type": "integer"
+        },
+        "temperature": {
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "top_p": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Top P",
+          "type": "number"
+        }
+      },
+      "required": [
+        "temperature",
+        "top_p",
+        "max_output_tokens"
+      ],
+      "title": "DecodingConfig",
+      "type": "object"
+    },
+    "NoMemoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "const": "",
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "no_memory",
+          "title": "Kind",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header"
+      ],
+      "title": "NoMemoryCondition",
+      "type": "object"
+    },
+    "PromptHashes": {
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "System",
+          "type": "string"
+        },
+        "user": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "User",
+          "type": "string"
+        }
+      },
+      "required": [
+        "system",
+        "user"
+      ],
+      "title": "PromptHashes",
+      "type": "object"
+    },
+    "RecentHistoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "recent_history",
+          "title": "Kind",
+          "type": "string"
+        },
+        "partial_messages": {
+          "const": false,
+          "title": "Partial Messages",
+          "type": "boolean"
+        },
+        "selection": {
+          "const": "newest-complete-contiguous-suffix",
+          "title": "Selection",
+          "type": "string"
+        },
+        "serialization_order": {
+          "const": "chronological",
+          "title": "Serialization Order",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "selection",
+        "serialization_order",
+        "partial_messages"
+      ],
+      "title": "RecentHistoryCondition",
+      "type": "object"
+    },
+    "RollingSummaryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "kind": {
+          "const": "rolling_summary",
+          "title": "Kind",
+          "type": "string"
+        },
+        "summary_generation": {
+          "$ref": "#/$defs/SummaryGeneration"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "summary_generation"
+      ],
+      "title": "RollingSummaryCondition",
+      "type": "object"
+    },
+    "RunFailure": {
+      "additionalProperties": false,
+      "properties": {
+        "error_type": {
+          "minLength": 1,
+          "title": "Error Type",
+          "type": "string"
+        },
+        "message": {
+          "minLength": 1,
+          "title": "Message",
+          "type": "string"
+        },
+        "stage": {
+          "enum": [
+            "context_assembly",
+            "model_invocation",
+            "output_capture"
+          ],
+          "title": "Stage",
+          "type": "string"
+        }
+      },
+      "required": [
+        "stage",
+        "error_type",
+        "message"
+      ],
+      "title": "RunFailure",
+      "type": "object"
+    },
+    "RunManifest": {
+      "additionalProperties": false,
+      "properties": {
+        "analysis": {
+          "$ref": "#/$defs/AnalysisConfig"
+        },
+        "artifact_type": {
+          "const": "run_manifest",
+          "title": "Artifact Type",
+          "type": "string"
+        },
+        "code_revision": {
+          "minLength": 1,
+          "title": "Code Revision",
+          "type": "string"
+        },
+        "condition_manifest_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Condition Manifest Id",
+          "type": "string"
+        },
+        "condition_order": {
+          "items": {
+            "enum": [
+              "B0",
+              "B1",
+              "B2",
+              "B3"
+            ],
+            "type": "string"
+          },
+          "title": "Condition Order",
+          "type": "array"
+        },
+        "created_at": {
+          "format": "date-time",
+          "title": "Created At",
+          "type": "string"
+        },
+        "dataset_version": {
+          "minLength": 1,
+          "title": "Dataset Version",
+          "type": "string"
+        },
+        "decoding": {
+          "$ref": "#/$defs/DecodingConfig"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_hashes": {
+          "$ref": "#/$defs/PromptHashes"
+        },
+        "protocol_version": {
+          "minLength": 1,
+          "title": "Protocol Version",
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "repeats": {
+          "minimum": 1,
+          "title": "Repeats",
+          "type": "integer"
+        },
+        "run_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Run Id",
+          "type": "string"
+        },
+        "scenario_ids": {
+          "items": {
+            "maxLength": 128,
+            "minLength": 1,
+            "pattern": "^[a-z0-9][a-z0-9._-]*$",
+            "type": "string"
+          },
+          "minItems": 1,
+          "title": "Scenario Ids",
+          "type": "array"
+        },
+        "schema_version": {
+          "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+          "title": "Schema Version",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "status": {
+          "enum": [
+            "prepared",
+            "running",
+            "completed",
+            "failed"
+          ],
+          "title": "Status",
+          "type": "string"
+        }
+      },
+      "required": [
+        "artifact_type",
+        "schema_version",
+        "run_id",
+        "created_at",
+        "protocol_version",
+        "dataset_version",
+        "code_revision",
+        "condition_manifest_id",
+        "scenario_ids",
+        "provider",
+        "model",
+        "prompt_hashes",
+        "condition_order",
+        "decoding",
+        "seed",
+        "repeats",
+        "analysis",
+        "status"
+      ],
+      "title": "RunManifest",
+      "type": "object"
+    },
+    "SerializerConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "memory-loom-context",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "const": "1",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "SerializerConfig",
+      "type": "object"
+    },
+    "StructuredMemoryCondition": {
+      "additionalProperties": false,
+      "properties": {
+        "header": {
+          "minLength": 1,
+          "title": "Header",
+          "type": "string"
+        },
+        "include_raw_approval_messages": {
+          "const": false,
+          "title": "Include Raw Approval Messages",
+          "type": "boolean"
+        },
+        "kind": {
+          "const": "structured_memory",
+          "title": "Kind",
+          "type": "string"
+        },
+        "selection_source": {
+          "const": "retrieval_decisions",
+          "title": "Selection Source",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind",
+        "header",
+        "selection_source",
+        "include_raw_approval_messages"
+      ],
+      "title": "StructuredMemoryCondition",
+      "type": "object"
+    },
+    "SummaryGeneration": {
+      "additionalProperties": false,
+      "properties": {
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "prompt_hash": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "Prompt Hash",
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "seed": {
+          "minimum": 0,
+          "title": "Seed",
+          "type": "integer"
+        },
+        "temperature": {
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "update_schedule": {
+          "minLength": 1,
+          "title": "Update Schedule",
+          "type": "string"
+        }
+      },
+      "required": [
+        "provider",
+        "model",
+        "prompt_hash",
+        "temperature",
+        "seed",
+        "update_schedule"
+      ],
+      "title": "SummaryGeneration",
+      "type": "object"
+    },
+    "TokenizerConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "name": {
+          "const": "whitespace",
+          "title": "Name",
+          "type": "string"
+        },
+        "version": {
+          "const": "1",
+          "title": "Version",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ],
+      "title": "TokenizerConfig",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/run-artifact.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "run_artifact",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "completed_at": {
+      "format": "date-time",
+      "title": "Completed At",
+      "type": "string"
+    },
+    "condition_manifest": {
+      "$ref": "#/$defs/ConditionManifest"
+    },
+    "results": {
+      "items": {
+        "$ref": "#/$defs/ConditionRunResult"
+      },
+      "minItems": 1,
+      "title": "Results",
+      "type": "array"
+    },
+    "run_manifest": {
+      "$ref": "#/$defs/RunManifest"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "started_at": {
+      "format": "date-time",
+      "title": "Started At",
+      "type": "string"
+    },
+    "status": {
+      "enum": [
+        "completed",
+        "completed_with_failures",
+        "failed"
+      ],
+      "title": "Status",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "run_manifest",
+    "condition_manifest",
+    "started_at",
+    "completed_at",
+    "status",
+    "results"
+  ],
+  "title": "RunArtifact",
+  "type": "object"
+}

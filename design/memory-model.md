@@ -67,7 +67,7 @@ The trace needed to evaluate retrieval independently from generation.
 query_id: uuid
 memory_id: uuid
 eligible: boolean
-decision: selected|scope_filtered|state_filtered|specificity_filtered|conflict_filtered|budget_filtered
+decision: selected|scope_filtered|state_filtered|specificity_filtered|conflict_filtered|lexical_filtered|budget_filtered
 lexical_score: number|null
 reason_code: string
 position: integer|null

@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a **design decision**, not an implemented or validated system.
+This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, and synchronous baseline runner exist; the system has not produced experimental results.
 
 Its purpose is to create the smallest system capable of running the initial experiment in [`../research/protocol.md`](../research/protocol.md).
 

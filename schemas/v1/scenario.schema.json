@@ -350,6 +350,7 @@
             "state_filtered",
             "specificity_filtered",
             "conflict_filtered",
+            "lexical_filtered",
             "budget_filtered"
           ],
           "title": "Decision",

@@ -3,6 +3,10 @@ from __future__ import annotations
 from dataclasses import asdict, dataclass
 from typing import Any
 
+from memory_loom.models import Scenario
+from memory_loom.retrieval import LexicalRetriever
+from memory_loom.store import MemoryStore
+
 
 @dataclass(frozen=True)
 class ReplayedContext:
@@ -19,16 +23,79 @@ class ReplayedContext:
 def replay_query_contexts(
     scenario: dict[str, Any], condition_manifest: dict[str, Any], query_id: str
 ) -> list[ReplayedContext]:
-    query = next(
-        (item for item in scenario["queries"] if item["query_id"] == query_id), None
-    )
+    return [
+        replay_query_context(
+            scenario, condition_manifest, query_id, condition, frozen_retrieval=True
+        )
+        for condition in ("B0", "B1", "B2", "B3")
+    ]
+
+
+def replay_query_contexts_live(
+    scenario_document: dict[str, Any],
+    condition_manifest: dict[str, Any],
+    query_id: str,
+) -> list[ReplayedContext]:
+    scenario = Scenario.model_validate(scenario_document)
+    query = next((item for item in scenario.queries if item.query_id == query_id), None)
     if query is None:
         raise ValueError(f"unknown query {query_id!r}")
 
-    return [
-        _replay_condition(scenario, condition_manifest, query, condition)
-        for condition in ("B0", "B1", "B2", "B3")
-    ]
+    with MemoryStore() as store:
+        store.load_scenario(scenario)
+        result = LexicalRetriever(store).retrieve(
+            query.query_id,
+            query.content,
+            query.scope,
+            query.occurred_at,
+        )
+
+    replay_document = scenario.model_dump(mode="json")
+    replay_document["retrieval_decisions"] = [
+        decision
+        for decision in replay_document["retrieval_decisions"]
+        if decision["query_id"] != query_id
+    ] + [decision.model_dump(mode="json") for decision in result.decisions]
+    return replay_query_contexts(replay_document, condition_manifest, query_id)
+
+
+def replay_query_context(
+    scenario_document: dict[str, Any],
+    condition_manifest: dict[str, Any],
+    query_id: str,
+    condition: str,
+    *,
+    frozen_retrieval: bool = False,
+) -> ReplayedContext:
+    scenario = Scenario.model_validate(scenario_document)
+    query = next((item for item in scenario.queries if item.query_id == query_id), None)
+    if query is None:
+        raise ValueError(f"unknown query {query_id!r}")
+    if condition not in {"B0", "B1", "B2", "B3"}:
+        raise ValueError(f"unknown condition {condition!r}")
+
+    replay_document = scenario.model_dump(mode="json")
+    if condition == "B3" and not frozen_retrieval:
+        with MemoryStore() as store:
+            store.load_scenario(scenario)
+            result = LexicalRetriever(store).retrieve(
+                query.query_id,
+                query.content,
+                query.scope,
+                query.occurred_at,
+            )
+        replay_document["retrieval_decisions"] = [
+            decision
+            for decision in replay_document["retrieval_decisions"]
+            if decision["query_id"] != query_id
+        ] + [decision.model_dump(mode="json") for decision in result.decisions]
+
+    query_document = next(
+        item for item in replay_document["queries"] if item["query_id"] == query_id
+    )
+    return _replay_condition(
+        replay_document, condition_manifest, query_document, condition
+    )
 
 
 def count_tokens(text: str) -> int:

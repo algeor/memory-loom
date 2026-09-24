@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from memory_loom.contracts import FIXTURE_DIRECTORY, validate_path
-from memory_loom.replay import replay_query_contexts
+from memory_loom.replay import replay_query_contexts, replay_query_contexts_live
 
 
 SCENARIO_PATH = FIXTURE_DIRECTORY / "scenarios" / "v1" / "scope-deletion-001.json"
@@ -41,6 +41,19 @@ def test_structured_context_has_scope_and_provenance_without_forbidden_records()
     assert "evidence_ids: 10000000-0000-4000-8000-000000000002" in structured.context
     assert "20000000-0000-4000-8000-000000000003" not in structured.context
     assert "20000000-0000-4000-8000-000000000004" not in structured.context
+
+
+def test_live_replay_regenerates_structured_selection() -> None:
+    scenario = validate_path(SCENARIO_PATH)
+    scenario["retrieval_decisions"] = []
+    manifest = validate_path(MANIFEST_PATH)
+
+    contexts = {
+        context.condition: context
+        for context in replay_query_contexts_live(scenario, manifest, "query-001")
+    }
+
+    assert contexts["B3"].included_ids == ("20000000-0000-4000-8000-000000000002",)
 
 
 def _sequence(event_id: str) -> int:

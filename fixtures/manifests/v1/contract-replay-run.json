@@ -11,8 +11,14 @@
   "provider": "none",
   "model": "no-model-contract-replay",
   "prompt_hashes": {
-    "system": "0000000000000000000000000000000000000000000000000000000000000000",
-    "task": "1111111111111111111111111111111111111111111111111111111111111111"
+    "system": "d091bd3477da4aca312fc91c4929d522dfa61d2825df4a45cac13da431e8ef1f",
+    "user": "d8420c30ec08dfe08cd7ae88edfe9266fa84f4ff95e28a154a180f3fbfbac8eb"
+  },
+  "condition_order": ["B0", "B1", "B2", "B3"],
+  "decoding": {
+    "temperature": 0,
+    "top_p": 1,
+    "max_output_tokens": 256
   },
   "seed": 0,
   "repeats": 1,

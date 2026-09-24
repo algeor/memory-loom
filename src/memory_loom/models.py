@@ -1,11 +1,17 @@
 from __future__ import annotations
 
 from collections import defaultdict
-from datetime import datetime
 from typing import Annotated, Literal
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, model_validator
+from pydantic import (
+    AwareDatetime,
+    BaseModel,
+    ConfigDict,
+    Field,
+    StringConstraints,
+    model_validator,
+)
 
 
 ArtifactVersion = Annotated[str, StringConstraints(pattern=r"^1\.[0-9]+\.[0-9]+$")]
@@ -14,6 +20,7 @@ Identifier = Annotated[
     StringConstraints(pattern=r"^[a-z0-9][a-z0-9._-]*$", min_length=1, max_length=128),
 ]
 Sha256 = Annotated[str, StringConstraints(pattern=r"^[a-f0-9]{64}$")]
+ConditionName = Literal["B0", "B1", "B2", "B3"]
 
 
 class ContractModel(BaseModel):
@@ -33,7 +40,7 @@ class EvidenceEvent(ContractModel):
     content: str | None
     content_state: Literal["present", "erased"]
     scope: Scope
-    recorded_at: datetime
+    recorded_at: AwareDatetime
     consent: Literal["approved"]
 
     @model_validator(mode="after")
@@ -53,9 +60,9 @@ class MemoryRecord(ContractModel):
     scope: Scope
     status: Literal["active", "superseded", "deleted"]
     evidence_ids: list[UUID] = Field(min_length=1)
-    created_at: datetime
-    valid_from: datetime
-    valid_until: datetime | None
+    created_at: AwareDatetime
+    valid_from: AwareDatetime
+    valid_until: AwareDatetime | None
     version: int = Field(ge=1)
 
     @model_validator(mode="after")
@@ -64,6 +71,8 @@ class MemoryRecord(ContractModel):
             raise ValueError("deleted memory statement must be null")
         if self.status != "deleted" and not self.statement:
             raise ValueError("active or superseded memory requires a statement")
+        if self.valid_until is not None and self.valid_until < self.valid_from:
+            raise ValueError("valid_until cannot precede valid_from")
         _require_unique(self.evidence_ids, "evidence_ids")
         return self
 
@@ -77,11 +86,27 @@ class RevisionEvent(ContractModel):
     evidence_ids: list[UUID]
     actor: Literal["user", "research_fixture"]
     reason_code: Identifier
-    created_at: datetime
+    created_at: AwareDatetime
 
     @model_validator(mode="after")
     def evidence_ids_are_unique(self) -> RevisionEvent:
         _require_unique(self.evidence_ids, "evidence_ids")
+        if self.operation == "approve" and (
+            self.from_version is not None or self.to_version is None
+        ):
+            raise ValueError("approval requires null from_version and a to_version")
+        if self.operation == "correct" and (
+            self.from_version is None
+            or self.to_version is None
+            or self.to_version != self.from_version + 1
+        ):
+            raise ValueError("correction requires consecutive versions")
+        if self.operation in {"supersede", "delete"} and (
+            self.from_version is None or self.to_version is not None
+        ):
+            raise ValueError(
+                "supersession and deletion require from_version and null to_version"
+            )
         return self
 
 
@@ -95,6 +120,7 @@ class RetrievalDecision(ContractModel):
         "state_filtered",
         "specificity_filtered",
         "conflict_filtered",
+        "lexical_filtered",
         "budget_filtered",
     ]
     lexical_score: float | None
@@ -104,8 +130,10 @@ class RetrievalDecision(ContractModel):
     @model_validator(mode="after")
     def decision_fields_are_consistent(self) -> RetrievalDecision:
         if self.decision == "selected":
-            if not self.eligible or self.position is None:
-                raise ValueError("selected decisions must be eligible and positioned")
+            if not self.eligible or self.position is None or self.lexical_score is None:
+                raise ValueError(
+                    "selected decisions must be eligible, scored, and positioned"
+                )
         elif self.position is not None:
             raise ValueError("filtered decisions cannot have a position")
         if self.decision in {"scope_filtered", "state_filtered"}:
@@ -113,13 +141,27 @@ class RetrievalDecision(ContractModel):
                 raise ValueError(
                     "scope and state filtered decisions are ineligible and unscored"
                 )
+        elif not self.eligible:
+            raise ValueError("post-eligibility filters must remain eligible")
+        if (
+            self.decision
+            in {
+                "specificity_filtered",
+                "conflict_filtered",
+                "lexical_filtered",
+            }
+            and self.lexical_score is not None
+        ):
+            raise ValueError("pre-ranking and unmatched decisions must be unscored")
+        if self.decision == "budget_filtered" and self.lexical_score is None:
+            raise ValueError("budget-filtered decisions must retain their score")
         return self
 
 
 class MessageEvent(ContractModel):
     event_id: Identifier
     sequence: int = Field(ge=1)
-    occurred_at: datetime
+    occurred_at: AwareDatetime
     type: Literal["message"]
     role: Literal["user", "assistant"]
     scope: Scope
@@ -129,7 +171,7 @@ class MessageEvent(ContractModel):
 class ApprovalTimelineEvent(ContractModel):
     event_id: Identifier
     sequence: int = Field(ge=1)
-    occurred_at: datetime
+    occurred_at: AwareDatetime
     type: Literal["approval"]
     memory_id: UUID
     evidence_ids: list[UUID] = Field(min_length=1)
@@ -139,7 +181,7 @@ class ApprovalTimelineEvent(ContractModel):
 class RevisionTimelineEvent(ContractModel):
     event_id: Identifier
     sequence: int = Field(ge=1)
-    occurred_at: datetime
+    occurred_at: AwareDatetime
     type: Literal["revision"]
     memory_id: UUID
     revision_id: UUID
@@ -156,7 +198,7 @@ TimelineEvent = Annotated[
 class SummarySnapshot(ContractModel):
     snapshot_id: Identifier
     through_sequence: int = Field(ge=1)
-    created_at: datetime
+    created_at: AwareDatetime
     generator: Identifier
     content: str = Field(min_length=1)
 
@@ -192,7 +234,7 @@ class QueryLabels(ContractModel):
 class ScenarioQuery(ContractModel):
     query_id: Identifier
     after_sequence: int = Field(ge=1)
-    occurred_at: datetime
+    occurred_at: AwareDatetime
     content: str = Field(min_length=1)
     scope: Scope
     labels: QueryLabels
@@ -395,11 +437,22 @@ class AnalysisConfig(ContractModel):
     h1_decision_rule: str = Field(min_length=1)
 
 
+class PromptHashes(ContractModel):
+    system: Sha256
+    user: Sha256
+
+
+class DecodingConfig(ContractModel):
+    temperature: float = Field(ge=0, le=2)
+    top_p: float = Field(gt=0, le=1)
+    max_output_tokens: int = Field(ge=1)
+
+
 class RunManifest(ContractModel):
     artifact_type: Literal["run_manifest"]
     schema_version: ArtifactVersion
     run_id: Identifier
-    created_at: datetime
+    created_at: AwareDatetime
     protocol_version: str = Field(min_length=1)
     dataset_version: str = Field(min_length=1)
     code_revision: str = Field(min_length=1)
@@ -407,7 +460,9 @@ class RunManifest(ContractModel):
     scenario_ids: list[Identifier] = Field(min_length=1)
     provider: str = Field(min_length=1)
     model: str = Field(min_length=1)
-    prompt_hashes: dict[str, Sha256] = Field(min_length=1)
+    prompt_hashes: PromptHashes
+    condition_order: list[ConditionName]
+    decoding: DecodingConfig
     seed: int = Field(ge=0)
     repeats: int = Field(ge=1)
     analysis: AnalysisConfig
@@ -416,6 +471,97 @@ class RunManifest(ContractModel):
     @model_validator(mode="after")
     def scenario_ids_are_unique(self) -> RunManifest:
         _require_unique(self.scenario_ids, "run scenario IDs")
+        if self.condition_order != ["B0", "B1", "B2", "B3"]:
+            raise ValueError("condition_order must be B0, B1, B2, B3")
+        return self
+
+
+class RunFailure(ContractModel):
+    stage: Literal["context_assembly", "model_invocation", "output_capture"]
+    error_type: str = Field(min_length=1)
+    message: str = Field(min_length=1)
+
+
+class ConditionRunResult(ContractModel):
+    scenario_id: Identifier
+    query_id: Identifier
+    condition: ConditionName
+    repeat: int = Field(ge=1)
+    provider: str = Field(min_length=1)
+    model: str = Field(min_length=1)
+    seed: int = Field(ge=0)
+    system_prompt: str = Field(min_length=1)
+    user_prompt: str | None
+    injected_context: str | None
+    context_token_count: int | None = Field(default=None, ge=0)
+    included_ids: list[str] | None
+    status: Literal["completed", "failed"]
+    raw_output: str | None
+    latency_ms: float | None = Field(default=None, ge=0)
+    failure: RunFailure | None
+
+    @model_validator(mode="after")
+    def outcome_fields_are_consistent(self) -> ConditionRunResult:
+        prompt_fields = (
+            self.user_prompt,
+            self.injected_context,
+            self.context_token_count,
+            self.included_ids,
+        )
+        if self.failure is not None and self.failure.stage == "context_assembly":
+            if any(value is not None for value in prompt_fields):
+                raise ValueError(
+                    "context failures cannot contain assembled prompt data"
+                )
+        elif any(value is None for value in prompt_fields):
+            raise ValueError("assembled runs require prompt and context data")
+
+        if self.status == "completed":
+            if (
+                self.raw_output is None
+                or self.latency_ms is None
+                or self.failure is not None
+            ):
+                raise ValueError(
+                    "completed runs require output and latency without failure"
+                )
+        elif self.failure is None or self.raw_output is not None:
+            raise ValueError("failed runs require failure details and no output")
+        if self.failure is not None and self.failure.stage != "context_assembly":
+            if self.latency_ms is None:
+                raise ValueError("post-assembly failures require latency")
+        return self
+
+
+class RunArtifact(ContractModel):
+    artifact_type: Literal["run_artifact"]
+    schema_version: ArtifactVersion
+    run_manifest: RunManifest
+    condition_manifest: ConditionManifest
+    started_at: AwareDatetime
+    completed_at: AwareDatetime
+    status: Literal["completed", "completed_with_failures", "failed"]
+    results: list[ConditionRunResult] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def configuration_and_status_are_consistent(self) -> RunArtifact:
+        if self.completed_at < self.started_at:
+            raise ValueError("completed_at cannot precede started_at")
+        if (
+            self.run_manifest.condition_manifest_id
+            != self.condition_manifest.manifest_id
+        ):
+            raise ValueError("run and condition manifests do not match")
+        completed = sum(result.status == "completed" for result in self.results)
+        expected_status = (
+            "completed"
+            if completed == len(self.results)
+            else "failed"
+            if completed == 0
+            else "completed_with_failures"
+        )
+        if self.status != expected_status:
+            raise ValueError(f"run status must be {expected_status}")
         return self
 
 

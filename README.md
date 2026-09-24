@@ -15,7 +15,7 @@ This repository currently contains a research protocol and a reference design. I
 | Source-backed agent-harness patterns | Documented from one source repository |
 | Research questions and hypotheses | Defined, not yet tested |
 | Experimental protocol | Specified, not yet run |
-| Reference implementation | Phase 0 contracts implemented; memory core not implemented |
+| Reference implementation | Phase 0-2 contracts, SQLite memory core, retrieval, and baseline runner implemented |
 | Scientific conclusions | None |
 
 Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.
@@ -79,6 +79,18 @@ PYTHONPATH=src python3 -m memory_loom replay \
   query-001
 pytest
 ```
+
+## Deterministic Baseline Run
+
+```bash
+PYTHONPATH=src python3 -m memory_loom run \
+  fixtures/scenarios/v1/scope-deletion-001.json \
+  fixtures/manifests/v1/default-conditions.json \
+  fixtures/manifests/v1/contract-replay-run.json \
+  --output evaluation-runs/contract-replay-001.json
+```
+
+This uses the no-model adapter. It verifies the complete B0-B3 execution and artifact pipeline without producing experimental evidence.
 
 ## Origin
 

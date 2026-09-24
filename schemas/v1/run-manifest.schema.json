@@ -47,6 +47,56 @@
       ],
       "title": "AnalysisConfig",
       "type": "object"
+    },
+    "DecodingConfig": {
+      "additionalProperties": false,
+      "properties": {
+        "max_output_tokens": {
+          "minimum": 1,
+          "title": "Max Output Tokens",
+          "type": "integer"
+        },
+        "temperature": {
+          "maximum": 2,
+          "minimum": 0,
+          "title": "Temperature",
+          "type": "number"
+        },
+        "top_p": {
+          "exclusiveMinimum": 0,
+          "maximum": 1,
+          "title": "Top P",
+          "type": "number"
+        }
+      },
+      "required": [
+        "temperature",
+        "top_p",
+        "max_output_tokens"
+      ],
+      "title": "DecodingConfig",
+      "type": "object"
+    },
+    "PromptHashes": {
+      "additionalProperties": false,
+      "properties": {
+        "system": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "System",
+          "type": "string"
+        },
+        "user": {
+          "pattern": "^[a-f0-9]{64}$",
+          "title": "User",
+          "type": "string"
+        }
+      },
+      "required": [
+        "system",
+        "user"
+      ],
+      "title": "PromptHashes",
+      "type": "object"
     }
   },
   "$id": "https://memory-loom.local/schemas/v1/run-manifest.schema.json",
@@ -73,6 +123,19 @@
       "title": "Condition Manifest Id",
       "type": "string"
     },
+    "condition_order": {
+      "items": {
+        "enum": [
+          "B0",
+          "B1",
+          "B2",
+          "B3"
+        ],
+        "type": "string"
+      },
+      "title": "Condition Order",
+      "type": "array"
+    },
     "created_at": {
       "format": "date-time",
       "title": "Created At",
@@ -83,19 +146,16 @@
       "title": "Dataset Version",
       "type": "string"
     },
+    "decoding": {
+      "$ref": "#/$defs/DecodingConfig"
+    },
     "model": {
       "minLength": 1,
       "title": "Model",
       "type": "string"
     },
     "prompt_hashes": {
-      "additionalProperties": {
-        "pattern": "^[a-f0-9]{64}$",
-        "type": "string"
-      },
-      "minProperties": 1,
-      "title": "Prompt Hashes",
-      "type": "object"
+      "$ref": "#/$defs/PromptHashes"
     },
     "protocol_version": {
       "minLength": 1,
@@ -164,6 +224,8 @@
     "provider",
     "model",
     "prompt_hashes",
+    "condition_order",
+    "decoding",
     "seed",
     "repeats",
     "analysis",

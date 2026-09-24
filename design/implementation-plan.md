@@ -7,7 +7,9 @@ Build only what the next experiment needs. Add complexity as a new controlled co
 ## Progress
 
 - Phase 0 completed on 2026-09-23.
-- Phase 1 is next.
+- Phase 1 completed on 2026-09-23.
+- Phase 2 completed on 2026-09-24.
+- Phase 3 is next.
 
 ## Phase 0: Experiment Contracts
 
