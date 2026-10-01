@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and MCP retrieval, proposal, commit, and discard tools exist. The inspection tool is specified but not implemented. The system has not produced experimental results.
+This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and all five v1 MCP tools exist. Host setup and the JSON CLI fallback remain incomplete. The system has not produced experimental results.
 
 Its purpose is to create the smallest system capable of running the initial experiment in [`../research/protocol.md`](../research/protocol.md).
 

@@ -4,7 +4,7 @@
 
 - Classification: design decision
 - Contract status: proposed
-- Implementation status: partial — retrieve, propose, commit, and discard implemented
+- Implementation status: all five stdio tools implemented; JSON CLI fallback pending
 - Primary transport: local MCP over standard input/output
 - Compatibility fallback: equivalent JSON CLI commands
 - Scientific result: no
@@ -101,9 +101,11 @@ memory or evidence record.
 ## Inspect
 
 `memory_loom_inspect` returns records visible to the current user and optional
-project or task scope. By default it returns current memory statements and
-lifecycle metadata, not raw source conversations. Deleted lineages expose only
-non-content tombstone metadata.
+host-bound project or task scope. By default it returns the latest active
+version of each visible lineage. `include_inactive` exposes lifecycle versions
+for a requested lineage and latest inactive tombstones when listing. Cursor
+pagination orders lineages by memory ID. Raw source conversations are not
+returned, and deleted lineages expose only non-content tombstone metadata.
 
 ## Stable Error Codes
 

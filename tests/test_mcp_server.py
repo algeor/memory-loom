@@ -183,6 +183,27 @@ def test_commit_change_persists_create_correct_delete_lifecycle(
     )
     assert deleted["status"] == "deleted"
 
+    active_inspection = _call_tool("memory_loom_inspect", {})
+    assert active_inspection["memories"] == []
+    assert active_inspection["revisions"] == []
+
+    deleted_inspection = _call_tool(
+        "memory_loom_inspect",
+        {
+            "memory_id": str(memory_id),
+            "include_inactive": True,
+        },
+    )
+    assert [item["version"] for item in deleted_inspection["memories"]] == [1, 2]
+    assert all(
+        item["statement"] is None for item in deleted_inspection["memories"]
+    )
+    assert [item["operation"] for item in deleted_inspection["revisions"]] == [
+        "approve",
+        "correct",
+        "delete",
+    ]
+
     with MemoryStore(database_path) as store:
         assert store.get_active(memory_id) is None
         assert str(memory_id) not in store.indexed_memory_ids()
@@ -256,3 +277,37 @@ def test_discard_change_removes_proposal_without_writing_memory(
         proposal_store.get(proposal_id)
     with MemoryStore(database_path) as store:
         assert store.latest_records() == []
+
+
+def test_inspect_does_not_reveal_out_of_scope_memory(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    database_path = tmp_path / "memory.db"
+    scenario = Scenario.model_validate(load_json(SCENARIO_PATH))
+    with MemoryStore(database_path) as store:
+        store.load_scenario(scenario)
+
+    monkeypatch.setenv("MEMORY_LOOM_USER_ID", "user-a")
+    monkeypatch.setenv("MEMORY_LOOM_PROJECT_ID", "another-project")
+    monkeypatch.setenv("MEMORY_LOOM_DATABASE_PATH", str(database_path))
+
+    inspected = _call_tool(
+        "memory_loom_inspect",
+        {
+            "memory_id": PROJECT_MEMORY_ID,
+            "include_inactive": True,
+        },
+    )
+
+    assert inspected["memories"] == []
+    assert inspected["revisions"] == []
+
+
+def test_inspect_is_declared_read_only_and_has_no_scope_argument() -> None:
+    tools = asyncio.run(server.list_tools())
+    inspect = next(tool for tool in tools if tool.name == "memory_loom_inspect")
+
+    assert inspect.annotations is not None
+    assert inspect.annotations.read_only_hint is True
+    assert "scope" not in inspect.input_schema["properties"]

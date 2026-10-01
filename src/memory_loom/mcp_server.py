@@ -6,6 +6,7 @@ from typing import Annotated, Literal
 from uuid import UUID, uuid4
 
 from mcp.server.mcpserver import MCPServer
+from mcp.types import ToolAnnotations
 from pydantic import Field
 
 from memory_loom.mcp_models import (
@@ -16,6 +17,9 @@ from memory_loom.mcp_models import (
     DeleteChangeRequest,
     DiscardChangeResponse,
     DiscardReason,
+    InspectedMemory,
+    InspectedRevision,
+    InspectResponse,
     ProposeChangeResponse,
     RetrieveResponse,
     SelectedMemory,
@@ -39,6 +43,7 @@ CONTEXT_HEADER = (
 )
 QueryText = Annotated[str, Field(min_length=1)]
 ResultLimit = Annotated[int, Field(ge=1, le=20)]
+InspectLimit = Annotated[int, Field(ge=1, le=100)]
 
 
 server = MCPServer(
@@ -200,6 +205,54 @@ def discard_change(
     )
 
 
+@server.tool(
+    name="memory_loom_inspect",
+    title="Inspect Memory",
+    description=(
+        "Inspect memory and lifecycle metadata visible to the configured local "
+        "profile. Deleted content is never returned."
+    ),
+    annotations=ToolAnnotations(
+        readOnlyHint=True,
+        destructiveHint=False,
+        idempotentHint=True,
+        openWorldHint=False,
+    ),
+    structured_output=True,
+)
+def inspect_memory(
+    memory_id: UUID | None = None,
+    include_inactive: bool = False,
+    cursor: UUID | None = None,
+    limit: InspectLimit = 50,
+) -> InspectResponse:
+    if memory_id is not None and cursor is not None:
+        raise ValueError("cursor cannot be used with a specific memory ID")
+
+    scope = configured_scope()
+    with MemoryStore(configured_database_path()) as store:
+        records, next_cursor = _inspect_records(
+            store,
+            scope,
+            memory_id,
+            include_inactive,
+            cursor,
+            limit,
+        )
+        revisions = [
+            revision
+            for record_id in sorted({record.id for record in records}, key=str)
+            for revision in store.revisions_for_lineage(record_id)
+        ]
+
+    return InspectResponse(
+        scope=scope,
+        memories=[_inspected_memory(record) for record in records],
+        revisions=[_inspected_revision(revision) for revision in revisions],
+        next_cursor=next_cursor,
+    )
+
+
 def _required_statement(record: MemoryRecord) -> str:
     if record.statement is None:
         raise RuntimeError(f"selected memory {record.id} has no statement")
@@ -302,6 +355,67 @@ def _scope_label(scope: Scope) -> str:
     if scope.project_id is not None:
         return "project"
     return "user"
+
+
+def _inspect_records(
+    store: MemoryStore,
+    scope: Scope,
+    memory_id: UUID | None,
+    include_inactive: bool,
+    cursor: UUID | None,
+    limit: int,
+) -> tuple[list[MemoryRecord], UUID | None]:
+    if memory_id is not None:
+        records = [
+            record
+            for record in store.records_for_lineage(memory_id)
+            if _scope_matches(record.scope, scope)
+        ]
+        if not include_inactive:
+            records = [record for record in records if record.status == "active"]
+        return records, None
+
+    records = [
+        record
+        for record in store.latest_records()
+        if _scope_matches(record.scope, scope)
+        and (include_inactive or record.status == "active")
+        and (cursor is None or str(record.id) > str(cursor))
+    ]
+    page = records[:limit]
+    next_cursor = page[-1].id if len(records) > limit else None
+    return page, next_cursor
+
+
+def _inspected_memory(record: MemoryRecord) -> InspectedMemory:
+    return InspectedMemory(
+        memory_id=record.id,
+        rule_key=record.rule_key,
+        statement=record.statement,
+        kind=record.kind,
+        scope=record.scope,
+        status=record.status,
+        evidence_ids=record.evidence_ids,
+        created_at=record.created_at,
+        valid_from=record.valid_from,
+        valid_until=record.valid_until,
+        version=record.version,
+    )
+
+
+def _inspected_revision(revision: RevisionEvent) -> InspectedRevision:
+    return InspectedRevision(
+        revision_id=revision.id,
+        memory_id=revision.memory_id,
+        operation=revision.operation,
+        from_version=revision.from_version,
+        to_version=revision.to_version,
+        evidence_ids=revision.evidence_ids,
+        actor=revision.actor,
+        reason_code=revision.reason_code,
+        approval_event_id=revision.approval_event_id,
+        created_at=revision.created_at,
+    )
 
 
 def _commit_proposal(

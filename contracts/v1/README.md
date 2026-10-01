@@ -4,7 +4,7 @@
 
 This directory documents implemented contract version `1.0.0`. Pydantic models in [`../../src/memory_loom/models.py`](../../src/memory_loom/models.py) are the runtime source of truth. Generated JSON Schemas live in [`../../schemas/v1/`](../../schemas/v1/).
 
-The implementation validates and replays synthetic artifacts, persists memory in SQLite, and executes all baseline conditions through a synchronous model-adapter interface. The included adapter is deterministic and does not call a model provider. An MCP 2.x stdio server currently exposes retrieval, non-durable change proposals, approval-gated commits, and proposal discard; inspection is not implemented.
+The implementation validates and replays synthetic artifacts, persists memory in SQLite, and executes all baseline conditions through a synchronous model-adapter interface. The included adapter is deterministic and does not call a model provider. An MCP 2.x stdio server exposes retrieval, non-durable change proposals, approval-gated commits, proposal discard, and scoped read-only inspection.
 
 ## Artifacts
 

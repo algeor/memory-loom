@@ -95,3 +95,37 @@ class DiscardChangeResponse(ContractModel):
     reason: DiscardReason
     discarded: bool
     durable_artifacts_created: Literal[False]
+
+
+class InspectedMemory(ContractModel):
+    memory_id: UUID
+    rule_key: Identifier
+    statement: str | None
+    kind: MemoryKind
+    scope: Scope
+    status: Literal["active", "superseded", "deleted"]
+    evidence_ids: list[UUID]
+    created_at: AwareDatetime
+    valid_from: AwareDatetime
+    valid_until: AwareDatetime | None
+    version: int = Field(ge=1)
+
+
+class InspectedRevision(ContractModel):
+    revision_id: UUID
+    memory_id: UUID
+    operation: Literal["approve", "correct", "supersede", "delete"]
+    from_version: int | None = Field(default=None, ge=1)
+    to_version: int | None = Field(default=None, ge=1)
+    evidence_ids: list[UUID]
+    actor: Literal["user", "research_fixture"]
+    reason_code: Identifier
+    approval_event_id: Identifier | None
+    created_at: AwareDatetime
+
+
+class InspectResponse(ContractModel):
+    scope: Scope
+    memories: list[InspectedMemory]
+    revisions: list[InspectedRevision]
+    next_cursor: UUID | None

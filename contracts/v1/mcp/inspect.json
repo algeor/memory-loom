@@ -2,15 +2,17 @@
   "tool": "memory_loom_inspect",
   "contract_version": "1.0.0",
   "request": {
-    "scope": {
-      "project_id": null,
-      "task_id": null
-    },
     "memory_id": null,
     "include_inactive": false,
+    "cursor": null,
     "limit": 50
   },
   "response": {
+    "scope": {
+      "user_id": "user-a",
+      "project_id": null,
+      "task_id": null
+    },
     "memories": [
       {
         "memory_id": "42000000-0000-4000-8000-000000000001",
@@ -23,12 +25,29 @@
           "task_id": null
         },
         "status": "active",
+        "created_at": "2026-10-01T12:00:00Z",
         "version": 1,
-        "valid_from": "2026-09-30T12:00:00Z",
+        "valid_from": "2026-10-01T12:00:00Z",
         "valid_until": null,
         "evidence_ids": [
           "41000000-0000-4000-8000-000000000001"
         ]
+      }
+    ],
+    "revisions": [
+      {
+        "revision_id": "43000000-0000-4000-8000-000000000001",
+        "memory_id": "42000000-0000-4000-8000-000000000001",
+        "operation": "approve",
+        "from_version": null,
+        "to_version": 1,
+        "evidence_ids": [
+          "41000000-0000-4000-8000-000000000001"
+        ],
+        "actor": "user",
+        "reason_code": "explicit-user-approval",
+        "approval_event_id": "host-message-002",
+        "created_at": "2026-10-01T12:00:00Z"
       }
     ],
     "next_cursor": null
