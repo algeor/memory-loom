@@ -162,6 +162,29 @@ def test_dry_run_does_not_write_or_execute(
     assert not (tmp_path / "AGENTS.md").exists()
 
 
+def test_default_database_uses_stable_user_data_directory(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    server = _executable(tmp_path / "memory-loom-mcp")
+    host = _executable(tmp_path / "codex")
+    data_home = tmp_path / "data"
+    monkeypatch.setenv("XDG_DATA_HOME", str(data_home))
+    monkeypatch.setattr(onboarding.shutil, "which", lambda _: str(host))
+
+    result = onboarding.onboard_host(
+        "codex",
+        project_root=tmp_path,
+        user_id="default",
+        project_id="sample-project",
+        database_path=None,
+        server_command=server,
+        dry_run=True,
+    )
+
+    assert result.database_path == data_home / "memory-loom" / "sample-project.db"
+
+
 def test_invalid_project_id_is_rejected(
     tmp_path: Path,
     monkeypatch: pytest.MonkeyPatch,

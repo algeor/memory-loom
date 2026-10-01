@@ -1,0 +1,64 @@
+name: Early tester feedback
+description: Report a Memory Loom usability problem or reproducible failure
+title: "[early-test] "
+labels: ["early-tester"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not attach databases, memory text, credentials, personal data, or raw conversation logs. Use synthetic examples.
+  - type: dropdown
+    id: host
+    attributes:
+      label: Host
+      options:
+        - Codex
+        - Claude Code
+        - Other
+    validations:
+      required: true
+  - type: input
+    id: version
+    attributes:
+      label: Memory Loom version
+      placeholder: "0.1.0"
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Operating system and Python version
+      placeholder: "macOS 15, Python 3.14.6"
+    validations:
+      required: true
+  - type: textarea
+    id: doctor
+    attributes:
+      label: Redacted doctor output
+      description: Run memory-loom doctor and remove paths or identifiers you do not want to share.
+      render: json
+  - type: textarea
+    id: steps
+    attributes:
+      label: Reproduction steps using synthetic content
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+    validations:
+      required: true
+  - type: checkboxes
+    id: safety
+    attributes:
+      label: Safety confirmation
+      options:
+        - label: I removed secrets, personal data, memory contents, and raw conversation logs.
+          required: true

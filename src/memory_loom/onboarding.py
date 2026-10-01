@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import os
 import shutil
 import subprocess
 import sys
@@ -47,7 +48,7 @@ def onboard_host(
     project_root: Path,
     user_id: str,
     project_id: str | None,
-    database_path: Path,
+    database_path: Path | None,
     server_command: Path | None = None,
     replace: bool = False,
     dry_run: bool = False,
@@ -58,7 +59,11 @@ def onboard_host(
         project_id or root.name,
         "project ID",
     )
-    resolved_database = _resolve_from_root(database_path, root)
+    resolved_database = (
+        _resolve_from_root(database_path, root)
+        if database_path is not None
+        else _default_database_path(resolved_project_id)
+    )
     resolved_server = _resolve_server_command(server_command)
     host_command = _resolve_host_command(host)
     add_command = tuple(
@@ -222,6 +227,13 @@ def _resolve_server_command(command: Path | None) -> Path:
 def _resolve_from_root(path: Path, root: Path) -> Path:
     expanded = path.expanduser()
     return (expanded if expanded.is_absolute() else root / expanded).resolve()
+
+
+def _default_database_path(project_id: str) -> Path:
+    data_home = Path(
+        os.environ.get("XDG_DATA_HOME", Path.home() / ".local" / "share")
+    )
+    return (data_home / "memory-loom" / f"{project_id}.db").expanduser().resolve()
 
 
 def _validate_identifier(value: str, label: str) -> str:

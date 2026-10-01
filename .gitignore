@@ -11,6 +11,7 @@ evaluation-runs/
 __pycache__/
 .pytest_cache/
 .venv/
+dist/
 *.db
 *.db-shm
 *.db-wal

@@ -4,6 +4,7 @@ import argparse
 import json
 from pathlib import Path
 
+from memory_loom import __version__
 from memory_loom.contracts import (
     ContractValidationError,
     export_schema_catalog,
@@ -11,6 +12,7 @@ from memory_loom.contracts import (
     validate_path,
     validate_schema_catalog,
 )
+from memory_loom.maintenance import backup_database, diagnose, restore_database
 from memory_loom.onboarding import onboard_host
 from memory_loom.replay import replay_query_contexts, replay_query_contexts_live
 from memory_loom.retrieval_evaluation import evaluate_retrieval, threshold_failures
@@ -20,6 +22,7 @@ from memory_loom.store import MemoryStore
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(prog="memory-loom")
+    parser.add_argument("--version", action="version", version=f"%(prog)s {__version__}")
     subparsers = parser.add_subparsers(dest="command", required=True)
 
     validate_parser = subparsers.add_parser("validate", help="validate one artifact")
@@ -66,7 +69,7 @@ def build_parser() -> argparse.ArgumentParser:
     onboard_parser.add_argument(
         "--database",
         type=Path,
-        default=Path("memory-loom.db"),
+        help="SQLite path; defaults to the user data directory",
     )
     onboard_parser.add_argument("--server-command", type=Path)
     onboard_parser.add_argument(
@@ -88,6 +91,44 @@ def build_parser() -> argparse.ArgumentParser:
         "--database",
         type=Path,
         default=Path("memory-loom.db"),
+    )
+
+    doctor_parser = subparsers.add_parser(
+        "doctor",
+        help="check the local runtime and database without reading memory content",
+    )
+    doctor_parser.add_argument(
+        "--database",
+        type=Path,
+        default=Path("memory-loom.db"),
+    )
+
+    backup_parser = subparsers.add_parser(
+        "backup",
+        help="create a consistent SQLite backup",
+    )
+    backup_parser.add_argument(
+        "--database",
+        type=Path,
+        default=Path("memory-loom.db"),
+    )
+    backup_parser.add_argument("--output", type=Path)
+    backup_parser.add_argument("--force", action="store_true")
+
+    restore_parser = subparsers.add_parser(
+        "restore",
+        help="restore and migrate a validated SQLite backup",
+    )
+    restore_parser.add_argument("--from", dest="backup", type=Path, required=True)
+    restore_parser.add_argument(
+        "--database",
+        type=Path,
+        default=Path("memory-loom.db"),
+    )
+    restore_parser.add_argument(
+        "--yes",
+        action="store_true",
+        help="confirm replacement when the destination database exists",
     )
 
     evaluation_parser = subparsers.add_parser(
@@ -173,6 +214,32 @@ def main(argv: list[str] | None = None) -> int:
                     print(f"backup: {store.last_backup_path}")
                 else:
                     print("backup: not needed")
+        elif args.command == "doctor":
+            report = diagnose(args.database)
+            print(report.to_json())
+            if report.status == "error":
+                return 1
+        elif args.command == "backup":
+            backup_path = backup_database(
+                args.database,
+                args.output,
+                overwrite=args.force,
+            )
+            print(f"backup: {backup_path}")
+        elif args.command == "restore":
+            restored = restore_database(
+                args.backup,
+                args.database,
+                confirmed=args.yes,
+            )
+            print(
+                f"restored: {restored.database_path} "
+                f"(schema {restored.schema_version})"
+            )
+            if restored.safety_backup_path is not None:
+                print(f"previous database backup: {restored.safety_backup_path}")
+            if restored.migration_backup_path is not None:
+                print(f"pre-migration backup: {restored.migration_backup_path}")
         elif args.command == "evaluate-retrieval":
             artifact = evaluate_retrieval(
                 args.scenarios,
@@ -203,7 +270,7 @@ def main(argv: list[str] | None = None) -> int:
                 for failure in failures:
                     print(f"failure: {failure}")
                 return 1
-    except (ContractValidationError, ValueError) as error:
+    except (ContractValidationError, OSError, ValueError) as error:
         print(f"error: {error}")
         return 1
     return 0

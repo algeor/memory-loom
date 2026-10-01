@@ -21,6 +21,8 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Automated onboarding registers Codex or Claude Code, installs a managed project instruction block, and verifies host configuration.
 - Claude Code local registration is documented and has passed its MCP connection check.
 - SQLite upgrades now create a pre-migration backup, apply changes transactionally, and reject unsupported newer schemas.
+- Local diagnostics, manual backup, and guarded restore commands are implemented without printing memory content.
+- CI and tagged-release workflows test contracts, retrieval gates, built distributions, clean onboarding, MCP restart persistence, and v1 database upgrades.
 - Source-backed harness patterns are cataloged in `notes/00` through `notes/08`.
 - Research questions, hypotheses, claims, and protocol are now separated from implementation design.
 - The first system under test is limited to explicit preferences and direct corrections.
@@ -41,6 +43,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Use local stdio MCP as the primary client integration boundary, with a JSON CLI fallback for hosts without MCP.
 - Keep provider adapters confined to the experiment runner; Memory Loom itself does not depend on a model provider.
 - Defer Gemini CLI onboarding until a later client-integration stage.
+- Distribute the first tester build as a versioned GitHub release artifact rather than claiming production readiness.
 
 ## Next Implementation Milestone
 
@@ -80,3 +83,4 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-10-01: Added automated Codex and Claude Code onboarding; deferred Gemini CLI integration.
 - 2026-10-01: Hardened early-user database upgrades with backups, transactional migrations, compatibility guards, and preservation tests.
 - 2026-10-01: Added versioned lexical-retrieval evaluation with CI thresholds and forbidden-hit failure behavior.
+- 2026-10-01: Added early-tester diagnostics, backup/restore, clean-wheel smoke testing, CI, release automation, and tester guidance.

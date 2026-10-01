@@ -74,6 +74,22 @@ These layers are intentionally separate:
 3. Use the [experiment protocol](research/protocol.md) for study design.
 4. Use the [reference design](design/README.md) only when implementing the system under test.
 
+## Early Tester Install
+
+Install the tagged wheel with `uv`, then run onboarding inside the project where
+the assistant should use Memory Loom:
+
+```zsh
+uv python install 3.14
+uv tool install --python 3.14 \
+  https://github.com/algeor/memory-loom/releases/download/v0.1.0/memory_loom-0.1.0-py3-none-any.whl
+memory-loom onboard codex --project-id your-project
+memory-loom doctor --database ~/.local/share/memory-loom/your-project.db
+```
+
+Claude Code is also supported. Read [`EARLY_TESTERS.md`](EARLY_TESTERS.md)
+before using real preferences.
+
 ## Contract Replay
 
 ```bash
@@ -143,6 +159,14 @@ uv run memory-loom migrate --database /absolute/path/to/memory-loom.db
 Pending schema changes are backed up and applied transactionally. See
 [`design/database-upgrades.md`](design/database-upgrades.md) before distributing
 a new build to early users.
+
+Manual recovery commands:
+
+```zsh
+memory-loom backup --database /absolute/path/to/memory-loom.db
+memory-loom restore --from /absolute/path/to/backup.db \
+  --database /absolute/path/to/memory-loom.db --yes
+```
 
 ## Origin
 

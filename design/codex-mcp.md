@@ -46,7 +46,7 @@ The configured variables are host-controlled scope, not model arguments:
 
 - `MEMORY_LOOM_USER_ID` selects a local memory profile. It is not operating-system authentication.
 - `MEMORY_LOOM_PROJECT_ID` limits project-scoped memory.
-- `MEMORY_LOOM_DATABASE_PATH` selects the local SQLite database. Repository `*.db` files are ignored by Git.
+- `MEMORY_LOOM_DATABASE_PATH` selects the local SQLite database. Onboarding defaults to `$XDG_DATA_HOME/memory-loom/<project>.db`, or `~/.local/share/memory-loom/<project>.db` when `XDG_DATA_HOME` is unset.
 
 The Codex CLI registration is global, so `memory-loom` is visible in other
 Codex projects. Its configured project scope remains `memory-loom`, while the

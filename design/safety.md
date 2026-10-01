@@ -45,7 +45,10 @@ For the prototype:
 
 Deletion tests must inspect the primary tables, indexes, stored manifests, serialized retrieval payloads, retrieval output, and newly generated traces. Append-only provenance applies to metadata, not to user-authored content. Logical erasure in the prototype is not a claim of forensic media sanitization or recall from a model provider that already received the text.
 
-Backup, export, replicas, and cryptographic erasure are deferred because the initial design has none of those features.
+Local manual and pre-migration backups are implemented. Backups retain memory
+content independently and therefore require separate deletion. Encrypted
+backups, exports, replicas, retention automation, and cryptographic erasure
+remain deferred.
 
 ## Provider Boundary
 

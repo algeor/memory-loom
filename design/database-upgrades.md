@@ -35,6 +35,18 @@ normal store startup:
 Backups are written beside the database under `<database>.backups/`. No backup
 is created when the database is already current.
 
+Users can also create and restore explicit backups:
+
+```zsh
+memory-loom backup --database /absolute/path/to/memory-loom.db
+memory-loom restore --from /absolute/path/to/backup.db \
+  --database /absolute/path/to/memory-loom.db --yes
+```
+
+Stop every MCP host using the database before restore. An overwrite creates a
+safety backup, restores atomically, removes stale SQLite sidecar files, and
+applies pending migrations.
+
 ## Release Rules
 
 - Never edit a released migration; add the next numbered migration.
