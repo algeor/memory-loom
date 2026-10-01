@@ -235,6 +235,7 @@ class MemoryStore:
                         "evidence_ids": evidence_ids,
                         "actor": row["actor"],
                         "reason_code": row["reason_code"],
+                        "approval_event_id": row["approval_event_id"],
                         "created_at": row["created_at"],
                     }
                 )
@@ -325,10 +326,14 @@ class MemoryStore:
 
     def _insert_evidence(self, evidence: EvidenceEvent) -> None:
         self.connection.execute(
-            "INSERT INTO evidence_events VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO evidence_events("
+            "id, scenario_id, source_event_id, kind, content, content_state, "
+            "user_scope, project_scope, task_scope, recorded_at, consent"
+            ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 str(evidence.id),
                 evidence.scenario_id,
+                evidence.source_event_id,
                 evidence.kind,
                 evidence.content,
                 evidence.content_state,
@@ -379,7 +384,10 @@ class MemoryStore:
 
     def _insert_revision(self, revision: RevisionEvent) -> None:
         self.connection.execute(
-            "INSERT INTO revision_events VALUES (?, ?, ?, ?, ?, ?, ?, ?)",
+            "INSERT INTO revision_events("
+            "id, memory_id, operation, from_version, to_version, actor, "
+            "reason_code, approval_event_id, created_at"
+            ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
             (
                 str(revision.id),
                 str(revision.memory_id),
@@ -388,6 +396,7 @@ class MemoryStore:
                 revision.to_version,
                 revision.actor,
                 revision.reason_code,
+                revision.approval_event_id,
                 _timestamp(revision.created_at),
             ),
         )

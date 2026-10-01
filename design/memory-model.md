@@ -13,6 +13,7 @@ An append-only metadata record for the interaction in which the user stated a pr
 ```yaml
 id: uuid
 scenario_id: string
+source_event_id: string|null
 kind: explicit_preference|direct_correction
 content: string|null
 content_state: present|erased
@@ -56,6 +57,7 @@ to_version: integer|null
 evidence_ids: [uuid]
 actor: user|research_fixture
 reason_code: string
+approval_event_id: string|null
 created_at: timestamp
 ```
 

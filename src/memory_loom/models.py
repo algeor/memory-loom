@@ -36,6 +36,7 @@ class Scope(ContractModel):
 class EvidenceEvent(ContractModel):
     id: UUID
     scenario_id: Identifier
+    source_event_id: Identifier | None = None
     kind: Literal["explicit_preference", "direct_correction"]
     content: str | None
     content_state: Literal["present", "erased"]
@@ -86,6 +87,7 @@ class RevisionEvent(ContractModel):
     evidence_ids: list[UUID]
     actor: Literal["user", "research_fixture"]
     reason_code: Identifier
+    approval_event_id: Identifier | None = None
     created_at: AwareDatetime
 
     @model_validator(mode="after")

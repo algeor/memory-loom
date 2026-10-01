@@ -4,7 +4,7 @@
 
 - Classification: design decision
 - Contract status: proposed
-- Implementation status: not implemented
+- Implementation status: partial — retrieve, propose, commit, and discard implemented
 - Primary transport: local MCP over standard input/output
 - Compatibility fallback: equivalent JSON CLI commands
 - Scientific result: no

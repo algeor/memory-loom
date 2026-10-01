@@ -17,7 +17,7 @@ This repository contains a research protocol, a reference design, and a local re
 | Experimental protocol | Specified, not yet run |
 | Reference implementation | Phase 0-2 contracts, SQLite memory core, retrieval, and baseline runner implemented |
 | Development pilot dataset | 24 synthetic scenarios across 6 template families |
-| Client integration | MCP 2.x stdio server with retrieval and ephemeral change proposals implemented |
+| Client integration | MCP 2.x stdio server with retrieval, proposal, commit, and discard implemented |
 | Scientific conclusions | None |
 
 Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.

@@ -10,7 +10,7 @@ Build only what the next experiment needs. Add complexity as a new controlled co
 - Phase 1 completed on 2026-09-23.
 - Phase 2 completed on 2026-09-24.
 - Phase 3 is active; the development dataset is complete.
-- The model-neutral MCP contract was drafted on 2026-09-30; retrieval and ephemeral proposal tools are implemented.
+- The model-neutral MCP contract was drafted on 2026-09-30; retrieval, proposal, commit, and discard tools are implemented.
 
 ## Phase 0: Experiment Contracts
 

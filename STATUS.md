@@ -14,8 +14,8 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking.
 - The synchronous baseline runner executes B0-B3 through one adapter and records exact prompts, contexts, configuration, latency, raw outputs, and failures.
 - A deterministic no-model adapter exercises the complete pipeline; no provider-backed runs or experimental results exist.
-- The MCP 2.x stdio server implements host-scoped retrieval and ephemeral create, correction, and deletion proposals.
-- Commit, discard, and inspection MCP tools are specified but not yet implemented.
+- The MCP 2.x stdio server implements host-scoped retrieval, ephemeral create/correct/delete proposals, and approval-gated durable commits.
+- The inspection MCP tool is specified but not yet implemented.
 - Source-backed harness patterns are cataloged in `notes/00` through `notes/08`.
 - Research questions, hypotheses, claims, and protocol are now separated from implementation design.
 - The first system under test is limited to explicit preferences and direct corrections.
@@ -53,7 +53,7 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 
 ## Blockers
 
-- The MCP lifecycle is incomplete: commit, discard, inspection, and host configuration documentation remain.
+- The MCP lifecycle is incomplete: inspection and host configuration documentation remain.
 - No provider-backed experiment runner exists.
 - The blinded review workflow has not been exercised.
 - Most literature pointers in the original brief still require primary-source verification.
@@ -69,3 +69,4 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-09-24: Implemented Phase 2 synchronous B0-B3 execution, deterministic no-model replay, versioned run artifacts, and failure-preserving output capture.
 - 2026-09-30: Completed 24 synthetic Phase 3 development scenarios across six independent template families and validated their contracts and live B3 selections.
 - 2026-09-30: Chose a model-neutral stdio MCP boundary and drafted five lifecycle-preserving tool contracts.
+- 2026-10-01: Implemented MCP retrieval, ephemeral proposals, and approval-gated create, correction, and deletion commits with host-event provenance.

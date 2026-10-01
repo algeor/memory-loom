@@ -111,6 +111,21 @@
         },
         "scope": {
           "$ref": "#/$defs/Scope"
+        },
+        "source_event_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9][a-z0-9._-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Source Event Id"
         }
       },
       "required": [
@@ -425,6 +440,21 @@
           ],
           "title": "Actor",
           "type": "string"
+        },
+        "approval_event_id": {
+          "anyOf": [
+            {
+              "maxLength": 128,
+              "minLength": 1,
+              "pattern": "^[a-z0-9][a-z0-9._-]*$",
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Approval Event Id"
         },
         "created_at": {
           "format": "date-time",

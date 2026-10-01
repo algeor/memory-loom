@@ -5,7 +5,11 @@ from datetime import UTC, datetime, timedelta
 import pytest
 
 from memory_loom.mcp_models import CreateChangeRequest, SourceEventInput
-from memory_loom.mcp_proposals import ProposalExpiredError, ProposalStore
+from memory_loom.mcp_proposals import (
+    ProposalExpiredError,
+    ProposalNotFoundError,
+    ProposalStore,
+)
 from memory_loom.models import Scope
 
 
@@ -32,6 +36,18 @@ def test_proposal_store_returns_defensive_copies() -> None:
 
     stored = store.get(proposal.proposal_id)
     assert stored.change.statement == "Lead with correctness issues."
+
+
+def test_take_is_atomic_and_failed_commit_can_restore() -> None:
+    store = ProposalStore()
+    proposal = store.create(_change(), _scope())
+
+    taken = store.take(proposal.proposal_id)
+
+    with pytest.raises(ProposalNotFoundError):
+        store.take(proposal.proposal_id)
+    assert store.restore(taken) is True
+    assert store.get(proposal.proposal_id) == proposal
 
 
 def _change() -> CreateChangeRequest:

@@ -73,3 +73,25 @@ class ProposeChangeResponse(ContractModel):
     confirmation_prompt: str = Field(min_length=1)
     durable: Literal[False]
     expires_at: AwareDatetime
+
+
+class CommitChangeResponse(ContractModel):
+    operation: Literal["create", "correct", "delete"]
+    memory_id: UUID
+    version: int = Field(ge=1)
+    status: Literal["active", "deleted"]
+    committed_at: AwareDatetime
+
+
+DiscardReason = Literal[
+    "user_declined",
+    "host_cancelled",
+    "superseded_proposal",
+]
+
+
+class DiscardChangeResponse(ContractModel):
+    proposal_id: UUID
+    reason: DiscardReason
+    discarded: bool
+    durable_artifacts_created: Literal[False]
