@@ -1,0 +1,405 @@
+{
+  "$defs": {
+    "RetrievalAggregateMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "abstention_accuracy": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Abstention Accuracy"
+        },
+        "abstention_queries": {
+          "minimum": 0,
+          "title": "Abstention Queries",
+          "type": "integer"
+        },
+        "forbidden_hit_count": {
+          "minimum": 0,
+          "title": "Forbidden Hit Count",
+          "type": "integer"
+        },
+        "forbidden_query_count": {
+          "minimum": 0,
+          "title": "Forbidden Query Count",
+          "type": "integer"
+        },
+        "mean_context_tokens": {
+          "minimum": 0,
+          "title": "Mean Context Tokens",
+          "type": "number"
+        },
+        "mean_ndcg_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean Ndcg At K"
+        },
+        "mean_reciprocal_rank": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean Reciprocal Rank"
+        },
+        "memory_needed_queries": {
+          "minimum": 0,
+          "title": "Memory Needed Queries",
+          "type": "integer"
+        },
+        "no_memory_false_positive_rate": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "No Memory False Positive Rate"
+        },
+        "precision_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Precision At K"
+        },
+        "recall_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recall At K"
+        },
+        "total_queries": {
+          "minimum": 1,
+          "title": "Total Queries",
+          "type": "integer"
+        },
+        "total_scenarios": {
+          "minimum": 1,
+          "title": "Total Scenarios",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "total_scenarios",
+        "total_queries",
+        "memory_needed_queries",
+        "abstention_queries",
+        "forbidden_hit_count",
+        "forbidden_query_count",
+        "mean_context_tokens"
+      ],
+      "title": "RetrievalAggregateMetrics",
+      "type": "object"
+    },
+    "RetrievalEvaluationQueryResult": {
+      "additionalProperties": false,
+      "properties": {
+        "abstention_expected": {
+          "title": "Abstention Expected",
+          "type": "boolean"
+        },
+        "abstention_match": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "title": "Abstention Match"
+        },
+        "acceptable_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Acceptable Memory Ids",
+          "type": "array"
+        },
+        "context_token_count": {
+          "minimum": 0,
+          "title": "Context Token Count",
+          "type": "integer"
+        },
+        "forbidden_hits": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Forbidden Hits",
+          "type": "array"
+        },
+        "forbidden_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Forbidden Memory Ids",
+          "type": "array"
+        },
+        "included_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Included Memory Ids",
+          "type": "array"
+        },
+        "irrelevant_selected_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Irrelevant Selected Ids",
+          "type": "array"
+        },
+        "memory_needed": {
+          "title": "Memory Needed",
+          "type": "boolean"
+        },
+        "ndcg_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Ndcg At K"
+        },
+        "no_memory_false_positive": {
+          "title": "No Memory False Positive",
+          "type": "boolean"
+        },
+        "precision_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Precision At K"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "recall_at_k": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Recall At K"
+        },
+        "reciprocal_rank": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Reciprocal Rank"
+        },
+        "relevant_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Relevant Memory Ids",
+          "type": "array"
+        },
+        "scenario_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "selected_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Selected Memory Ids",
+          "type": "array"
+        },
+        "split": {
+          "enum": [
+            "development",
+            "held_out"
+          ],
+          "title": "Split",
+          "type": "string"
+        },
+        "template_family": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Template Family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "scenario_id",
+        "template_family",
+        "split",
+        "query_id",
+        "memory_needed",
+        "abstention_expected",
+        "relevant_memory_ids",
+        "acceptable_memory_ids",
+        "forbidden_memory_ids",
+        "selected_memory_ids",
+        "included_memory_ids",
+        "irrelevant_selected_ids",
+        "forbidden_hits",
+        "abstention_match",
+        "no_memory_false_positive",
+        "context_token_count"
+      ],
+      "title": "RetrievalEvaluationQueryResult",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/retrieval-evaluation.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "retrieval_evaluation",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "condition_manifest_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Condition Manifest Id",
+      "type": "string"
+    },
+    "dataset_path": {
+      "minLength": 1,
+      "title": "Dataset Path",
+      "type": "string"
+    },
+    "evaluator": {
+      "const": "sqlite-fts5-lexical-v1",
+      "title": "Evaluator",
+      "type": "string"
+    },
+    "limit": {
+      "minimum": 1,
+      "title": "Limit",
+      "type": "integer"
+    },
+    "metrics": {
+      "$ref": "#/$defs/RetrievalAggregateMetrics"
+    },
+    "query_results": {
+      "items": {
+        "$ref": "#/$defs/RetrievalEvaluationQueryResult"
+      },
+      "minItems": 1,
+      "title": "Query Results",
+      "type": "array"
+    },
+    "scenario_ids": {
+      "items": {
+        "maxLength": 128,
+        "minLength": 1,
+        "pattern": "^[a-z0-9][a-z0-9._-]*$",
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Scenario Ids",
+      "type": "array"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "evaluator",
+    "dataset_path",
+    "condition_manifest_id",
+    "limit",
+    "scenario_ids",
+    "query_results",
+    "metrics"
+  ],
+  "title": "RetrievalEvaluationArtifact",
+  "type": "object"
+}

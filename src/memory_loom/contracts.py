@@ -11,6 +11,7 @@ from memory_loom.models import (
     EvidenceEvent,
     MemoryRecord,
     RetrievalDecision,
+    RetrievalEvaluationArtifact,
     RevisionEvent,
     RunArtifact,
     RunManifest,
@@ -27,6 +28,7 @@ MODEL_BY_ARTIFACT_TYPE: dict[str, type[BaseModel]] = {
     "condition_manifest": ConditionManifest,
     "run_manifest": RunManifest,
     "run_artifact": RunArtifact,
+    "retrieval_evaluation": RetrievalEvaluationArtifact,
 }
 
 MODEL_BY_SCHEMA_NAME: dict[str, type[BaseModel]] = {
@@ -38,6 +40,7 @@ MODEL_BY_SCHEMA_NAME: dict[str, type[BaseModel]] = {
     "memory-record.schema.json": MemoryRecord,
     "revision-event.schema.json": RevisionEvent,
     "retrieval-decision.schema.json": RetrievalDecision,
+    "retrieval-evaluation.schema.json": RetrievalEvaluationArtifact,
 }
 
 

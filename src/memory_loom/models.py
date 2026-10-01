@@ -567,6 +567,74 @@ class RunArtifact(ContractModel):
         return self
 
 
+class RetrievalEvaluationQueryResult(ContractModel):
+    scenario_id: Identifier
+    template_family: Identifier
+    split: Literal["development", "held_out"]
+    query_id: Identifier
+    memory_needed: bool
+    abstention_expected: bool
+    relevant_memory_ids: list[UUID]
+    acceptable_memory_ids: list[UUID]
+    forbidden_memory_ids: list[UUID]
+    selected_memory_ids: list[UUID]
+    included_memory_ids: list[UUID]
+    irrelevant_selected_ids: list[UUID]
+    forbidden_hits: list[UUID]
+    recall_at_k: float | None = Field(default=None, ge=0, le=1)
+    precision_at_k: float | None = Field(default=None, ge=0, le=1)
+    reciprocal_rank: float | None = Field(default=None, ge=0, le=1)
+    ndcg_at_k: float | None = Field(default=None, ge=0, le=1)
+    abstention_match: bool | None
+    no_memory_false_positive: bool
+    context_token_count: int = Field(ge=0)
+
+
+class RetrievalAggregateMetrics(ContractModel):
+    total_scenarios: int = Field(ge=1)
+    total_queries: int = Field(ge=1)
+    memory_needed_queries: int = Field(ge=0)
+    abstention_queries: int = Field(ge=0)
+    recall_at_k: float | None = Field(default=None, ge=0, le=1)
+    precision_at_k: float | None = Field(default=None, ge=0, le=1)
+    mean_reciprocal_rank: float | None = Field(default=None, ge=0, le=1)
+    mean_ndcg_at_k: float | None = Field(default=None, ge=0, le=1)
+    abstention_accuracy: float | None = Field(default=None, ge=0, le=1)
+    no_memory_false_positive_rate: float | None = Field(default=None, ge=0, le=1)
+    forbidden_hit_count: int = Field(ge=0)
+    forbidden_query_count: int = Field(ge=0)
+    mean_context_tokens: float = Field(ge=0)
+
+
+class RetrievalEvaluationArtifact(ContractModel):
+    artifact_type: Literal["retrieval_evaluation"]
+    schema_version: ArtifactVersion
+    evaluator: Literal["sqlite-fts5-lexical-v1"]
+    dataset_path: str = Field(min_length=1)
+    condition_manifest_id: Identifier
+    limit: int = Field(ge=1)
+    scenario_ids: list[Identifier] = Field(min_length=1)
+    query_results: list[RetrievalEvaluationQueryResult] = Field(min_length=1)
+    metrics: RetrievalAggregateMetrics
+
+    @model_validator(mode="after")
+    def contents_are_consistent(self) -> RetrievalEvaluationArtifact:
+        _require_unique(self.scenario_ids, "retrieval evaluation scenario IDs")
+        query_keys = [
+            (result.scenario_id, result.query_id) for result in self.query_results
+        ]
+        _require_unique(query_keys, "retrieval evaluation query keys")
+        if set(self.scenario_ids) != {
+            result.scenario_id for result in self.query_results
+        }:
+            raise ValueError("scenario IDs must match retrieval query results")
+        if self.metrics.total_scenarios != len(self.scenario_ids):
+            raise ValueError("total_scenarios must match scenario IDs")
+        if self.metrics.total_queries != len(self.query_results):
+            raise ValueError("total_queries must match query results")
+        return self
+
+
 def _require_unique(values: list[object], label: str) -> None:
     if len(values) != len(set(values)):
         raise ValueError(f"{label} must be unique")

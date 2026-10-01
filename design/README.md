@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and all five v1 MCP tools exist. Host setup and the JSON CLI fallback remain incomplete. The system has not produced experimental results.
+This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and all five v1 MCP tools exist. Automated Codex and Claude Code onboarding is implemented; the JSON CLI fallback remains incomplete. The system has not produced experimental results.
 
 Its purpose is to create the smallest system capable of running the initial experiment in [`../research/protocol.md`](../research/protocol.md).
 
@@ -54,6 +54,8 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 - [`retrieval.md`](retrieval.md) — lexical retrieval and context construction.
 - [`safety.md`](safety.md) — consent, scope, deletion, and threat boundaries.
 - [`implementation-plan.md`](implementation-plan.md) — build order and exit gates.
+- [`codex-mcp.md`](codex-mcp.md) — Codex installation, registration, and verification.
+- [`claude-code-mcp.md`](claude-code-mcp.md) — Claude Code installation, registration, and verification.
 - [`../contracts/v1/mcp-tools.md`](../contracts/v1/mcp-tools.md) — proposed client-neutral tool boundary.
 
 ## Deferred Decisions
@@ -66,6 +68,7 @@ These require evidence from the first study or a separate experiment:
 - autonomous admission and consolidation;
 - network daemon and remote service hosting;
 - host-specific enforcement and non-MCP wrappers;
+- Gemini CLI onboarding and verification;
 - anonymisation of research exports;
 - encryption and backup strategy;
 - fine-tuning.

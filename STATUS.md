@@ -7,15 +7,19 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 ## Current State
 
 - Phase 0 experiment contracts and deterministic replay tooling are implemented.
-- Pydantic v2 models validate scenarios, manifests, run artifacts, memory records, revisions, and retrieval traces and generate eight versioned JSON Schemas.
+- Pydantic v2 models validate scenarios, manifests, run artifacts, retrieval evaluations, memory records, revisions, and retrieval traces and generate nine versioned JSON Schemas.
 - A 24-scenario synthetic development set covers six independent template families with four surface variants each.
 - All 24 pilot scenarios validate, use unique UUIDs, and reproduce their labeled B3 retrieval selections without calling a model.
 - The SQLite memory core implements approval, correction, supersession, deletion, restart persistence, and retrieval traces.
 - Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking.
+- The deterministic retrieval evaluator reports ranking, abstention, safety, and context-cost metrics from frozen labels without calling a model.
 - The synchronous baseline runner executes B0-B3 through one adapter and records exact prompts, contexts, configuration, latency, raw outputs, and failures.
 - A deterministic no-model adapter exercises the complete pipeline; no provider-backed runs or experimental results exist.
 - The MCP 2.x stdio server implements host-scoped retrieval, ephemeral create/correct/delete proposals, and approval-gated durable commits.
 - All five v1 MCP tools are implemented over local stdio, including read-only scoped inspection with tombstone-safe output.
+- Codex host registration and verification are documented, and the five-tool lifecycle has passed a local stdio smoke test.
+- Automated onboarding registers Codex or Claude Code, installs a managed project instruction block, and verifies host configuration.
+- Claude Code local registration is documented and has passed its MCP connection check.
 - Source-backed harness patterns are cataloged in `notes/00` through `notes/08`.
 - Research questions, hypotheses, claims, and protocol are now separated from implementation design.
 - The first system under test is limited to explicit preferences and direct corrections.
@@ -35,25 +39,25 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Resample independent scenario-construction clusters rather than queries or repeated model runs.
 - Use local stdio MCP as the primary client integration boundary, with a JSON CLI fallback for hosts without MCP.
 - Keep provider adapters confined to the experiment runner; Memory Loom itself does not depend on a model provider.
+- Defer Gemini CLI onboarding until a later client-integration stage.
 
 ## Next Implementation Milestone
 
-Implement the model-neutral MCP boundary without changing the tested memory lifecycle.
+Complete the non-MCP JSON CLI fallback without changing the tested memory lifecycle.
 
 Exit conditions:
 
-- expose the five frozen v1 tools over local stdio MCP;
-- keep proposed changes ephemeral until explicit user approval;
-- preserve scope, lifecycle, deletion, and retrieval-trace invariants;
 - provide equivalent JSON CLI operations for non-MCP hosts;
-- add contract and integration tests without calling a model.
+- preserve the same host-controlled scope and approval boundary;
+- add contract and integration tests without calling a model;
+- document one reproducible non-MCP host workflow.
 
 The Phase 3 scientific pilot follows this integration milestone. It still needs
 a provider-backed experiment adapter and an exercised blinded review workflow.
 
 ## Blockers
 
-- MCP host configuration documentation and the equivalent JSON CLI fallback remain.
+- The equivalent JSON CLI fallback remains.
 - No provider-backed experiment runner exists.
 - The blinded review workflow has not been exercised.
 - Most literature pointers in the original brief still require primary-source verification.
@@ -71,3 +75,6 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-09-30: Chose a model-neutral stdio MCP boundary and drafted five lifecycle-preserving tool contracts.
 - 2026-10-01: Implemented MCP retrieval, ephemeral proposals, and approval-gated create, correction, and deletion commits with host-event provenance.
 - 2026-10-01: Completed the v1 MCP tool surface with proposal discard and scoped, read-only inspection.
+- 2026-10-01: Verified Codex registration and the full propose, commit, retrieve, and inspect lifecycle; documented reproducible host setup.
+- 2026-10-01: Added automated Codex and Claude Code onboarding; deferred Gemini CLI integration.
+- 2026-10-01: Added versioned lexical-retrieval evaluation with CI thresholds and forbidden-hit failure behavior.

@@ -1,9 +1,10 @@
 from __future__ import annotations
 
+from collections.abc import Sequence
 from dataclasses import asdict, dataclass
 from typing import Any
 
-from memory_loom.models import Scenario
+from memory_loom.models import MemoryRecord, Scenario
 from memory_loom.retrieval import LexicalRetriever
 from memory_loom.store import MemoryStore
 
@@ -100,6 +101,28 @@ def replay_query_context(
 
 def count_tokens(text: str) -> int:
     return len(text.split())
+
+
+def build_structured_memory_context(
+    records: Sequence[MemoryRecord],
+    header: str,
+    budget: int,
+) -> tuple[str, tuple[str, ...]]:
+    included_records: list[dict[str, Any]] = []
+    for record in records:
+        record_document = record.model_dump(mode="json")
+        candidate = [*included_records, record_document]
+        context = _serialize_blocks(header, [_memory_block(item) for item in candidate])
+        if count_tokens(context) > budget:
+            break
+        included_records = candidate
+
+    if not included_records:
+        return "", ()
+    return (
+        _serialize_blocks(header, [_memory_block(item) for item in included_records]),
+        tuple(record["id"] for record in included_records),
+    )
 
 
 def _replay_condition(
@@ -209,7 +232,7 @@ def _structured_memory_context(
     for record in scenario["memory_records"]:
         records_by_id.setdefault(record["id"], []).append(record)
 
-    included_records: list[dict[str, Any]] = []
+    selected_records: list[MemoryRecord] = []
     for decision in selected_decisions:
         record = max(
             records_by_id[decision["memory_id"]], key=lambda item: item["version"]
@@ -218,18 +241,9 @@ def _structured_memory_context(
             raise ValueError(f"selected memory {record['id']!r} is not active")
         if not _scope_matches(record["scope"], query["scope"]):
             raise ValueError(f"selected memory {record['id']!r} is out of scope")
-        candidate = [*included_records, record]
-        context = _serialize_blocks(header, [_memory_block(item) for item in candidate])
-        if count_tokens(context) > budget:
-            break
-        included_records = candidate
+        selected_records.append(MemoryRecord.model_validate(record))
 
-    if not included_records:
-        return "", ()
-    return (
-        _serialize_blocks(header, [_memory_block(item) for item in included_records]),
-        tuple(record["id"] for record in included_records),
-    )
+    return build_structured_memory_context(selected_records, header, budget)
 
 
 def _scope_matches(record_scope: dict[str, Any], query_scope: dict[str, Any]) -> bool:

@@ -17,7 +17,7 @@ This repository contains a research protocol, a reference design, and a local re
 | Experimental protocol | Specified, not yet run |
 | Reference implementation | Phase 0-2 contracts, SQLite memory core, retrieval, and baseline runner implemented |
 | Development pilot dataset | 24 synthetic scenarios across 6 template families |
-| Client integration | Five model-neutral MCP 2.x stdio tools implemented; host setup and JSON CLI fallback pending |
+| Client integration | Five model-neutral MCP 2.x stdio tools and automated Codex/Claude onboarding implemented; JSON CLI fallback pending |
 | Scientific conclusions | None |
 
 Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.
@@ -48,6 +48,8 @@ The first study excludes:
 |---|---|
 | [`research/`](research/README.md) | Questions, hypotheses, claims, and experimental protocol |
 | [`design/`](design/README.md) | Minimal system being proposed for evaluation |
+| [`design/codex-mcp.md`](design/codex-mcp.md) | Reproducible Codex MCP host setup |
+| [`design/claude-code-mcp.md`](design/claude-code-mcp.md) | Reproducible Claude Code MCP host setup |
 | [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
 | [`sources/`](sources/README.md) | Provenance and literature ledgers |
 | [`schemas/`](schemas/v1/) | Versioned machine-readable experiment contracts |
@@ -93,6 +95,41 @@ PYTHONPATH=src python3 -m memory_loom run \
 ```
 
 This uses the no-model adapter. It verifies the complete B0-B3 execution and artifact pipeline without producing experimental evidence.
+
+## Lexical Retrieval Evaluation
+
+Evaluate live SQLite FTS5 retrieval against the frozen scenario labels without
+calling a model:
+
+```zsh
+uv run memory-loom evaluate-retrieval \
+  fixtures/scenarios/v1 \
+  --output evaluation-runs/retrieval-fixtures.json \
+  --min-recall-at-k 1 \
+  --min-mrr 1 \
+  --max-no-memory-fpr 0
+```
+
+The versioned artifact separates raw ranked IDs from budgeted context IDs and
+reports recall, precision, MRR, nDCG, abstention accuracy, false positives,
+forbidden hits, and context-token cost. This command evaluates all 25 scenario
+fixtures, including the standalone contract fixture; it is engineering
+validation, not a scientific result for the 24-scenario pilot.
+
+## MCP Host Setup
+
+After installation, onboard a supported host with one command:
+
+```zsh
+uv run memory-loom onboard codex --project-id memory-loom
+# or
+uv run memory-loom onboard claude --project-id memory-loom
+```
+
+See the [Codex](design/codex-mcp.md) and
+[Claude Code](design/claude-code-mcp.md) guides for scope and verification.
+Memory Loom remains model-independent; onboarding configures hosts rather than
+adapting the memory core to an LLM.
 
 ## Origin
 

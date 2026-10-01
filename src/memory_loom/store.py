@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import sqlite3
 from collections.abc import Iterable
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from uuid import UUID
@@ -22,13 +23,31 @@ class MemoryStoreError(ValueError):
     pass
 
 
+@dataclass(frozen=True)
+class Migration:
+    version: int
+    path: Path
+
+
 class MemoryStore:
-    def __init__(self, database_path: str | Path = ":memory:") -> None:
+    def __init__(
+        self,
+        database_path: str | Path = ":memory:",
+        *,
+        migration_directory: Path | None = None,
+    ) -> None:
         self.database_path = str(database_path)
+        self.migration_directory = migration_directory or MIGRATION_DIRECTORY
+        self.last_backup_path: Path | None = None
+        self._database_existed = self._database_file_exists()
         self.connection = sqlite3.connect(self.database_path)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
-        self.migrate()
+        try:
+            self.migrate()
+        except Exception:
+            self.connection.close()
+            raise
 
     def __enter__(self) -> MemoryStore:
         return self
@@ -39,25 +58,90 @@ class MemoryStore:
     def close(self) -> None:
         self.connection.close()
 
+    @property
+    def schema_version(self) -> int:
+        versions = self._applied_migration_versions()
+        return max(versions, default=0)
+
     def migrate(self) -> None:
-        self.connection.execute(
-            "CREATE TABLE IF NOT EXISTS schema_migrations "
-            "(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL)"
-        )
-        applied = {
+        migrations = _load_migrations(self.migration_directory)
+        self.connection.execute("BEGIN IMMEDIATE")
+        current_migration: Migration | None = None
+        try:
+            applied = self._applied_migration_versions()
+            _validate_migration_history(applied, migrations)
+            pending = [item for item in migrations if item.version not in applied]
+
+            if pending and self._database_existed:
+                self.last_backup_path = self._backup_database(pending[-1].version)
+
+            self.connection.execute(
+                "CREATE TABLE IF NOT EXISTS schema_migrations "
+                "(version INTEGER PRIMARY KEY, applied_at TEXT NOT NULL)"
+            )
+            for migration in pending:
+                current_migration = migration
+                _execute_sql_script(
+                    self.connection,
+                    migration.path.read_text(encoding="utf-8"),
+                )
+                self.connection.execute(
+                    "INSERT INTO schema_migrations(version, applied_at) VALUES (?, ?)",
+                    (migration.version, _timestamp(datetime.now(UTC))),
+                )
+            self.connection.commit()
+        except sqlite3.Error as error:
+            self.connection.rollback()
+            version = current_migration.version if current_migration else "unknown"
+            backup = (
+                f"; backup: {self.last_backup_path}"
+                if self.last_backup_path is not None
+                else ""
+            )
+            raise MemoryStoreError(
+                f"database migration {version} failed{backup}: {error}"
+            ) from error
+        except Exception:
+            self.connection.rollback()
+            raise
+
+    def _applied_migration_versions(self) -> set[int]:
+        table_exists = self.connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type = 'table' "
+            "AND name = 'schema_migrations'"
+        ).fetchone()
+        if table_exists is None:
+            return set()
+        return {
             row["version"]
             for row in self.connection.execute("SELECT version FROM schema_migrations")
         }
-        for migration_path in sorted(MIGRATION_DIRECTORY.glob("*.sql")):
-            version = int(migration_path.name.split("_", 1)[0])
-            if version in applied:
-                continue
-            self.connection.executescript(migration_path.read_text(encoding="utf-8"))
-            self.connection.execute(
-                "INSERT INTO schema_migrations(version, applied_at) VALUES (?, ?)",
-                (version, _timestamp(datetime.now(UTC))),
-            )
-            self.connection.commit()
+
+    def _backup_database(self, target_version: int) -> Path:
+        database_path = Path(self.database_path).expanduser().resolve()
+        backup_directory = database_path.parent / f"{database_path.name}.backups"
+        backup_directory.mkdir(parents=True, exist_ok=True)
+        timestamp = datetime.now(UTC).strftime("%Y%m%dT%H%M%S%fZ")
+        suffix = database_path.suffix or ".db"
+        backup_path = backup_directory / (
+            f"{database_path.stem}.pre-v{target_version}.{timestamp}{suffix}"
+        )
+
+        source = sqlite3.connect(database_path)
+        destination = sqlite3.connect(backup_path)
+        try:
+            source.backup(destination)
+        finally:
+            destination.close()
+            source.close()
+        backup_path.chmod(0o600)
+        return backup_path
+
+    def _database_file_exists(self) -> bool:
+        if self.database_path == ":memory:":
+            return False
+        path = Path(self.database_path).expanduser()
+        return path.is_file() and path.stat().st_size > 0
 
     def approve(
         self,
@@ -472,6 +556,63 @@ class MemoryStore:
 
 def _timestamp(value: datetime | None) -> str | None:
     return value.isoformat() if value is not None else None
+
+
+def _load_migrations(directory: Path) -> list[Migration]:
+    migrations = []
+    for path in sorted(directory.glob("*.sql")):
+        try:
+            version = int(path.name.split("_", 1)[0])
+        except ValueError as error:
+            raise MemoryStoreError(f"invalid migration filename: {path.name}") from error
+        migrations.append(Migration(version=version, path=path))
+
+    if not migrations:
+        raise MemoryStoreError(f"no SQLite migrations found in {directory}")
+    versions = [item.version for item in migrations]
+    if len(versions) != len(set(versions)):
+        raise MemoryStoreError("SQLite migration versions must be unique")
+    expected = list(range(1, versions[-1] + 1))
+    if versions != expected:
+        raise MemoryStoreError(
+            f"SQLite migration versions must be contiguous: expected {expected}, "
+            f"found {versions}"
+        )
+    return migrations
+
+
+def _validate_migration_history(
+    applied: set[int], migrations: list[Migration]
+) -> None:
+    available = [item.version for item in migrations]
+    unknown = sorted(applied - set(available))
+    if unknown:
+        if unknown[-1] > available[-1]:
+            raise MemoryStoreError(
+                "database uses newer migration versions unsupported by this "
+                f"release: {unknown}"
+            )
+        raise MemoryStoreError(f"database uses unavailable migration versions: {unknown}")
+
+    expected_applied = set(available[: len(applied)])
+    if applied != expected_applied:
+        raise MemoryStoreError(
+            f"database migration history is not contiguous: {sorted(applied)}"
+        )
+
+
+def _execute_sql_script(connection: sqlite3.Connection, script: str) -> None:
+    statement = ""
+    for line in script.splitlines(keepends=True):
+        statement += line
+        if not sqlite3.complete_statement(statement):
+            continue
+        sql = statement.strip()
+        if sql:
+            connection.execute(sql)
+        statement = ""
+    if statement.strip():
+        raise MemoryStoreError("migration contains an incomplete SQL statement")
 
 
 def _fts_query(query: str) -> str:

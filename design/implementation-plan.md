@@ -95,6 +95,7 @@ Deliver:
 - retrieve, propose, commit, discard, and inspect tools;
 - ephemeral proposal storage with expiry;
 - local memory-profile scope supplied outside model-controlled content;
+- automated Codex and Claude Code host onboarding;
 - equivalent JSON CLI operations;
 - contract and integration tests that do not call a model.
 

@@ -18,6 +18,7 @@ The implementation validates and replays synthetic artifacts, persists memory in
 | Memory record | `memory-record.schema.json` | Scoped and versioned preference state |
 | Revision event | `revision-event.schema.json` | Append-only lifecycle transition metadata |
 | Retrieval decision | `retrieval-decision.schema.json` | Per-record eligibility and selection trace |
+| Retrieval evaluation | `retrieval-evaluation.schema.json` | Per-query rankings, context cost, aggregate metrics, and safety failures |
 
 ## Replay Boundary
 
@@ -43,6 +44,10 @@ PYTHONPATH=src python3 -m memory_loom run \
   fixtures/manifests/v1/default-conditions.json \
   fixtures/manifests/v1/contract-replay-run.json \
   --output evaluation-runs/contract-replay-001.json
+PYTHONPATH=src python3 -m memory_loom evaluate-retrieval \
+  fixtures/scenarios/v1 \
+  --condition-manifest fixtures/manifests/v1/default-conditions.json \
+  --output evaluation-runs/retrieval-fixtures.json
 pytest
 ```
 
