@@ -56,6 +56,7 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 - [`implementation-plan.md`](implementation-plan.md) — build order and exit gates.
 - [`codex-mcp.md`](codex-mcp.md) — Codex installation, registration, and verification.
 - [`claude-code-mcp.md`](claude-code-mcp.md) — Claude Code installation, registration, and verification.
+- [`database-upgrades.md`](database-upgrades.md) — SQLite backup, migration, and early-user upgrade rules.
 - [`../contracts/v1/mcp-tools.md`](../contracts/v1/mcp-tools.md) — proposed client-neutral tool boundary.
 
 ## Deferred Decisions
@@ -70,5 +71,5 @@ These require evidence from the first study or a separate experiment:
 - host-specific enforcement and non-MCP wrappers;
 - Gemini CLI onboarding and verification;
 - anonymisation of research exports;
-- encryption and backup strategy;
+- encryption and long-term backup retention policy;
 - fine-tuning.

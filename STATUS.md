@@ -20,6 +20,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Codex host registration and verification are documented, and the five-tool lifecycle has passed a local stdio smoke test.
 - Automated onboarding registers Codex or Claude Code, installs a managed project instruction block, and verifies host configuration.
 - Claude Code local registration is documented and has passed its MCP connection check.
+- SQLite upgrades now create a pre-migration backup, apply changes transactionally, and reject unsupported newer schemas.
 - Source-backed harness patterns are cataloged in `notes/00` through `notes/08`.
 - Research questions, hypotheses, claims, and protocol are now separated from implementation design.
 - The first system under test is limited to explicit preferences and direct corrections.
@@ -77,4 +78,5 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-10-01: Completed the v1 MCP tool surface with proposal discard and scoped, read-only inspection.
 - 2026-10-01: Verified Codex registration and the full propose, commit, retrieve, and inspect lifecycle; documented reproducible host setup.
 - 2026-10-01: Added automated Codex and Claude Code onboarding; deferred Gemini CLI integration.
+- 2026-10-01: Hardened early-user database upgrades with backups, transactional migrations, compatibility guards, and preservation tests.
 - 2026-10-01: Added versioned lexical-retrieval evaluation with CI thresholds and forbidden-hit failure behavior.

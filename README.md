@@ -50,6 +50,7 @@ The first study excludes:
 | [`design/`](design/README.md) | Minimal system being proposed for evaluation |
 | [`design/codex-mcp.md`](design/codex-mcp.md) | Reproducible Codex MCP host setup |
 | [`design/claude-code-mcp.md`](design/claude-code-mcp.md) | Reproducible Claude Code MCP host setup |
+| [`design/database-upgrades.md`](design/database-upgrades.md) | SQLite backup and upgrade procedure |
 | [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
 | [`sources/`](sources/README.md) | Provenance and literature ledgers |
 | [`schemas/`](schemas/v1/) | Versioned machine-readable experiment contracts |
@@ -130,6 +131,18 @@ See the [Codex](design/codex-mcp.md) and
 [Claude Code](design/claude-code-mcp.md) guides for scope and verification.
 Memory Loom remains model-independent; onboarding configures hosts rather than
 adapting the memory core to an LLM.
+
+## Early User Upgrades
+
+Keep the configured database path stable, update the checkout, then run:
+
+```zsh
+uv run memory-loom migrate --database /absolute/path/to/memory-loom.db
+```
+
+Pending schema changes are backed up and applied transactionally. See
+[`design/database-upgrades.md`](design/database-upgrades.md) before distributing
+a new build to early users.
 
 ## Origin
 
