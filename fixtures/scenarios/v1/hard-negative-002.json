@@ -1,0 +1,158 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "hard-negative-002",
+  "template_family": "hard-negative",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-10-11T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "content": "For mobile-app reviews, include iOS-specific implementation notes."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-10-11T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "content": "Should I save that project-specific preference?"
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-10-11T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "content": "Yes, save it for this project."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 4,
+      "occurred_at": "2026-10-11T09:00:11Z",
+      "type": "approval",
+      "memory_id": "92000000-0000-4000-8000-000000000002",
+      "evidence_ids": [
+        "91000000-0000-4000-8000-000000000002"
+      ],
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 4,
+      "created_at": "2026-10-11T09:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "For mobile-app reviews, the user wants iOS-specific implementation notes."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "91000000-0000-4000-8000-000000000002",
+      "scenario_id": "hard-negative-002",
+      "kind": "explicit_preference",
+      "content": "For mobile-app reviews, include iOS-specific implementation notes.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "recorded_at": "2026-10-11T09:00:00Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "92000000-0000-4000-8000-000000000002",
+      "rule_key": "review.platform-notes",
+      "statement": "For mobile-app reviews, include iOS-specific implementation notes.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "91000000-0000-4000-8000-000000000002"
+      ],
+      "created_at": "2026-10-11T09:00:11Z",
+      "valid_from": "2026-10-11T09:00:11Z",
+      "valid_until": null,
+      "version": 1
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "93000000-0000-4000-8000-000000000002",
+      "memory_id": "92000000-0000-4000-8000-000000000002",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "91000000-0000-4000-8000-000000000002"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-10-11T09:00:11Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "92000000-0000-4000-8000-000000000002",
+      "eligible": false,
+      "decision": "scope_filtered",
+      "lexical_score": null,
+      "reason_code": "project-scope-mismatch",
+      "position": null
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 4,
+      "occurred_at": "2026-10-12T10:00:00Z",
+      "content": "Review the web application's responsive navigation code.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "web-app",
+        "task_id": "responsive-ui-review"
+      },
+      "labels": {
+        "memory_needed": false,
+        "relevant_memory_ids": [],
+        "acceptable_memory_ids": [],
+        "forbidden_memory_ids": [
+          "92000000-0000-4000-8000-000000000002"
+        ],
+        "required_behavior": "Do not apply the mobile-app-specific iOS preference.",
+        "violating_behaviors": [
+          "Include iOS implementation notes in the web-app review."
+        ],
+        "abstention_correct": true
+      }
+    }
+  ]
+}

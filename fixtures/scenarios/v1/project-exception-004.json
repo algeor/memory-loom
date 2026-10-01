@@ -1,0 +1,266 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "project-exception-004",
+  "template_family": "project-exception",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-09-01T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Keep UI reviews short and list only actionable findings."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-09-01T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I save that as a durable preference?"
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-09-01T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, save it."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 4,
+      "occurred_at": "2026-09-01T09:00:11Z",
+      "type": "approval",
+      "memory_id": "52000000-0000-4000-8000-000000000007",
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000007"
+      ],
+      "actor": "research_fixture"
+    },
+    {
+      "event_id": "msg-004",
+      "sequence": 5,
+      "occurred_at": "2026-09-02T10:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "memory-loom",
+        "task_id": null
+      },
+      "content": "For accessibility reviews of the mobile app, include the relevant WCAG criterion and explain the remediation."
+    },
+    {
+      "event_id": "msg-005",
+      "sequence": 6,
+      "occurred_at": "2026-09-02T10:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "memory-loom",
+        "task_id": null
+      },
+      "content": "Should I save that project-specific exception?"
+    },
+    {
+      "event_id": "msg-006",
+      "sequence": 7,
+      "occurred_at": "2026-09-02T10:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "memory-loom",
+        "task_id": null
+      },
+      "content": "Yes, save the exception."
+    },
+    {
+      "event_id": "approval-002",
+      "sequence": 8,
+      "occurred_at": "2026-09-02T10:00:11Z",
+      "type": "approval",
+      "memory_id": "52000000-0000-4000-8000-000000000008",
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000008"
+      ],
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 8,
+      "created_at": "2026-09-02T10:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "The user generally prefers short UI reviews with actionable findings. For mobile-app accessibility reviews, include the relevant WCAG criterion and explain remediation."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "51000000-0000-4000-8000-000000000007",
+      "scenario_id": "project-exception-004",
+      "kind": "explicit_preference",
+      "content": "Keep UI reviews short and list only actionable findings.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-09-01T09:00:00Z",
+      "consent": "approved"
+    },
+    {
+      "id": "51000000-0000-4000-8000-000000000008",
+      "scenario_id": "project-exception-004",
+      "kind": "explicit_preference",
+      "content": "For accessibility reviews of the mobile app, include the relevant WCAG criterion and explain the remediation.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "recorded_at": "2026-09-02T10:00:00Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "52000000-0000-4000-8000-000000000007",
+      "rule_key": "response.style",
+      "statement": "Keep UI reviews short and list only actionable findings.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000007"
+      ],
+      "created_at": "2026-09-01T09:00:11Z",
+      "valid_from": "2026-09-01T09:00:11Z",
+      "valid_until": null,
+      "version": 1
+    },
+    {
+      "id": "52000000-0000-4000-8000-000000000008",
+      "rule_key": "response.style",
+      "statement": "For accessibility reviews of the mobile app, include the relevant WCAG criterion and explain the remediation.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000008"
+      ],
+      "created_at": "2026-09-02T10:00:11Z",
+      "valid_from": "2026-09-02T10:00:11Z",
+      "valid_until": null,
+      "version": 1
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "53000000-0000-4000-8000-000000000007",
+      "memory_id": "52000000-0000-4000-8000-000000000007",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000007"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-09-01T09:00:11Z"
+    },
+    {
+      "id": "53000000-0000-4000-8000-000000000008",
+      "memory_id": "52000000-0000-4000-8000-000000000008",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "51000000-0000-4000-8000-000000000008"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-09-02T10:00:11Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "52000000-0000-4000-8000-000000000007",
+      "eligible": true,
+      "decision": "specificity_filtered",
+      "lexical_score": null,
+      "reason_code": "narrower-rule-match",
+      "position": null
+    },
+    {
+      "query_id": "query-001",
+      "memory_id": "52000000-0000-4000-8000-000000000008",
+      "eligible": true,
+      "decision": "selected",
+      "lexical_score": 1.0,
+      "reason_code": "highest-lexical-score",
+      "position": 1
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 8,
+      "occurred_at": "2026-09-03T09:00:00Z",
+      "content": "Review the mobile login screen for accessibility problems.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "mobile-app",
+        "task_id": "accessibility-review"
+      },
+      "labels": {
+        "memory_needed": true,
+        "relevant_memory_ids": [
+          "52000000-0000-4000-8000-000000000008"
+        ],
+        "acceptable_memory_ids": [
+          "52000000-0000-4000-8000-000000000008"
+        ],
+        "forbidden_memory_ids": [],
+        "required_behavior": "Include the applicable WCAG criterion and explain remediation.",
+        "violating_behaviors": [
+          "Return only a short list without WCAG criteria.",
+          "Identify accessibility problems without explaining remediation."
+        ],
+        "abstention_correct": false
+      }
+    }
+  ]
+}

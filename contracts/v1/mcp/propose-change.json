@@ -1,0 +1,25 @@
+{
+  "tool": "memory_loom_propose_change",
+  "contract_version": "1.0.0",
+  "request": {
+    "change": {
+      "operation": "create",
+      "kind": "preference",
+      "rule_key": "review.priority",
+      "statement": "When reviewing Python code, lead with correctness issues before style comments.",
+      "scope_level": "user",
+      "source_event": {
+        "event_id": "host-message-001",
+        "content": "When reviewing Python code, lead with correctness issues before style comments."
+      }
+    }
+  },
+  "response": {
+    "proposal_id": "43000000-0000-4000-8000-000000000001",
+    "operation": "create",
+    "summary": "Create preference 'review.priority' at user scope: When reviewing Python code, lead with correctness issues before style comments.",
+    "confirmation_prompt": "Create preference 'review.priority' at user scope: When reviewing Python code, lead with correctness issues before style comments. Approve this durable change?",
+    "durable": false,
+    "expires_at": "2026-10-01T12:15:00Z"
+  }
+}

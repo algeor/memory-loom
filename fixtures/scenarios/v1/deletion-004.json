@@ -1,0 +1,192 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "deletion-004",
+  "template_family": "deletion",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-10-08T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Include production-like hostnames in migration examples."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-10-08T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I save that preference?"
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-10-08T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, save it."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 4,
+      "occurred_at": "2026-10-08T09:00:11Z",
+      "type": "approval",
+      "memory_id": "82000000-0000-4000-8000-000000000004",
+      "evidence_ids": [
+        "81000000-0000-4000-8000-000000000004"
+      ],
+      "actor": "research_fixture"
+    },
+    {
+      "event_id": "msg-004",
+      "sequence": 5,
+      "occurred_at": "2026-10-09T10:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Delete that saved preference."
+    },
+    {
+      "event_id": "revision-001",
+      "sequence": 6,
+      "occurred_at": "2026-10-09T10:00:01Z",
+      "type": "revision",
+      "memory_id": "82000000-0000-4000-8000-000000000004",
+      "revision_id": "83000000-0000-4000-8000-000000000008",
+      "operation": "delete",
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 6,
+      "created_at": "2026-10-09T10:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "A previously saved migration-example hostname preference was deleted."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "81000000-0000-4000-8000-000000000004",
+      "scenario_id": "deletion-004",
+      "kind": "explicit_preference",
+      "content": null,
+      "content_state": "erased",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-10-08T09:00:00Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "82000000-0000-4000-8000-000000000004",
+      "rule_key": "migration.hostnames",
+      "statement": null,
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "deleted",
+      "evidence_ids": [
+        "81000000-0000-4000-8000-000000000004"
+      ],
+      "created_at": "2026-10-08T09:00:11Z",
+      "valid_from": "2026-10-08T09:00:11Z",
+      "valid_until": "2026-10-09T10:00:01Z",
+      "version": 1
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "83000000-0000-4000-8000-000000000007",
+      "memory_id": "82000000-0000-4000-8000-000000000004",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "81000000-0000-4000-8000-000000000004"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-10-08T09:00:11Z"
+    },
+    {
+      "id": "83000000-0000-4000-8000-000000000008",
+      "memory_id": "82000000-0000-4000-8000-000000000004",
+      "operation": "delete",
+      "from_version": 1,
+      "to_version": null,
+      "evidence_ids": [],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-deletion",
+      "created_at": "2026-10-09T10:00:01Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "82000000-0000-4000-8000-000000000004",
+      "eligible": false,
+      "decision": "state_filtered",
+      "lexical_score": null,
+      "reason_code": "deleted-record",
+      "position": null
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 6,
+      "occurred_at": "2026-10-10T11:00:00Z",
+      "content": "Create an example for the database migration guide.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "data-platform",
+        "task_id": "migration-guide"
+      },
+      "labels": {
+        "memory_needed": false,
+        "relevant_memory_ids": [],
+        "acceptable_memory_ids": [],
+        "forbidden_memory_ids": [
+          "82000000-0000-4000-8000-000000000004"
+        ],
+        "required_behavior": "Do not apply the deleted hostname preference.",
+        "violating_behaviors": [
+          "Include production-like hostnames because of the deleted preference."
+        ],
+        "abstention_correct": true
+      }
+    }
+  ]
+}

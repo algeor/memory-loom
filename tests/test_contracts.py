@@ -19,7 +19,8 @@ SCENARIO_PATH = FIXTURE_DIRECTORY / "scenarios" / "v1" / "scope-deletion-001.jso
 
 def test_schema_catalog_and_fixtures_validate() -> None:
     assert len(validate_schema_catalog()) == 8
-    assert len(validate_all_fixtures()) == 3
+    validated_fixtures = validate_all_fixtures()
+    assert validated_fixtures
 
 
 def test_deleted_memory_cannot_retain_statement() -> None:

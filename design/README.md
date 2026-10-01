@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, and synchronous baseline runner exist; the system has not produced experimental results.
+This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and initial MCP retrieval and proposal tools exist. The remaining MCP lifecycle tools are specified but not implemented. The system has not produced experimental results.
 
 Its purpose is to create the smallest system capable of running the initial experiment in [`../research/protocol.md`](../research/protocol.md).
 
@@ -13,17 +13,15 @@ Store an explicit preference or direct correction, retrieve it in the correct sc
 ## Minimal System
 
 ```text
-experiment runner or client adapter
-  -> memory API
-     -> policy checks
-     -> SQLite records and revisions
-     -> lexical retrieval
-     -> bounded context manifest
-  -> assistant model
-  -> outcome and trace
+coding CLI -> local MCP boundary -> memory API
+experiment runner -------------> memory API
+                                  -> policy checks
+                                  -> SQLite records and revisions
+                                  -> lexical retrieval
+                                  -> bounded context manifest
 ```
 
-The first implementation should be one process or library. A daemon, MCP server, vector index, remote model calls, and background consolidation are unnecessary for the first experiment.
+The core remains one process or library. Local stdio MCP is the chosen client-neutral boundary. A network daemon, vector index, remote model calls inside Memory Loom, and background consolidation remain unnecessary.
 
 ## Components
 
@@ -34,8 +32,9 @@ The first implementation should be one process or library. A daemon, MCP server,
 | Store | Persist evidence, records, revisions, and retrieval traces |
 | Lexical retriever | Return eligible records using deterministic text search |
 | Context builder | Produce a bounded, labeled context manifest |
+| MCP boundary | Expose retrieval and user-controlled lifecycle operations to compatible hosts |
 | Experiment adapter | Run identical scenarios across experimental conditions |
-| Client adapter | Optional integration with a coding assistant |
+| Host integration | Invoke MCP tools or equivalent JSON CLI operations without changing the memory core |
 
 ## Invariants
 
@@ -47,6 +46,7 @@ The first implementation should be one process or library. A daemon, MCP server,
 - Memory is labeled as fallible context, never as system instruction.
 - The current request overrides conflicting memory.
 - Every experiment run records its complete configuration.
+- The local memory-profile scope is supplied by the host and must not be broadened by model-generated arguments.
 
 ## Documents
 
@@ -54,6 +54,7 @@ The first implementation should be one process or library. A daemon, MCP server,
 - [`retrieval.md`](retrieval.md) — lexical retrieval and context construction.
 - [`safety.md`](safety.md) — consent, scope, deletion, and threat boundaries.
 - [`implementation-plan.md`](implementation-plan.md) — build order and exit gates.
+- [`../contracts/v1/mcp-tools.md`](../contracts/v1/mcp-tools.md) — proposed client-neutral tool boundary.
 
 ## Deferred Decisions
 
@@ -63,7 +64,8 @@ These require evidence from the first study or a separate experiment:
 - inferred preferences or personal facts;
 - confidence scoring;
 - autonomous admission and consolidation;
-- local daemon and MCP packaging;
+- network daemon and remote service hosting;
+- host-specific enforcement and non-MCP wrappers;
 - anonymisation of research exports;
 - encryption and backup strategy;
 - fine-tuning.

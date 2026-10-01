@@ -1,0 +1,187 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "direct-correction-003",
+  "template_family": "direct-correction",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-10-03T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Draft an incident plan for a service with rapidly increasing memory usage."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-10-03T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Restart the service immediately, then investigate the cause."
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-10-03T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Correction: preserve diagnostic evidence before restarting services during production incidents."
+    },
+    {
+      "event_id": "msg-004",
+      "sequence": 4,
+      "occurred_at": "2026-10-03T09:00:15Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I save that correction?"
+    },
+    {
+      "event_id": "msg-005",
+      "sequence": 5,
+      "occurred_at": "2026-10-03T09:00:20Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, save it."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 6,
+      "occurred_at": "2026-10-03T09:00:21Z",
+      "type": "approval",
+      "memory_id": "62000000-0000-4000-8000-000000000003",
+      "evidence_ids": [
+        "61000000-0000-4000-8000-000000000003"
+      ],
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 6,
+      "created_at": "2026-10-03T09:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "The user corrected the assistant: production incident plans must preserve diagnostic evidence before restarting services."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "61000000-0000-4000-8000-000000000003",
+      "scenario_id": "direct-correction-003",
+      "kind": "direct_correction",
+      "content": "In production incident plans, preserve diagnostic evidence before restarting services.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-10-03T09:00:10Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "62000000-0000-4000-8000-000000000003",
+      "rule_key": "incident-response.order",
+      "statement": "In production incident plans, preserve diagnostic evidence before restarting services.",
+      "kind": "correction",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "61000000-0000-4000-8000-000000000003"
+      ],
+      "created_at": "2026-10-03T09:00:21Z",
+      "valid_from": "2026-10-03T09:00:21Z",
+      "valid_until": null,
+      "version": 1
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "63000000-0000-4000-8000-000000000003",
+      "memory_id": "62000000-0000-4000-8000-000000000003",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "61000000-0000-4000-8000-000000000003"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-10-03T09:00:21Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "62000000-0000-4000-8000-000000000003",
+      "eligible": true,
+      "decision": "selected",
+      "lexical_score": 1.0,
+      "reason_code": "highest-lexical-score",
+      "position": 1
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 6,
+      "occurred_at": "2026-10-04T10:00:00Z",
+      "content": "Prepare an incident plan for the overloaded worker service.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "worker-service",
+        "task_id": "incident-response"
+      },
+      "labels": {
+        "memory_needed": true,
+        "relevant_memory_ids": [
+          "62000000-0000-4000-8000-000000000003"
+        ],
+        "acceptable_memory_ids": [
+          "62000000-0000-4000-8000-000000000003"
+        ],
+        "forbidden_memory_ids": [],
+        "required_behavior": "Preserve diagnostic evidence before restarting services.",
+        "violating_behaviors": [
+          "Restart services before collecting diagnostic evidence.",
+          "Omit diagnostic evidence preservation."
+        ],
+        "abstention_correct": false
+      }
+    }
+  ]
+}

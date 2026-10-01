@@ -1,0 +1,257 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "preference-change-003",
+  "template_family": "preference-change",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-10-05T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Use object-oriented examples for data transformations."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-10-05T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I save that preference?"
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-10-05T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, save it."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 4,
+      "occurred_at": "2026-10-05T09:00:11Z",
+      "type": "approval",
+      "memory_id": "72000000-0000-4000-8000-000000000003",
+      "evidence_ids": [
+        "71000000-0000-4000-8000-000000000005"
+      ],
+      "actor": "research_fixture"
+    },
+    {
+      "event_id": "msg-004",
+      "sequence": 5,
+      "occurred_at": "2026-10-06T10:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Change that preference. Use functional examples for data transformations."
+    },
+    {
+      "event_id": "msg-005",
+      "sequence": 6,
+      "occurred_at": "2026-10-06T10:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I update the saved preference?"
+    },
+    {
+      "event_id": "msg-006",
+      "sequence": 7,
+      "occurred_at": "2026-10-06T10:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, update it."
+    },
+    {
+      "event_id": "revision-001",
+      "sequence": 8,
+      "occurred_at": "2026-10-06T10:00:11Z",
+      "type": "revision",
+      "memory_id": "72000000-0000-4000-8000-000000000003",
+      "revision_id": "73000000-0000-4000-8000-000000000006",
+      "operation": "correct",
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 8,
+      "created_at": "2026-10-06T10:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "The earlier preference was replaced. Current preference: Use functional examples for data transformations."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "71000000-0000-4000-8000-000000000005",
+      "scenario_id": "preference-change-003",
+      "kind": "explicit_preference",
+      "content": "Use object-oriented examples for data transformations.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-10-05T09:00:00Z",
+      "consent": "approved"
+    },
+    {
+      "id": "71000000-0000-4000-8000-000000000006",
+      "scenario_id": "preference-change-003",
+      "kind": "explicit_preference",
+      "content": "Use functional examples for data transformations.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-10-06T10:00:00Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "72000000-0000-4000-8000-000000000003",
+      "rule_key": "example.style",
+      "statement": "Use object-oriented examples for data transformations.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "superseded",
+      "evidence_ids": [
+        "71000000-0000-4000-8000-000000000005"
+      ],
+      "created_at": "2026-10-05T09:00:11Z",
+      "valid_from": "2026-10-05T09:00:11Z",
+      "valid_until": "2026-10-06T10:00:11Z",
+      "version": 1
+    },
+    {
+      "id": "72000000-0000-4000-8000-000000000003",
+      "rule_key": "example.style",
+      "statement": "Use functional examples for data transformations.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "71000000-0000-4000-8000-000000000005",
+        "71000000-0000-4000-8000-000000000006"
+      ],
+      "created_at": "2026-10-06T10:00:11Z",
+      "valid_from": "2026-10-06T10:00:11Z",
+      "valid_until": null,
+      "version": 2
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "73000000-0000-4000-8000-000000000005",
+      "memory_id": "72000000-0000-4000-8000-000000000003",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "71000000-0000-4000-8000-000000000005"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-10-05T09:00:11Z"
+    },
+    {
+      "id": "73000000-0000-4000-8000-000000000006",
+      "memory_id": "72000000-0000-4000-8000-000000000003",
+      "operation": "correct",
+      "from_version": 1,
+      "to_version": 2,
+      "evidence_ids": [
+        "71000000-0000-4000-8000-000000000006"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-preference-change",
+      "created_at": "2026-10-06T10:00:11Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "72000000-0000-4000-8000-000000000003",
+      "eligible": true,
+      "decision": "selected",
+      "lexical_score": 1.0,
+      "reason_code": "highest-lexical-score",
+      "position": 1
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 8,
+      "occurred_at": "2026-10-07T11:00:00Z",
+      "content": "Show an example that normalizes these event records.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "event-pipeline",
+        "task_id": "data-transformation-example"
+      },
+      "labels": {
+        "memory_needed": true,
+        "relevant_memory_ids": [
+          "72000000-0000-4000-8000-000000000003"
+        ],
+        "acceptable_memory_ids": [
+          "72000000-0000-4000-8000-000000000003"
+        ],
+        "forbidden_memory_ids": [],
+        "required_behavior": "Use a functional data-transformation example.",
+        "violating_behaviors": [
+          "Use the superseded object-oriented example style.",
+          "Ignore the updated functional-example preference."
+        ],
+        "abstention_correct": false
+      }
+    }
+  ]
+}

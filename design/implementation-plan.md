@@ -9,7 +9,8 @@ Build only what the next experiment needs. Add complexity as a new controlled co
 - Phase 0 completed on 2026-09-23.
 - Phase 1 completed on 2026-09-23.
 - Phase 2 completed on 2026-09-24.
-- Phase 3 is next.
+- Phase 3 is active; the development dataset is complete.
+- The model-neutral MCP contract was drafted on 2026-09-30; retrieval and ephemeral proposal tools are implemented.
 
 ## Phase 0: Experiment Contracts
 
@@ -71,7 +72,7 @@ Exit gate:
 
 Deliver:
 
-- development dataset;
+- development dataset — complete: 24 synthetic scenarios across six template families;
 - blinded human review workflow;
 - paired analysis with uncertainty intervals;
 - failure report by pipeline stage;
@@ -83,6 +84,28 @@ Exit gate:
 - metrics distinguish retrieval from generation failures;
 - no post-hoc success threshold is introduced.
 
+## Client Integration Track: MCP
+
+This track exposes the existing memory lifecycle to coding assistants. It is an
+integration surface, not a new experimental condition or a model adapter.
+
+Deliver:
+
+- local stdio MCP server;
+- retrieve, propose, commit, discard, and inspect tools;
+- ephemeral proposal storage with expiry;
+- local memory-profile scope supplied outside model-controlled content;
+- equivalent JSON CLI operations;
+- contract and integration tests that do not call a model.
+
+Exit gate:
+
+- multiple MCP-capable hosts can use the same memory database and tool contract;
+- no proposal becomes durable before an explicit approval event;
+- rejected and expired proposals leave no durable evidence or index entries;
+- tool output never exposes out-of-scope records or raw internal errors;
+- the existing lifecycle and retrieval tests still pass.
+
 ## Phase 4: Held-Out Study
 
 Freeze the protocol, dataset split, prompts, conditions, and analysis before running the held-out set. Publish all required reproducibility artifacts and limitations.
@@ -93,7 +116,8 @@ Freeze the protocol, dataset split, prompts, conditions, and analysis before run
 - inferred facts and sensitive attributes;
 - confidence-weighted consolidation;
 - vector and hybrid retrieval;
-- daemon and MCP packaging;
+- network daemon and remote service hosting;
+- host-specific enforcement wrappers;
 - real-user data;
 - fine-tuning;
 - production deployment.

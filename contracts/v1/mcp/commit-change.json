@@ -1,0 +1,16 @@
+{
+  "tool": "memory_loom_commit_change",
+  "contract_version": "1.0.0",
+  "request": {
+    "proposal_id": "43000000-0000-4000-8000-000000000001",
+    "approval_event_id": "host-message-002",
+    "approved_by": "user"
+  },
+  "response": {
+    "operation": "create",
+    "memory_id": "42000000-0000-4000-8000-000000000001",
+    "version": 1,
+    "status": "active",
+    "committed_at": "2026-09-30T12:00:00Z"
+  }
+}

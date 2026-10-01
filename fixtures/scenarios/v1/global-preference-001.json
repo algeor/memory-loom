@@ -1,0 +1,161 @@
+{
+  "artifact_type": "scenario",
+  "schema_version": "1.0.0",
+  "scenario_id": "global-preference-001",
+  "template_family": "global-preference",
+  "split": "development",
+  "synthetic": true,
+  "timeline": [
+    {
+      "event_id": "msg-001",
+      "sequence": 1,
+      "occurred_at": "2026-10-01T09:00:00Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "When reviewing Python code, lead with correctness issues before style comments."
+    },
+    {
+      "event_id": "msg-002",
+      "sequence": 2,
+      "occurred_at": "2026-10-01T09:00:05Z",
+      "type": "message",
+      "role": "assistant",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Should I save that as a durable preference?"
+    },
+    {
+      "event_id": "msg-003",
+      "sequence": 3,
+      "occurred_at": "2026-10-01T09:00:10Z",
+      "type": "message",
+      "role": "user",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "content": "Yes, save it."
+    },
+    {
+      "event_id": "approval-001",
+      "sequence": 4,
+      "occurred_at": "2026-10-01T09:00:11Z",
+      "type": "approval",
+      "memory_id": "42000000-0000-4000-8000-000000000001",
+      "evidence_ids": [
+        "41000000-0000-4000-8000-000000000001"
+      ],
+      "actor": "research_fixture"
+    }
+  ],
+  "summary_snapshots": [
+    {
+      "snapshot_id": "summary-001",
+      "through_sequence": 4,
+      "created_at": "2026-10-01T09:01:00Z",
+      "generator": "synthetic-summary-v1",
+      "content": "The user prefers Python code reviews to discuss correctness before style."
+    }
+  ],
+  "evidence_events": [
+    {
+      "id": "41000000-0000-4000-8000-000000000001",
+      "scenario_id": "global-preference-001",
+      "kind": "explicit_preference",
+      "content": "When reviewing Python code, lead with correctness issues before style comments.",
+      "content_state": "present",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "recorded_at": "2026-10-01T09:00:00Z",
+      "consent": "approved"
+    }
+  ],
+  "memory_records": [
+    {
+      "id": "42000000-0000-4000-8000-000000000001",
+      "rule_key": "review.priority",
+      "statement": "When reviewing Python code, lead with correctness issues before style comments.",
+      "kind": "preference",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": null,
+        "task_id": null
+      },
+      "status": "active",
+      "evidence_ids": [
+        "41000000-0000-4000-8000-000000000001"
+      ],
+      "created_at": "2026-10-01T09:00:11Z",
+      "valid_from": "2026-10-01T09:00:11Z",
+      "valid_until": null,
+      "version": 1
+    }
+  ],
+  "revision_events": [
+    {
+      "id": "43000000-0000-4000-8000-000000000001",
+      "memory_id": "42000000-0000-4000-8000-000000000001",
+      "operation": "approve",
+      "from_version": null,
+      "to_version": 1,
+      "evidence_ids": [
+        "41000000-0000-4000-8000-000000000001"
+      ],
+      "actor": "research_fixture",
+      "reason_code": "explicit-user-approval",
+      "created_at": "2026-10-01T09:00:11Z"
+    }
+  ],
+  "retrieval_decisions": [
+    {
+      "query_id": "query-001",
+      "memory_id": "42000000-0000-4000-8000-000000000001",
+      "eligible": true,
+      "decision": "selected",
+      "lexical_score": 1.0,
+      "reason_code": "highest-lexical-score",
+      "position": 1
+    }
+  ],
+  "queries": [
+    {
+      "query_id": "query-001",
+      "after_sequence": 4,
+      "occurred_at": "2026-10-02T10:00:00Z",
+      "content": "Review this Python code and identify the most important problems.",
+      "scope": {
+        "user_id": "user-a",
+        "project_id": "compiler-tools",
+        "task_id": "python-review"
+      },
+      "labels": {
+        "memory_needed": true,
+        "relevant_memory_ids": [
+          "42000000-0000-4000-8000-000000000001"
+        ],
+        "acceptable_memory_ids": [
+          "42000000-0000-4000-8000-000000000001"
+        ],
+        "forbidden_memory_ids": [],
+        "required_behavior": "Discuss correctness issues before style comments.",
+        "violating_behaviors": [
+          "Lead with style comments before correctness issues.",
+          "Discuss only style while omitting correctness issues."
+        ],
+        "abstention_correct": false
+      }
+    }
+  ]
+}

@@ -1,0 +1,13 @@
+{
+  "tool": "memory_loom_discard_change",
+  "contract_version": "1.0.0",
+  "request": {
+    "proposal_id": "43000000-0000-4000-8000-000000000001",
+    "reason": "user_declined"
+  },
+  "response": {
+    "proposal_id": "43000000-0000-4000-8000-000000000001",
+    "discarded": true,
+    "durable_artifacts_created": false
+  }
+}

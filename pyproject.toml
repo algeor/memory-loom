@@ -7,8 +7,9 @@ name = "memory-loom"
 version = "0.1.0"
 description = "Experiment contracts and reference implementation for Memory Loom"
 readme = "README.md"
-requires-python = ">=3.11"
+requires-python = ">=3.14,<3.15"
 dependencies = [
+  "mcp[cli]>=2.2.0",
   "pydantic>=2.10,<3",
 ]
 
@@ -19,6 +20,7 @@ test = [
 
 [project.scripts]
 memory-loom = "memory_loom.cli:main"
+memory-loom-mcp = "memory_loom.mcp_server:main"
 
 [tool.hatch.build.targets.wheel]
 packages = ["src/memory_loom"]

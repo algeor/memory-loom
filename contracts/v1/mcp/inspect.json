@@ -1,0 +1,36 @@
+{
+  "tool": "memory_loom_inspect",
+  "contract_version": "1.0.0",
+  "request": {
+    "scope": {
+      "project_id": null,
+      "task_id": null
+    },
+    "memory_id": null,
+    "include_inactive": false,
+    "limit": 50
+  },
+  "response": {
+    "memories": [
+      {
+        "memory_id": "42000000-0000-4000-8000-000000000001",
+        "rule_key": "review.priority",
+        "statement": "When reviewing Python code, lead with correctness issues before style comments.",
+        "kind": "preference",
+        "scope": {
+          "user_id": "user-a",
+          "project_id": null,
+          "task_id": null
+        },
+        "status": "active",
+        "version": 1,
+        "valid_from": "2026-09-30T12:00:00Z",
+        "valid_until": null,
+        "evidence_ids": [
+          "41000000-0000-4000-8000-000000000001"
+        ]
+      }
+    ],
+    "next_cursor": null
+  }
+}
