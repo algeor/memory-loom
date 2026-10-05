@@ -57,6 +57,7 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 - [`codex-mcp.md`](codex-mcp.md) — Codex installation, registration, and verification.
 - [`claude-code-mcp.md`](claude-code-mcp.md) — Claude Code installation, registration, and verification.
 - [`database-upgrades.md`](database-upgrades.md) — SQLite backup, migration, and early-user upgrade rules.
+- [`project-guidance.md`](project-guidance.md) — project-scoped conventions using the existing approval lifecycle.
 - [`../contracts/v1/mcp-tools.md`](../contracts/v1/mcp-tools.md) — proposed client-neutral tool boundary.
 
 ## Deferred Decisions

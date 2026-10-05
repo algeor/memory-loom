@@ -44,6 +44,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Keep provider adapters confined to the experiment runner; Memory Loom itself does not depend on a model provider.
 - Defer Gemini CLI onboarding until a later client-integration stage.
 - Distribute the first tester build as a versioned GitHub release artifact rather than claiming production readiness.
+- Treat internal-language and API conventions as concise, explicit project-scoped preferences, not bulk document ingestion or model training.
 
 ## Next Implementation Milestone
 
@@ -84,3 +85,4 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-10-01: Hardened early-user database upgrades with backups, transactional migrations, compatibility guards, and preservation tests.
 - 2026-10-01: Added versioned lexical-retrieval evaluation with CI thresholds and forbidden-hit failure behavior.
 - 2026-10-01: Added early-tester diagnostics, backup/restore, clean-wheel smoke testing, CI, release automation, and tester guidance.
+- 2026-10-01: Documented project-scoped guidance for internal languages and APIs without expanding the first-study memory model.

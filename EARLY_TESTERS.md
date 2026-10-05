@@ -41,6 +41,17 @@ Restart the host, inspect its MCP tools, then try one explicit preference. The
 assistant must show a proposal and receive explicit approval before committing
 it.
 
+## Project-Specific Guidance
+
+You may save an explicit convention for an internal language, API, or workflow
+at project scope. Keep each memory short and actionable, for example: "In this
+project, use `spawn_task` instead of deprecated `start_task`." The assistant
+must use the normal propose, explicit approval, commit lifecycle.
+
+Do not use Memory Loom to ingest complete manuals or source trees. It provides
+curated scoped memory, not model training or bulk document RAG. See
+[`design/project-guidance.md`](design/project-guidance.md).
+
 ## Diagnose
 
 ```zsh

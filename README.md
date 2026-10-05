@@ -51,6 +51,7 @@ The first study excludes:
 | [`design/codex-mcp.md`](design/codex-mcp.md) | Reproducible Codex MCP host setup |
 | [`design/claude-code-mcp.md`](design/claude-code-mcp.md) | Reproducible Claude Code MCP host setup |
 | [`design/database-upgrades.md`](design/database-upgrades.md) | SQLite backup and upgrade procedure |
+| [`design/project-guidance.md`](design/project-guidance.md) | Project-scoped conventions for internal languages, APIs, and workflows |
 | [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
 | [`sources/`](sources/README.md) | Provenance and literature ledgers |
 | [`schemas/`](schemas/v1/) | Versioned machine-readable experiment contracts |
