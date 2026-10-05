@@ -1,0 +1,125 @@
+{
+  "$defs": {
+    "BlindedReviewItem": {
+      "additionalProperties": false,
+      "properties": {
+        "current_request": {
+          "minLength": 1,
+          "title": "Current Request",
+          "type": "string"
+        },
+        "item_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "repeat": {
+          "minimum": 1,
+          "title": "Repeat",
+          "type": "integer"
+        },
+        "required_behavior": {
+          "minLength": 1,
+          "title": "Required Behavior",
+          "type": "string"
+        },
+        "response": {
+          "minLength": 1,
+          "title": "Response",
+          "type": "string"
+        },
+        "scenario_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "violating_behaviors": {
+          "items": {
+            "type": "string"
+          },
+          "title": "Violating Behaviors",
+          "type": "array"
+        }
+      },
+      "required": [
+        "item_id",
+        "scenario_id",
+        "query_id",
+        "repeat",
+        "current_request",
+        "required_behavior",
+        "violating_behaviors",
+        "response"
+      ],
+      "title": "BlindedReviewItem",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/blinded-review-packet.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "blinded_review_packet",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "dataset_version": {
+      "minLength": 1,
+      "title": "Dataset Version",
+      "type": "string"
+    },
+    "instructions": {
+      "minLength": 1,
+      "title": "Instructions",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BlindedReviewItem"
+      },
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    },
+    "packet_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "packet_id",
+    "created_at",
+    "dataset_version",
+    "instructions",
+    "items"
+  ],
+  "title": "BlindedReviewPacket",
+  "type": "object"
+}

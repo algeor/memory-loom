@@ -1,0 +1,3081 @@
+{
+  "artifact_type": "blinding_key",
+  "schema_version": "1.0.0",
+  "packet_id": "development-pilot-claude-001",
+  "created_at": "2026-10-05T11:53:37.880889Z",
+  "seed_hash": "ce5ba6b58a11204c403689c095b0cf49cce8f498bb57d8b21970ef470b2397c5",
+  "items": [
+    {
+      "item_id": "item-590d10f6ae40581007e332ee",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9b23f1bcb4f4f2b9dbedbdfc",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-112844a31f9c6345be48041f",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b6a35c288c4a54aac2e73a45",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-05323d2412f98947d67135e6",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-763d2695d96356f818578333",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7fe59006862614da6ebd2939",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-614abe063fe6e978000f193a",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6a3fb6780db174ebd85792c9",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b1bd9479bc82bfa0e67f17d4",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-91568a992b04d968e8e3abc4",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1fc14372a715ebf6f1907333",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-e73af01eb842416288062992",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f26c16661a50bb3f2c516795",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-804e79c8a449a1e0839ed0b9",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-09419b8d7501c44d146277d4",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b502fb9076cd66adf839b6a2",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d1fea9b8ae63f1565d061f8b",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9eadd557d1635263ab0fc5af",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c3376c938f3f69a3b9592300",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-659119d81f33ab7c4ce49397",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-0a26eaa3f607d1fe7123fa8f",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c69557ef155a53b85ce8b057",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-50e4e23a25b94c9e88a43934",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-992854ea7fadefefa4c6ca47",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1d55fd03cbaa0206de2d9c09",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-3c4fb08ceae8a499c491da01",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c9ed6cbea049d632cfd975dc",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f8f563897bf61ecb12eb852c",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-a81e5da5ce4375c83ec94e61",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9384017678b4210172906ec2",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-5edccd548266d87cae5da881",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7a2ba67e686d1cd4afc44462",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-355bcb6c3e26807b3b2b8a8e",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4fdefc8ef85b01c0d47e99a1",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-0e12a51ae116e2939ab8aec9",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f5b4788e42f34e5ca59032db",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7db94c74f3df99ce1ba14626",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cdb407246a91332dfb8b7585",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-3df0c131407e0eca1568ef55",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1d5e40d7c0b1d591abf36a23",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-909d8e6c9111c2a685dd322e",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-3f891813f3334c592b67a6b6",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2472282808656ff6f2fcfa3c",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9dfbb1710b767ca630a36084",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-ec2754c5ca18f8df0a720833",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-46b38f273bfb750a368545cd",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-fb7cd8df2380b49ee0ed4175",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d2e003ab2afe3f9d50171ff6",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-17771e909e2ae84a0a58f37e",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4f1c505cff14fd4cf1af902a",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9799055f913705a90a5c1f59",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-86589ae39353cc17105f3f7e",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c34f81cb9e9425f031057019",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d8a10d57fed8a500891a7622",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-bcc71a5a6c231d0b3844fdab",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cabba111d350727e60b09b46",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-744d00208c043990fc2d3d50",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-bedf73c9abb7a8b0b7441ef0",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2a06e18eb5fe2201ecd0b3fe",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-330959acb73fae4aa975a23a",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-fec787dd0ff3aecc83c358c2",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-875a92070a773bead90c8a1c",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-71e729e7144b7443343440fe",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b7aaf826601da7ccbc872034",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-75a4d9109969740eca93f3f4",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-09525e3a61c947d392c3517d",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-09e834efb4c8aeb7e9b40707",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-123459ca06dd5a9ba8d7604c",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4dab14c93a765f5ea77c56b0",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6d999e81dd202acdeea8c493",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4a5748435fd6b5edc9959d37",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cdd88a2af5e919b4a0674503",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-beb78766cd6b381ba024d91e",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-527a519239f8fefd4cd48bf6",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-fc9692128a14320ea3fcfc0e",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-35673249ad176458fccd1787",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-52bd73774e418fd6c0e0ab19",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-edf708e40a680d0e56fe4657",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-33b73d5884d1c371a1512470",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-27cde212fcfa4d094595d56b",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-994cd91cb5d525bc055952b8",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2ca926ab439b738bc5444885",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-ea31817fab4e4743579d3023",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-22fad101825d4f544323e60c",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-601f9a2274e5d08042d04fe4",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-757252c2ce83f67e8b9b13c1",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-0ed797b3ccf3388648bac513",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c6b9de1198d3587ad8423ed9",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b7f9dc17d46ddc0a68e30503",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6af6e40767af305d1c9a4b2b",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-89baadff76af336c47b4de2d",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9bfaffc844d8e5b67d5f654b",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b24bb33f79683eebd8594acc",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b97a46868372b9c32e27deb4",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2b094fbfb6005aea0613c06c",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d0458d7d45b2c0bb6b8c75d6",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1dfd7b0b307d8f644459419c",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9c832d619558efd13775df9b",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-be489644f99d4a16b5ee997d",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-20b5455f01aed0bddbcc2da2",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b5191ad6aa06cf22b3de6a49",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7c97585893d61892295e7e2f",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-fdd50fed8a202a92b088a534",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4f7780b8d6ccc53027e7546c",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c48a0eb4b93496da936dc107",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c425313730a0cc3f17674bf6",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-bee2b2875852797636f8a35e",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-28a1ef8232fd65278d70e8aa",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-93b0722a23745ae332ccdde3",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-eac201c24411e0cbff721330",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b27a2ec7268dcde1b5df9c2d",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-a951f2d23b26042f7d269b53",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-8c941b859f38280efcc951a9",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c7bc07c38907f61780f82629",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-e45eb5baeeee09a95399e375",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2cd0e7196fd7072b6709c12e",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f3069021dddc2e4740ff33e7",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1ded807839dd2ddb70454ad9",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-051732988a4e3df1cb7a25c9",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-08705d260c3e7b30aa3a0e92",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f3cf92bcb4b21e3cc076f3c5",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-a0c9893d62b9b411be3b70c7",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-bb39d9d5271ee09d17d3dcd9",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-e84fdb8ee1e116831eab629c",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6079fef6c5cceae1ed8b9619",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-5f22bc4b5e4d48a1d396e106",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9418056b204e10e9abe48256",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-ef0e62ce490bfaa0fc21229d",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d824600172889bfe814683fc",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-8319c0ab20ccde261851d403",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9a15843ed04feada4c1da4d5",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-32100d11be9b2b3b314dcb72",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d2471c683620416e9a0baba8",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-37e748858a74f95aa39e6e06",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-32d351c0636462abf2bd91e8",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-016073f0be35374c7f9dcf36",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c637cd511c7946eb363b6990",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c6669e4ca9e5b06808297a11",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c1043e86ffeb3bf4854aa59b",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-5f9b46178f7b2b66ea6b78ee",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-4ff73a93fa61f37297785048",
+      "scenario_id": "project-exception-003",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000006"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-a1e32be2c652a92684f75048",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7f98a189912621e384e6bd97",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-985180d7041c6b8b56064288",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-29c4b0c0b99c1faecc34d6ac",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-19df121c92b70e3f7941e42d",
+      "scenario_id": "global-preference-003",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9410cec1ea446b68197f7d47",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c55b7a233c68c602a21d07c3",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1e545500b8303f8e47b367fe",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-b083060cd8f713afbdc1a5ad",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-35f1ad90d0cb81ce30722715",
+      "scenario_id": "preference-change-004",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cf2d60c1fc292eab0c9fa8cd",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-d7666d3768e70d821d5e78e5",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-ef7ca1d709b308bd3190e180",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-8619bc8458affa915067bfda",
+      "scenario_id": "hard-negative-004",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9583cb18ea0175e63c678f84",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-8939ae64e59cf4534ee1390b",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-3d8869d4bea79a98c9e9a358",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-f3555fdb6782abc144c86748",
+      "scenario_id": "direct-correction-002",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-8a8795c861691f352435e5db",
+      "scenario_id": "direct-correction-003",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-9d5ea3b95c2f7b9966fd714a",
+      "scenario_id": "deletion-002",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7c2231470deb4880b6066773",
+      "scenario_id": "project-exception-002",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-2d2a60c35a6030a38e009843",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1c20baa6dcd6f7e53223555c",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-66c018177792c79c5625c410",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-51501e2872ec801d0c7174ec",
+      "scenario_id": "project-exception-004",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000008"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6ab4303da899748d38c5cf5f",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-7ef3a3c3087ed9af9fd6bea4",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-fb02d4d6567039e1d8345c94",
+      "scenario_id": "global-preference-004",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-02aaf504af69c2a0a0ae2219",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-65149db8659a969c61847430",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-57ee7a310f218950288ec097",
+      "scenario_id": "direct-correction-004",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000004"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-26a991252c1db024f305dbdb",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-362c55cc6f4cefbdaa8ce7f3",
+      "scenario_id": "preference-change-003",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000003"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cb9d16cf59e73cdc3a0b70bb",
+      "scenario_id": "hard-negative-002",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000002"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-e2df55d703c273c1be17c950",
+      "scenario_id": "project-exception-001",
+      "template_family": "project-exception",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "52000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-6e8bd5ad5156aa314b785862",
+      "scenario_id": "hard-negative-003",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c84293e0b4311c7b6d6b4d7a",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-57377a742ca8073173639170",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-1f7413af9ddda5f77b8a7564",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-464b4febe67bb3ee17779d70",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-088ad185490703c8be91437c",
+      "scenario_id": "deletion-003",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000003"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-bc446e2442276b5a4098c961",
+      "scenario_id": "deletion-001",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-e1ea3cc03ee77c2a3aeb3e68",
+      "scenario_id": "preference-change-001",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B2",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-cd7db73406a7681da6429be5",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-c0662a2808c263f5937dfc9e",
+      "scenario_id": "deletion-004",
+      "template_family": "deletion",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "82000000-0000-4000-8000-000000000004"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-46cc020b4a0f5d5472ed28b3",
+      "scenario_id": "direct-correction-001",
+      "template_family": "direct-correction",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B1",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "62000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-41efa5ba2c3bca31e239abfb",
+      "scenario_id": "hard-negative-001",
+      "template_family": "hard-negative",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B3",
+      "memory_needed": false,
+      "relevant_memory_ids": [],
+      "forbidden_memory_ids": [
+        "92000000-0000-4000-8000-000000000001"
+      ],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-74a031f43da5624ec036ba24",
+      "scenario_id": "global-preference-002",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-3198d916dcd315da3b05a8c0",
+      "scenario_id": "preference-change-002",
+      "template_family": "preference-change",
+      "query_id": "query-001",
+      "repeat": 1,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "72000000-0000-4000-8000-000000000002"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    },
+    {
+      "item_id": "item-0e70d61e340e7cacd5645887",
+      "scenario_id": "global-preference-001",
+      "template_family": "global-preference",
+      "query_id": "query-001",
+      "repeat": 2,
+      "condition": "B0",
+      "memory_needed": true,
+      "relevant_memory_ids": [
+        "42000000-0000-4000-8000-000000000001"
+      ],
+      "forbidden_memory_ids": [],
+      "provider": "claude-cli",
+      "model": "haiku",
+      "provider_model": "claude-haiku-4-5"
+    }
+  ]
+}

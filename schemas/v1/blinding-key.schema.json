@@ -1,0 +1,159 @@
+{
+  "$defs": {
+    "BlindingKeyItem": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "forbidden_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Forbidden Memory Ids",
+          "type": "array"
+        },
+        "item_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "memory_needed": {
+          "title": "Memory Needed",
+          "type": "boolean"
+        },
+        "model": {
+          "minLength": 1,
+          "title": "Model",
+          "type": "string"
+        },
+        "provider": {
+          "minLength": 1,
+          "title": "Provider",
+          "type": "string"
+        },
+        "provider_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Model"
+        },
+        "query_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Query Id",
+          "type": "string"
+        },
+        "relevant_memory_ids": {
+          "items": {
+            "format": "uuid",
+            "type": "string"
+          },
+          "title": "Relevant Memory Ids",
+          "type": "array"
+        },
+        "repeat": {
+          "minimum": 1,
+          "title": "Repeat",
+          "type": "integer"
+        },
+        "scenario_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Scenario Id",
+          "type": "string"
+        },
+        "template_family": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Template Family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "item_id",
+        "scenario_id",
+        "template_family",
+        "query_id",
+        "repeat",
+        "condition",
+        "memory_needed",
+        "relevant_memory_ids",
+        "forbidden_memory_ids",
+        "provider",
+        "model"
+      ],
+      "title": "BlindingKeyItem",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/blinding-key.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "blinding_key",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "items": {
+      "items": {
+        "$ref": "#/$defs/BlindingKeyItem"
+      },
+      "minItems": 1,
+      "title": "Items",
+      "type": "array"
+    },
+    "packet_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "seed_hash": {
+      "pattern": "^[a-f0-9]{64}$",
+      "title": "Seed Hash",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "packet_id",
+    "created_at",
+    "seed_hash",
+    "items"
+  ],
+  "title": "BlindingKey",
+  "type": "object"
+}

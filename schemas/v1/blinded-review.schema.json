@@ -1,0 +1,165 @@
+{
+  "$defs": {
+    "BlindedRating": {
+      "additionalProperties": false,
+      "properties": {
+        "decision": {
+          "enum": [
+            "adheres",
+            "violates",
+            "unclear",
+            "unreviewed"
+          ],
+          "title": "Decision",
+          "type": "string"
+        },
+        "item_id": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Item Id",
+          "type": "string"
+        },
+        "memory_override": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Memory Override"
+        },
+        "notes": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Notes"
+        },
+        "task_success": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Success"
+        },
+        "unsupported_memory_claim": {
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Unsupported Memory Claim"
+        }
+      },
+      "required": [
+        "item_id",
+        "decision"
+      ],
+      "title": "BlindedRating",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/blinded-review.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "blinded_review",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "model": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Model"
+    },
+    "packet_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "provider": {
+      "anyOf": [
+        {
+          "type": "string"
+        },
+        {
+          "type": "null"
+        }
+      ],
+      "default": null,
+      "title": "Provider"
+    },
+    "ratings": {
+      "items": {
+        "$ref": "#/$defs/BlindedRating"
+      },
+      "minItems": 1,
+      "title": "Ratings",
+      "type": "array"
+    },
+    "reviewer_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Reviewer Id",
+      "type": "string"
+    },
+    "reviewer_type": {
+      "enum": [
+        "human",
+        "model"
+      ],
+      "title": "Reviewer Type",
+      "type": "string"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "packet_id",
+    "reviewer_id",
+    "created_at",
+    "reviewer_type",
+    "ratings"
+  ],
+  "title": "BlindedReview",
+  "type": "object"
+}

@@ -12,7 +12,8 @@ This file is the authority for what the repository may claim.
 | Design decision | A replaceable engineering choice |
 | Result | Supported by a completed, reproducible experiment |
 
-There are currently **no result claims**.
+There are currently **no confirmatory result claims**. The bounded development
+result below must not be generalized beyond its frozen synthetic run.
 
 ## Source Observations
 
@@ -34,7 +35,15 @@ There are currently **no result claims**.
 | H3 | Structured memory reduces irrelevant context at a fixed budget. | Context relevance labels and token counts |
 | H4 | Lifecycle filters prevent forbidden retrieval in the evaluated test corpus. | Zero out-of-scope, superseded, and deleted hits in adversarial fixtures |
 
-All four remain untested.
+All four remain unconfirmed. H1 and H4 were exercised in the synthetic
+development pilot, but that model-reviewed run was not confirmatory.
+
+## Exploratory Result
+
+| ID | Claim | Status | Evidence |
+|---|---|---|---|
+| R1 | In the frozen 24-scenario, 192-output Claude development pilot, the B3-B0 preference-adherence estimate was 0.2188 with simultaneous 95% interval [-0.0625, 0.5000]; the B3-B1 and B3-B2 intervals also included zero. The pilot therefore did not distinguish structured memory from any baseline. | Result | [`development-pilot-claude-001`](../evaluation-runs/development-pilot-claude-001/REPORT.md) |
+| R2 | The same frozen run recorded zero forbidden context inclusions and zero no-memory false-positive retrievals, but its synthetic coverage does not establish safety outside that corpus. | Result | [`development-pilot-claude-001`](../evaluation-runs/development-pilot-claude-001/analysis.json) |
 
 ## Design Decisions
 
@@ -48,7 +57,7 @@ All four remain untested.
 
 ## Prohibited Claims
 
-Until supported by results, do not claim that Memory Loom:
+Until supported by confirmatory results, do not claim that Memory Loom:
 
 - learns a user autonomously;
 - improves coding quality generally;

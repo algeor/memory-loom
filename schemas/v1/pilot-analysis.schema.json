@@ -1,0 +1,373 @@
+{
+  "$defs": {
+    "ConditionPilotMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "estimated_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost Usd"
+        },
+        "input_tokens": {
+          "minimum": 0,
+          "title": "Input Tokens",
+          "type": "integer"
+        },
+        "mean_context_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean Context Tokens"
+        },
+        "mean_latency_ms": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Mean Latency Ms"
+        },
+        "memory_override_count": {
+          "minimum": 0,
+          "title": "Memory Override Count",
+          "type": "integer"
+        },
+        "output_tokens": {
+          "minimum": 0,
+          "title": "Output Tokens",
+          "type": "integer"
+        },
+        "preference_adherence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preference Adherence"
+        },
+        "scored_items": {
+          "minimum": 0,
+          "title": "Scored Items",
+          "type": "integer"
+        },
+        "task_success": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Success"
+        },
+        "unclear_items": {
+          "minimum": 0,
+          "title": "Unclear Items",
+          "type": "integer"
+        },
+        "unsupported_memory_claim_count": {
+          "minimum": 0,
+          "title": "Unsupported Memory Claim Count",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "condition",
+        "scored_items",
+        "unclear_items",
+        "memory_override_count",
+        "unsupported_memory_claim_count",
+        "input_tokens",
+        "output_tokens"
+      ],
+      "title": "ConditionPilotMetrics",
+      "type": "object"
+    },
+    "FamilyPilotMetrics": {
+      "additionalProperties": false,
+      "properties": {
+        "condition": {
+          "enum": [
+            "B0",
+            "B1",
+            "B2",
+            "B3"
+          ],
+          "title": "Condition",
+          "type": "string"
+        },
+        "preference_adherence": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Preference Adherence"
+        },
+        "scored_items": {
+          "minimum": 0,
+          "title": "Scored Items",
+          "type": "integer"
+        },
+        "task_success": {
+          "anyOf": [
+            {
+              "maximum": 1,
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Task Success"
+        },
+        "template_family": {
+          "maxLength": 128,
+          "minLength": 1,
+          "pattern": "^[a-z0-9][a-z0-9._-]*$",
+          "title": "Template Family",
+          "type": "string"
+        }
+      },
+      "required": [
+        "template_family",
+        "condition",
+        "scored_items"
+      ],
+      "title": "FamilyPilotMetrics",
+      "type": "object"
+    },
+    "PilotContrast": {
+      "additionalProperties": false,
+      "properties": {
+        "comparison": {
+          "enum": [
+            "B3-B0",
+            "B3-B1",
+            "B3-B2"
+          ],
+          "title": "Comparison",
+          "type": "string"
+        },
+        "estimate": {
+          "title": "Estimate",
+          "type": "number"
+        },
+        "simultaneous_ci_high": {
+          "title": "Simultaneous Ci High",
+          "type": "number"
+        },
+        "simultaneous_ci_low": {
+          "title": "Simultaneous Ci Low",
+          "type": "number"
+        }
+      },
+      "required": [
+        "comparison",
+        "estimate",
+        "simultaneous_ci_low",
+        "simultaneous_ci_high"
+      ],
+      "title": "PilotContrast",
+      "type": "object"
+    }
+  },
+  "$id": "https://memory-loom.local/schemas/v1/pilot-analysis.schema.json",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "additionalProperties": false,
+  "properties": {
+    "artifact_type": {
+      "const": "pilot_analysis",
+      "title": "Artifact Type",
+      "type": "string"
+    },
+    "bootstrap_samples": {
+      "minimum": 1,
+      "title": "Bootstrap Samples",
+      "type": "integer"
+    },
+    "condition_metrics": {
+      "items": {
+        "$ref": "#/$defs/ConditionPilotMetrics"
+      },
+      "title": "Condition Metrics",
+      "type": "array"
+    },
+    "contrasts": {
+      "items": {
+        "$ref": "#/$defs/PilotContrast"
+      },
+      "title": "Contrasts",
+      "type": "array"
+    },
+    "created_at": {
+      "format": "date-time",
+      "title": "Created At",
+      "type": "string"
+    },
+    "failed_runs": {
+      "minimum": 0,
+      "title": "Failed Runs",
+      "type": "integer"
+    },
+    "family_metrics": {
+      "items": {
+        "$ref": "#/$defs/FamilyPilotMetrics"
+      },
+      "title": "Family Metrics",
+      "type": "array"
+    },
+    "forbidden_context_count": {
+      "minimum": 0,
+      "title": "Forbidden Context Count",
+      "type": "integer"
+    },
+    "generation_models": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Generation Models",
+      "type": "array"
+    },
+    "limitations": {
+      "items": {
+        "type": "string"
+      },
+      "minItems": 1,
+      "title": "Limitations",
+      "type": "array"
+    },
+    "memory_override_count": {
+      "minimum": 0,
+      "title": "Memory Override Count",
+      "type": "integer"
+    },
+    "no_memory_false_positive_count": {
+      "minimum": 0,
+      "title": "No Memory False Positive Count",
+      "type": "integer"
+    },
+    "packet_id": {
+      "maxLength": 128,
+      "minLength": 1,
+      "pattern": "^[a-z0-9][a-z0-9._-]*$",
+      "title": "Packet Id",
+      "type": "string"
+    },
+    "reviewed_items": {
+      "minimum": 0,
+      "title": "Reviewed Items",
+      "type": "integer"
+    },
+    "reviewer_disagreements": {
+      "minimum": 0,
+      "title": "Reviewer Disagreements",
+      "type": "integer"
+    },
+    "reviewer_models": {
+      "items": {
+        "type": "string"
+      },
+      "title": "Reviewer Models",
+      "type": "array"
+    },
+    "reviewer_types": {
+      "items": {
+        "enum": [
+          "human",
+          "model"
+        ],
+        "type": "string"
+      },
+      "title": "Reviewer Types",
+      "type": "array"
+    },
+    "schema_version": {
+      "pattern": "^1\\.[0-9]+\\.[0-9]+$",
+      "title": "Schema Version",
+      "type": "string"
+    },
+    "status": {
+      "const": "exploratory_pilot",
+      "title": "Status",
+      "type": "string"
+    },
+    "unsupported_memory_claim_count": {
+      "minimum": 0,
+      "title": "Unsupported Memory Claim Count",
+      "type": "integer"
+    }
+  },
+  "required": [
+    "artifact_type",
+    "schema_version",
+    "packet_id",
+    "created_at",
+    "status",
+    "reviewer_types",
+    "generation_models",
+    "reviewer_models",
+    "reviewed_items",
+    "reviewer_disagreements",
+    "failed_runs",
+    "memory_override_count",
+    "unsupported_memory_claim_count",
+    "forbidden_context_count",
+    "no_memory_false_positive_count",
+    "bootstrap_samples",
+    "condition_metrics",
+    "family_metrics",
+    "contrasts",
+    "limitations"
+  ],
+  "title": "PilotAnalysis",
+  "type": "object"
+}

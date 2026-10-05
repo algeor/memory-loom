@@ -136,6 +136,15 @@
       "title": "Condition Order",
       "type": "array"
     },
+    "condition_order_strategy": {
+      "default": "fixed",
+      "enum": [
+        "fixed",
+        "deterministic-shuffle"
+      ],
+      "title": "Condition Order Strategy",
+      "type": "string"
+    },
     "created_at": {
       "format": "date-time",
       "title": "Created At",

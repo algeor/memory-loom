@@ -7,16 +7,18 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 ## Current State
 
 - Phase 0 experiment contracts and deterministic replay tooling are implemented.
-- Pydantic v2 models validate scenarios, manifests, run artifacts, retrieval evaluations, memory records, revisions, and retrieval traces and generate nine versioned JSON Schemas.
+- Pydantic v2 models validate scenarios, manifests, run artifacts, blinded-review artifacts, pilot analyses, retrieval evaluations, memory records, revisions, and retrieval traces and generate 13 versioned JSON Schemas.
 - A 24-scenario synthetic development set covers six independent template families with four surface variants each.
 - All 24 pilot scenarios validate, use unique UUIDs, and reproduce their labeled B3 retrieval selections without calling a model.
 - The SQLite memory core implements approval, correction, supersession, deletion, restart persistence, and retrieval traces.
 - Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking.
 - The deterministic retrieval evaluator reports ranking, abstention, safety, and context-cost metrics from frozen labels without calling a model.
-- The synchronous baseline runner executes B0-B3 through one adapter and records exact prompts, contexts, configuration, latency, raw outputs, and failures.
-- A deterministic no-model adapter exercises the complete pipeline; no provider-backed runs or experimental results exist.
+- The resumable parallel runner executes B0-B3 through OpenAI Responses API, isolated Claude CLI, or deterministic no-model adapters and records prompts, contexts, usage, cost, latency, raw outputs, and failures.
+- A frozen Claude development pilot completed 192 runs across 24 scenarios, with condition-blind model review and paired cluster-bootstrap analysis.
+- All pilot contrast intervals included zero; the run did not distinguish structured memory from any baseline and is not confirmatory evidence.
 - The MCP 2.x stdio server implements host-scoped retrieval, ephemeral create/correct/delete proposals, and approval-gated durable commits.
 - All five v1 MCP tools are implemented over local stdio, including read-only scoped inspection with tombstone-safe output.
+- A persistent JSON-lines fallback exposes the same host-scoped lifecycle for clients without MCP.
 - Codex host registration and verification are documented, and the five-tool lifecycle has passed a local stdio smoke test.
 - Automated onboarding registers Codex or Claude Code, installs a managed project instruction block, and verifies host configuration.
 - Claude Code local registration is documented and has passed its MCP connection check.
@@ -27,6 +29,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Research questions, hypotheses, claims, and protocol are now separated from implementation design.
 - The first system under test is limited to explicit preferences and direct corrections.
 - Earlier admission and memory-revision material is retained only as later-phase design material.
+- Every literature item named in the original personalization brief is resolved to a primary paper or proceedings record with an explicit relevance boundary.
 
 ## Decisions
 
@@ -46,26 +49,26 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Distribute the first tester build as a versioned GitHub release artifact rather than claiming production readiness.
 - Treat internal-language and API conventions as concise, explicit project-scoped preferences, not bulk document ingestion or model training.
 
-## Next Implementation Milestone
+## Next Scientific Milestone
 
-Complete the non-MCP JSON CLI fallback without changing the tested memory lifecycle.
+Calibrate the blinded rubric with independent human review, then freeze a
+held-out confirmatory study before viewing its outputs.
 
 Exit conditions:
 
-- provide equivalent JSON CLI operations for non-MCP hosts;
-- preserve the same host-controlled scope and approval boundary;
-- add contract and integration tests without calling a model;
-- document one reproducible non-MCP host workflow.
+- obtain at least two independent condition-blind human reviews;
+- measure reviewer agreement and adjudicate disagreements;
+- use a dated provider model snapshot with enforceable decoding controls;
+- freeze the held-out dataset, decision rules, and exact code revision;
+- publish conclusions only after the preregistered analysis completes.
 
-The Phase 3 scientific pilot follows this integration milestone. It still needs
-a provider-backed experiment adapter and an exercised blinded review workflow.
+## Scientific Limits
 
-## Blockers
-
-- The equivalent JSON CLI fallback remains.
-- No provider-backed experiment runner exists.
-- The blinded review workflow has not been exercised.
-- Most literature pointers in the original brief still require primary-source verification.
+- The completed pilot uses synthetic development scenarios, not held-out data or real users.
+- Review is model-only and is not calibrated against blinded human judgments.
+- One reviewer cannot estimate reviewer disagreement.
+- Claude CLI did not expose temperature, top-p, seed, or output-token controls.
+- The generation manifest records a working-tree revision rather than an exact commit.
 
 ## History
 
@@ -86,3 +89,8 @@ a provider-backed experiment adapter and an exercised blinded review workflow.
 - 2026-10-01: Added versioned lexical-retrieval evaluation with CI thresholds and forbidden-hit failure behavior.
 - 2026-10-01: Added early-tester diagnostics, backup/restore, clean-wheel smoke testing, CI, release automation, and tester guidance.
 - 2026-10-01: Documented project-scoped guidance for internal languages and APIs without expanding the first-study memory model.
+- 2026-10-05: Added the lifecycle-equivalent persistent JSON stdio fallback for non-MCP hosts.
+- 2026-10-05: Added OpenAI Responses API and isolated Claude CLI provider adapters plus resumable parallel study execution.
+- 2026-10-05: Added condition-blind review packets, model and human review workflows, and paired cluster-bootstrap analysis.
+- 2026-10-05: Completed the 192-output Claude development pilot; every B3 contrast interval included zero, so no baseline difference was established.
+- 2026-10-05: Resolved every named personalization and memory paper in the original brief to a primary source record.

@@ -18,7 +18,7 @@ SCENARIO_PATH = FIXTURE_DIRECTORY / "scenarios" / "v1" / "scope-deletion-001.jso
 
 
 def test_schema_catalog_and_fixtures_validate() -> None:
-    assert len(validate_schema_catalog()) == 9
+    assert len(validate_schema_catalog()) == 13
     validated_fixtures = validate_all_fixtures()
     assert validated_fixtures
 

@@ -19,6 +19,10 @@ The implementation validates and replays synthetic artifacts, persists memory in
 | Revision event | `revision-event.schema.json` | Append-only lifecycle transition metadata |
 | Retrieval decision | `retrieval-decision.schema.json` | Per-record eligibility and selection trace |
 | Retrieval evaluation | `retrieval-evaluation.schema.json` | Per-query rankings, context cost, aggregate metrics, and safety failures |
+| Blinded review packet | `blinded-review-packet.schema.json` | Condition-hidden outputs and behavior criteria |
+| Blinding key | `blinding-key.schema.json` | Withheld mapping from review items to conditions |
+| Blinded review | `blinded-review.schema.json` | Human or model ratings without condition labels |
+| Pilot analysis | `pilot-analysis.schema.json` | Paired exploratory metrics, simultaneous intervals, and limitations |
 
 ## Replay Boundary
 
@@ -54,6 +58,8 @@ pytest
 ## Supporting Definitions
 
 - [`development-dataset-plan.md`](development-dataset-plan.md)
+- [`pilot-workflow.md`](pilot-workflow.md)
+- [`blinded-evaluation.md`](blinded-evaluation.md)
 - [`mcp-tools.md`](mcp-tools.md)
 - [`labeling-guide.md`](labeling-guide.md)
 - [`metrics.md`](metrics.md)

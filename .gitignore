@@ -5,7 +5,9 @@
 .idea/
 
 # Generated research runs
-evaluation-runs/
+evaluation-runs/*
+!evaluation-runs/development-pilot-claude-001/
+!evaluation-runs/development-pilot-claude-001/**
 
 # Python
 __pycache__/

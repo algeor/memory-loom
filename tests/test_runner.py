@@ -6,7 +6,7 @@ from itertools import count
 
 from memory_loom.cli import main
 from memory_loom.contracts import FIXTURE_DIRECTORY, load_json, validate_document
-from memory_loom.runner import ModelRequest, NoModelAdapter, run_scenario
+from memory_loom.runner import ModelRequest, ModelResponse, NoModelAdapter, run_scenario
 
 
 SCENARIO_PATH = FIXTURE_DIRECTORY / "scenarios" / "v1" / "scope-deletion-001.json"
@@ -21,10 +21,10 @@ class FailingAdapter:
     provider = "none"
     model = "no-model-contract-replay"
 
-    def generate(self, request: ModelRequest) -> str:
+    def generate(self, request: ModelRequest) -> ModelResponse:
         if "fallible rolling summary" in request.user_prompt:
             raise RuntimeError("synthetic provider failure")
-        return "ok"
+        return ModelResponse(output_text="ok")
 
 
 def test_no_model_runner_is_complete_and_reproducible() -> None:
@@ -55,6 +55,33 @@ def test_runner_preserves_failure_and_continues() -> None:
     assert failed[0].failure.stage == "model_invocation"
     assert artifact.results[-1].condition == "B3"
     assert artifact.results[-1].status == "completed"
+
+
+def test_runner_deterministically_shuffles_condition_order() -> None:
+    manifest = load_json(RUN_MANIFEST_PATH)
+    manifest["condition_order_strategy"] = "deterministic-shuffle"
+
+    first = run_scenario(
+        load_json(SCENARIO_PATH),
+        load_json(CONDITION_MANIFEST_PATH),
+        manifest,
+        NoModelAdapter(),
+        frozen_retrieval=True,
+        clock=lambda: FIXED_TIME,
+    )
+    second = run_scenario(
+        load_json(SCENARIO_PATH),
+        load_json(CONDITION_MANIFEST_PATH),
+        manifest,
+        NoModelAdapter(),
+        frozen_retrieval=True,
+        clock=lambda: FIXED_TIME,
+    )
+
+    first_order = [result.condition for result in first.results]
+    second_order = [result.condition for result in second.results]
+    assert first_order == second_order
+    assert sorted(first_order) == ["B0", "B1", "B2", "B3"]
 
 
 def test_run_cli_writes_valid_artifact(tmp_path) -> None:

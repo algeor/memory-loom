@@ -43,12 +43,16 @@ Admission hard gates, candidate-specific evidence thresholds, typed revision ope
 
 These may become justified engineering choices later, but the brief itself does not supply that evidence.
 
-## Literature Queue
+## Literature Resolution
 
 The brief named Generative Agents, Reflexion, MemGPT, MemoryBank, LoCoMo, LongMemEval, LOCCO, Reflective Memory Management, PREMem, PRIME, *Hello Again!*, Persona-Plug, and *Learning to Remember User Conversations*.
 
-Only sources recorded in [`rag-evaluation-research.md`](rag-evaluation-research.md) are treated as checked. All other names remain an unverified search queue.
+The retrieval-evaluation sources are recorded in
+[`rag-evaluation-research.md`](rag-evaluation-research.md). The remaining named
+works are verified and bounded in
+[`personalized-memory-research.md`](personalized-memory-research.md).
 
 ## Next Evidence Step
 
-Verify the most relevant memory benchmarks and personalized-dialogue studies from primary papers. Add only claims that can be tied to a precise source and to a decision in the research protocol.
+Use these sources only for clearly attributed design comparisons. Add empirical
+claims to the claim register only when they affect a specific protocol decision.

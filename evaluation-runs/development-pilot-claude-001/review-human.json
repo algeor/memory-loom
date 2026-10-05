@@ -1,0 +1,1548 @@
+{
+  "artifact_type": "blinded_review",
+  "schema_version": "1.0.0",
+  "packet_id": "development-pilot-claude-001",
+  "reviewer_id": "reviewer-001",
+  "created_at": "2026-10-05T11:53:37.880889Z",
+  "reviewer_type": "human",
+  "provider": null,
+  "model": null,
+  "ratings": [
+    {
+      "item_id": "item-590d10f6ae40581007e332ee",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9b23f1bcb4f4f2b9dbedbdfc",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-112844a31f9c6345be48041f",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b6a35c288c4a54aac2e73a45",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-05323d2412f98947d67135e6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-763d2695d96356f818578333",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7fe59006862614da6ebd2939",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-614abe063fe6e978000f193a",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6a3fb6780db174ebd85792c9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b1bd9479bc82bfa0e67f17d4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-91568a992b04d968e8e3abc4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1fc14372a715ebf6f1907333",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-e73af01eb842416288062992",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f26c16661a50bb3f2c516795",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-804e79c8a449a1e0839ed0b9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-09419b8d7501c44d146277d4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b502fb9076cd66adf839b6a2",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d1fea9b8ae63f1565d061f8b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9eadd557d1635263ab0fc5af",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c3376c938f3f69a3b9592300",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-659119d81f33ab7c4ce49397",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-0a26eaa3f607d1fe7123fa8f",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c69557ef155a53b85ce8b057",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-50e4e23a25b94c9e88a43934",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-992854ea7fadefefa4c6ca47",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1d55fd03cbaa0206de2d9c09",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-3c4fb08ceae8a499c491da01",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c9ed6cbea049d632cfd975dc",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f8f563897bf61ecb12eb852c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-a81e5da5ce4375c83ec94e61",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9384017678b4210172906ec2",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-5edccd548266d87cae5da881",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7a2ba67e686d1cd4afc44462",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-355bcb6c3e26807b3b2b8a8e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4fdefc8ef85b01c0d47e99a1",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-0e12a51ae116e2939ab8aec9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f5b4788e42f34e5ca59032db",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7db94c74f3df99ce1ba14626",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cdb407246a91332dfb8b7585",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-3df0c131407e0eca1568ef55",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1d5e40d7c0b1d591abf36a23",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-909d8e6c9111c2a685dd322e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-3f891813f3334c592b67a6b6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2472282808656ff6f2fcfa3c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9dfbb1710b767ca630a36084",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-ec2754c5ca18f8df0a720833",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-46b38f273bfb750a368545cd",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-fb7cd8df2380b49ee0ed4175",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d2e003ab2afe3f9d50171ff6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-17771e909e2ae84a0a58f37e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4f1c505cff14fd4cf1af902a",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9799055f913705a90a5c1f59",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-86589ae39353cc17105f3f7e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c34f81cb9e9425f031057019",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d8a10d57fed8a500891a7622",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-bcc71a5a6c231d0b3844fdab",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cabba111d350727e60b09b46",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-744d00208c043990fc2d3d50",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-bedf73c9abb7a8b0b7441ef0",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2a06e18eb5fe2201ecd0b3fe",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-330959acb73fae4aa975a23a",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-fec787dd0ff3aecc83c358c2",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-875a92070a773bead90c8a1c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-71e729e7144b7443343440fe",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b7aaf826601da7ccbc872034",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-75a4d9109969740eca93f3f4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-09525e3a61c947d392c3517d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-09e834efb4c8aeb7e9b40707",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-123459ca06dd5a9ba8d7604c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4dab14c93a765f5ea77c56b0",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6d999e81dd202acdeea8c493",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4a5748435fd6b5edc9959d37",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cdd88a2af5e919b4a0674503",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-beb78766cd6b381ba024d91e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-527a519239f8fefd4cd48bf6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-fc9692128a14320ea3fcfc0e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-35673249ad176458fccd1787",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-52bd73774e418fd6c0e0ab19",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-edf708e40a680d0e56fe4657",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-33b73d5884d1c371a1512470",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-27cde212fcfa4d094595d56b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-994cd91cb5d525bc055952b8",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2ca926ab439b738bc5444885",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-ea31817fab4e4743579d3023",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-22fad101825d4f544323e60c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-601f9a2274e5d08042d04fe4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-757252c2ce83f67e8b9b13c1",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-0ed797b3ccf3388648bac513",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c6b9de1198d3587ad8423ed9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b7f9dc17d46ddc0a68e30503",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6af6e40767af305d1c9a4b2b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-89baadff76af336c47b4de2d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9bfaffc844d8e5b67d5f654b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b24bb33f79683eebd8594acc",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b97a46868372b9c32e27deb4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2b094fbfb6005aea0613c06c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d0458d7d45b2c0bb6b8c75d6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1dfd7b0b307d8f644459419c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9c832d619558efd13775df9b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-be489644f99d4a16b5ee997d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-20b5455f01aed0bddbcc2da2",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b5191ad6aa06cf22b3de6a49",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7c97585893d61892295e7e2f",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-fdd50fed8a202a92b088a534",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4f7780b8d6ccc53027e7546c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c48a0eb4b93496da936dc107",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c425313730a0cc3f17674bf6",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-bee2b2875852797636f8a35e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-28a1ef8232fd65278d70e8aa",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-93b0722a23745ae332ccdde3",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-eac201c24411e0cbff721330",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b27a2ec7268dcde1b5df9c2d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-a951f2d23b26042f7d269b53",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-8c941b859f38280efcc951a9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c7bc07c38907f61780f82629",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-e45eb5baeeee09a95399e375",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2cd0e7196fd7072b6709c12e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f3069021dddc2e4740ff33e7",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1ded807839dd2ddb70454ad9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-051732988a4e3df1cb7a25c9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-08705d260c3e7b30aa3a0e92",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f3cf92bcb4b21e3cc076f3c5",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-a0c9893d62b9b411be3b70c7",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-bb39d9d5271ee09d17d3dcd9",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-e84fdb8ee1e116831eab629c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6079fef6c5cceae1ed8b9619",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-5f22bc4b5e4d48a1d396e106",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9418056b204e10e9abe48256",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-ef0e62ce490bfaa0fc21229d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d824600172889bfe814683fc",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-8319c0ab20ccde261851d403",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9a15843ed04feada4c1da4d5",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-32100d11be9b2b3b314dcb72",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d2471c683620416e9a0baba8",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-37e748858a74f95aa39e6e06",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-32d351c0636462abf2bd91e8",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-016073f0be35374c7f9dcf36",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c637cd511c7946eb363b6990",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c6669e4ca9e5b06808297a11",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c1043e86ffeb3bf4854aa59b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-5f9b46178f7b2b66ea6b78ee",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-4ff73a93fa61f37297785048",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-a1e32be2c652a92684f75048",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7f98a189912621e384e6bd97",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-985180d7041c6b8b56064288",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-29c4b0c0b99c1faecc34d6ac",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-19df121c92b70e3f7941e42d",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9410cec1ea446b68197f7d47",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c55b7a233c68c602a21d07c3",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1e545500b8303f8e47b367fe",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-b083060cd8f713afbdc1a5ad",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-35f1ad90d0cb81ce30722715",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cf2d60c1fc292eab0c9fa8cd",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-d7666d3768e70d821d5e78e5",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-ef7ca1d709b308bd3190e180",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-8619bc8458affa915067bfda",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9583cb18ea0175e63c678f84",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-8939ae64e59cf4534ee1390b",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-3d8869d4bea79a98c9e9a358",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-f3555fdb6782abc144c86748",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-8a8795c861691f352435e5db",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-9d5ea3b95c2f7b9966fd714a",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7c2231470deb4880b6066773",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-2d2a60c35a6030a38e009843",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1c20baa6dcd6f7e53223555c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-66c018177792c79c5625c410",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-51501e2872ec801d0c7174ec",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6ab4303da899748d38c5cf5f",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-7ef3a3c3087ed9af9fd6bea4",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-fb02d4d6567039e1d8345c94",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-02aaf504af69c2a0a0ae2219",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-65149db8659a969c61847430",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-57ee7a310f218950288ec097",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-26a991252c1db024f305dbdb",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-362c55cc6f4cefbdaa8ce7f3",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cb9d16cf59e73cdc3a0b70bb",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-e2df55d703c273c1be17c950",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-6e8bd5ad5156aa314b785862",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c84293e0b4311c7b6d6b4d7a",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-57377a742ca8073173639170",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-1f7413af9ddda5f77b8a7564",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-464b4febe67bb3ee17779d70",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-088ad185490703c8be91437c",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-bc446e2442276b5a4098c961",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-e1ea3cc03ee77c2a3aeb3e68",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-cd7db73406a7681da6429be5",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-c0662a2808c263f5937dfc9e",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-46cc020b4a0f5d5472ed28b3",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-41efa5ba2c3bca31e239abfb",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-74a031f43da5624ec036ba24",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-3198d916dcd315da3b05a8c0",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    },
+    {
+      "item_id": "item-0e70d61e340e7cacd5645887",
+      "decision": "unreviewed",
+      "task_success": null,
+      "memory_override": null,
+      "unsupported_memory_claim": null,
+      "notes": null
+    }
+  ]
+}

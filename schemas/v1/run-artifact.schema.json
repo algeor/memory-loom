@@ -121,6 +121,19 @@
           "default": null,
           "title": "Context Token Count"
         },
+        "estimated_cost_usd": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "number"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Estimated Cost Usd"
+        },
         "failure": {
           "anyOf": [
             {
@@ -156,6 +169,19 @@
           ],
           "title": "Injected Context"
         },
+        "input_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Input Tokens"
+        },
         "latency_ms": {
           "anyOf": [
             {
@@ -174,10 +200,47 @@
           "title": "Model",
           "type": "string"
         },
+        "output_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Output Tokens"
+        },
         "provider": {
           "minLength": 1,
           "title": "Provider",
           "type": "string"
+        },
+        "provider_model": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Model"
+        },
+        "provider_response_id": {
+          "anyOf": [
+            {
+              "type": "string"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Provider Response Id"
         },
         "query_id": {
           "maxLength": 128,
@@ -226,6 +289,19 @@
           "minLength": 1,
           "title": "System Prompt",
           "type": "string"
+        },
+        "total_tokens": {
+          "anyOf": [
+            {
+              "minimum": 0,
+              "type": "integer"
+            },
+            {
+              "type": "null"
+            }
+          ],
+          "default": null,
+          "title": "Total Tokens"
         },
         "user_prompt": {
           "anyOf": [
@@ -484,6 +560,15 @@
           },
           "title": "Condition Order",
           "type": "array"
+        },
+        "condition_order_strategy": {
+          "default": "fixed",
+          "enum": [
+            "fixed",
+            "deterministic-shuffle"
+          ],
+          "title": "Condition Order Strategy",
+          "type": "string"
         },
         "created_at": {
           "format": "date-time",

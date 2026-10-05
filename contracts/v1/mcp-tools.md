@@ -4,7 +4,7 @@
 
 - Classification: design decision
 - Contract status: proposed
-- Implementation status: all five stdio tools implemented; JSON CLI fallback pending
+- Implementation status: all five MCP tools and the persistent JSON stdio fallback are implemented
 - Primary transport: local MCP over standard input/output
 - Compatibility fallback: equivalent JSON CLI commands
 - Scientific result: no

@@ -7,9 +7,13 @@ from typing import Any
 from pydantic import BaseModel, ValidationError
 
 from memory_loom.models import (
+    BlindedReview,
+    BlindedReviewPacket,
+    BlindingKey,
     ConditionManifest,
     EvidenceEvent,
     MemoryRecord,
+    PilotAnalysis,
     RetrievalDecision,
     RetrievalEvaluationArtifact,
     RevisionEvent,
@@ -29,6 +33,10 @@ MODEL_BY_ARTIFACT_TYPE: dict[str, type[BaseModel]] = {
     "run_manifest": RunManifest,
     "run_artifact": RunArtifact,
     "retrieval_evaluation": RetrievalEvaluationArtifact,
+    "blinded_review_packet": BlindedReviewPacket,
+    "blinding_key": BlindingKey,
+    "blinded_review": BlindedReview,
+    "pilot_analysis": PilotAnalysis,
 }
 
 MODEL_BY_SCHEMA_NAME: dict[str, type[BaseModel]] = {
@@ -41,6 +49,10 @@ MODEL_BY_SCHEMA_NAME: dict[str, type[BaseModel]] = {
     "revision-event.schema.json": RevisionEvent,
     "retrieval-decision.schema.json": RetrievalDecision,
     "retrieval-evaluation.schema.json": RetrievalEvaluationArtifact,
+    "blinded-review-packet.schema.json": BlindedReviewPacket,
+    "blinding-key.schema.json": BlindingKey,
+    "blinded-review.schema.json": BlindedReview,
+    "pilot-analysis.schema.json": PilotAnalysis,
 }
 
 
@@ -184,3 +196,4 @@ def _format_location(location: tuple[int | str, ...]) -> str:
     return "$" + "".join(
         f"[{part}]" if isinstance(part, int) else f".{part}" for part in location
     )
+    PilotAnalysis,

@@ -34,6 +34,7 @@ def main() -> None:
         root = Path(temporary)
         _test_onboarding(cli, server, root)
         _test_mcp_restart(server, root / "fresh.db")
+        _test_json_stdio(cli, root / "json.db")
         _test_v1_upgrade_and_retrieval(cli, root / "upgrade.db")
 
     print("release smoke test passed")
@@ -123,6 +124,76 @@ def _test_mcp_restart(server: Path, database: Path) -> None:
         committed["memory_id"]
     ]
     assert CONTEXT_HEADER in retrieved["context"]
+
+
+def _test_json_stdio(cli: Path, database: Path) -> None:
+    environment = os.environ.copy()
+    environment.update(
+        {
+            "MEMORY_LOOM_USER_ID": "default",
+            "MEMORY_LOOM_PROJECT_ID": "early-test",
+            "MEMORY_LOOM_DATABASE_PATH": str(database),
+        }
+    )
+    process = subprocess.Popen(
+        [str(cli), "json-stdio"],
+        stdin=subprocess.PIPE,
+        stdout=subprocess.PIPE,
+        text=True,
+        bufsize=1,
+        env=environment,
+    )
+    try:
+        proposal = _json_request(
+            process,
+            "request-001",
+            "memory_loom_propose_change",
+            {
+                "change": {
+                    "operation": "create",
+                    "kind": "preference",
+                    "rule_key": "release.format",
+                    "statement": "Use compact release summaries.",
+                    "scope_level": "project",
+                    "source_event": {
+                        "event_id": "json-source-001",
+                        "content": "Use compact release summaries.",
+                    },
+                }
+            },
+        )
+        committed = _json_request(
+            process,
+            "request-002",
+            "memory_loom_commit_change",
+            {
+                "proposal_id": proposal["proposal_id"],
+                "approval_event_id": "json-approval-001",
+                "approved_by": "user",
+            },
+        )
+        assert committed["status"] == "active"
+    finally:
+        process.terminate()
+        process.wait(timeout=5)
+
+
+def _json_request(
+    process: subprocess.Popen[str],
+    request_id: str,
+    method: str,
+    params: dict,
+) -> dict:
+    assert process.stdin is not None
+    assert process.stdout is not None
+    process.stdin.write(
+        json.dumps({"id": request_id, "method": method, "params": params}) + "\n"
+    )
+    process.stdin.flush()
+    response = json.loads(process.stdout.readline())
+    assert response["id"] == request_id
+    assert response["ok"] is True
+    return response["result"]
 
 
 def _test_v1_upgrade_and_retrieval(cli: Path, database: Path) -> None:

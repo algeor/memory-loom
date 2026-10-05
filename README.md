@@ -6,19 +6,19 @@ The first question is deliberately narrow:
 
 > Does a small store of explicit, user-approved preferences improve behavior across sessions compared with no memory, recent history, or a rolling summary?
 
-This repository contains a research protocol, a reference design, and a local reference implementation for controlled experiments. It does **not** contain a production memory service or experimental results.
+This repository contains a research protocol, a reference design, and a local reference implementation for controlled experiments. It does **not** contain a production memory service or confirmatory evidence.
 
 ## Current Maturity
 
 | Item | State |
 |---|---|
 | Source-backed agent-harness patterns | Documented from one source repository |
-| Research questions and hypotheses | Defined, not yet tested |
-| Experimental protocol | Specified, not yet run |
-| Reference implementation | Phase 0-2 contracts, SQLite memory core, retrieval, and baseline runner implemented |
+| Research questions and hypotheses | Defined; exercised in one exploratory development pilot |
+| Experimental protocol | Implemented and exercised with blinded model review |
+| Reference implementation | SQLite memory core, retrieval, JSON/MCP lifecycle boundaries, and provider-backed runner implemented |
 | Development pilot dataset | 24 synthetic scenarios across 6 template families |
-| Client integration | Five model-neutral MCP 2.x stdio tools and automated Codex/Claude onboarding implemented; JSON CLI fallback pending |
-| Scientific conclusions | None |
+| Client integration | Five model-neutral MCP 2.x tools, persistent JSON stdio fallback, and automated Codex/Claude onboarding implemented |
+| Scientific conclusions | No confirmatory conclusion; development-pilot contrasts were inconclusive |
 
 Do not cite this repository as evidence that personalized memory improves an agent. That is the hypothesis under test.
 
@@ -52,6 +52,7 @@ The first study excludes:
 | [`design/claude-code-mcp.md`](design/claude-code-mcp.md) | Reproducible Claude Code MCP host setup |
 | [`design/database-upgrades.md`](design/database-upgrades.md) | SQLite backup and upgrade procedure |
 | [`design/project-guidance.md`](design/project-guidance.md) | Project-scoped conventions for internal languages, APIs, and workflows |
+| [`design/provider-runner.md`](design/provider-runner.md) | Provider-backed experiment execution and isolation boundaries |
 | [`notes/`](notes/README.md) | Reusable patterns extracted from source systems |
 | [`sources/`](sources/README.md) | Provenance and literature ledgers |
 | [`schemas/`](schemas/v1/) | Versioned machine-readable experiment contracts |
@@ -148,6 +149,34 @@ See the [Codex](design/codex-mcp.md) and
 [Claude Code](design/claude-code-mcp.md) guides for scope and verification.
 Memory Loom remains model-independent; onboarding configures hosts rather than
 adapting the memory core to an LLM.
+
+## Non-MCP Hosts
+
+Hosts without MCP can start one persistent JSON-lines process:
+
+```zsh
+MEMORY_LOOM_USER_ID=default \
+MEMORY_LOOM_PROJECT_ID=memory-loom \
+MEMORY_LOOM_DATABASE_PATH=~/.local/share/memory-loom/memory-loom.db \
+memory-loom json-stdio
+```
+
+The process exposes the same retrieve, propose, commit, discard, and inspect
+operations. Scope remains host-controlled, and proposals remain non-durable
+until a separate explicitly approved commit request. See
+[`contracts/v1/json-stdio.md`](contracts/v1/json-stdio.md).
+
+## Development Pilot
+
+The repository includes provider-backed generation, condition-blind review,
+and paired cluster-bootstrap analysis commands. The 24-scenario development
+pilot completed 192 Claude CLI runs without a run failure. Its model-only review
+estimated B3-B0 adherence at `0.2188`, with a simultaneous 95% interval of
+`[-0.0625, 0.5000]`. Every B3 contrast interval included zero, so the run does
+not distinguish structured memory from any baseline. It is exploratory and
+cannot establish a confirmatory scientific result. See the
+[`pilot workflow`](contracts/v1/pilot-workflow.md) and frozen
+[`pilot report`](evaluation-runs/development-pilot-claude-001/REPORT.md).
 
 ## Early User Upgrades
 

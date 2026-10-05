@@ -2,18 +2,29 @@ from __future__ import annotations
 
 import argparse
 import json
+from concurrent.futures import ThreadPoolExecutor, as_completed
 from pathlib import Path
 
 from memory_loom import __version__
+from memory_loom.blinded_evaluation import (
+    analyze_pilot,
+    create_blinded_review,
+    render_pilot_report,
+)
+from memory_loom.claude_provider import ClaudeCliAdapter
 from memory_loom.contracts import (
     ContractValidationError,
     export_schema_catalog,
+    load_json,
     validate_all_fixtures,
     validate_path,
     validate_schema_catalog,
 )
 from memory_loom.maintenance import backup_database, diagnose, restore_database
+from memory_loom.model_reviewer import review_packet_with_model
+from memory_loom.json_stdio import serve_json_lines
 from memory_loom.onboarding import onboard_host
+from memory_loom.openai_provider import OpenAIResponsesAdapter
 from memory_loom.replay import replay_query_contexts, replay_query_contexts_live
 from memory_loom.retrieval_evaluation import evaluate_retrieval, threshold_failures
 from memory_loom.runner import NoModelAdapter, run_scenario
@@ -31,6 +42,10 @@ def build_parser() -> argparse.ArgumentParser:
     subparsers.add_parser("validate-all", help="validate every JSON fixture")
     subparsers.add_parser(
         "export-schemas", help="regenerate JSON Schemas from Pydantic models"
+    )
+    subparsers.add_parser(
+        "json-stdio",
+        help="serve the memory lifecycle as newline-delimited JSON",
     )
 
     replay_parser = subparsers.add_parser(
@@ -57,6 +72,27 @@ def build_parser() -> argparse.ArgumentParser:
         action="store_true",
         help="use fixture retrieval decisions instead of running SQLite FTS",
     )
+
+    study_parser = subparsers.add_parser(
+        "run-study",
+        help="run a scenario set through a configured model provider",
+    )
+    study_parser.add_argument("scenarios", type=Path)
+    study_parser.add_argument("condition_manifest", type=Path)
+    study_parser.add_argument("run_manifest", type=Path)
+    study_parser.add_argument("--output-directory", type=Path, required=True)
+    study_parser.add_argument(
+        "--provider", choices=("openai", "claude-cli"), required=True
+    )
+    study_parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    study_parser.add_argument(
+        "--base-url", default="https://api.openai.com/v1"
+    )
+    study_parser.add_argument("--input-cost-per-million", type=float)
+    study_parser.add_argument("--output-cost-per-million", type=float)
+    study_parser.add_argument("--frozen-retrieval", action="store_true")
+    study_parser.add_argument("--resume", action="store_true")
+    study_parser.add_argument("--jobs", type=int, default=1)
 
     onboard_parser = subparsers.add_parser(
         "onboard",
@@ -146,6 +182,49 @@ def build_parser() -> argparse.ArgumentParser:
     evaluation_parser.add_argument("--min-recall-at-k", type=float)
     evaluation_parser.add_argument("--min-mrr", type=float)
     evaluation_parser.add_argument("--max-no-memory-fpr", type=float)
+
+    blind_parser = subparsers.add_parser(
+        "blind-study",
+        help="create a condition-blind review packet and separate key",
+    )
+    blind_parser.add_argument("scenarios", type=Path)
+    blind_parser.add_argument("run_directory", type=Path)
+    blind_parser.add_argument("--packet", type=Path, required=True)
+    blind_parser.add_argument("--key", type=Path, required=True)
+    blind_parser.add_argument("--review-template", type=Path, required=True)
+    blind_parser.add_argument("--packet-id", required=True)
+    blind_parser.add_argument("--reviewer-id", required=True)
+    blind_parser.add_argument("--seed", type=int, required=True)
+
+    analyze_parser = subparsers.add_parser(
+        "analyze-study",
+        help="analyze blinded reviews with paired cluster bootstrap",
+    )
+    analyze_parser.add_argument("key", type=Path)
+    analyze_parser.add_argument("run_directory", type=Path)
+    analyze_parser.add_argument("reviews", type=Path, nargs="+")
+    analyze_parser.add_argument("--output", type=Path, required=True)
+    analyze_parser.add_argument("--report", type=Path)
+    analyze_parser.add_argument("--bootstrap-samples", type=int, default=10_000)
+    analyze_parser.add_argument("--seed", type=int, default=0)
+
+    judge_parser = subparsers.add_parser(
+        "review-study",
+        help="produce a condition-blind model review for an existing packet",
+    )
+    judge_parser.add_argument("packet", type=Path)
+    judge_parser.add_argument("--output", type=Path, required=True)
+    judge_parser.add_argument("--reviewer-id", required=True)
+    judge_parser.add_argument(
+        "--provider", choices=("openai", "claude-cli"), required=True
+    )
+    judge_parser.add_argument("--model", required=True)
+    judge_parser.add_argument("--api-key-env", default="OPENAI_API_KEY")
+    judge_parser.add_argument("--base-url", default="https://api.openai.com/v1")
+    judge_parser.add_argument("--batch-size", type=int, default=8)
+    judge_parser.add_argument("--jobs", type=int, default=1)
+    judge_parser.add_argument("--seed", type=int, default=0)
+    judge_parser.add_argument("--resume", action="store_true")
     return parser
 
 
@@ -162,6 +241,8 @@ def main(argv: list[str] | None = None) -> int:
         elif args.command == "export-schemas":
             paths = export_schema_catalog()
             print(f"exported: {len(paths)} schemas")
+        elif args.command == "json-stdio":
+            return serve_json_lines()
         elif args.command == "replay":
             scenario = validate_path(args.scenario)
             condition_manifest = validate_path(args.condition_manifest)
@@ -188,6 +269,74 @@ def main(argv: list[str] | None = None) -> int:
                 f"{artifact.status}: {len(artifact.results)} condition runs written "
                 f"to {args.output}"
             )
+        elif args.command == "run-study":
+            run_manifest = validate_path(args.run_manifest)
+            adapter = (
+                OpenAIResponsesAdapter(
+                    run_manifest["model"],
+                    api_key_env=args.api_key_env,
+                    base_url=args.base_url,
+                    input_cost_per_million=args.input_cost_per_million,
+                    output_cost_per_million=args.output_cost_per_million,
+                )
+                if args.provider == "openai"
+                else ClaudeCliAdapter(run_manifest["model"])
+            )
+            scenario_paths = (
+                sorted(args.scenarios.glob("*.json"))
+                if args.scenarios.is_dir()
+                else [args.scenarios]
+            )
+            scenario_documents = [validate_path(path) for path in scenario_paths]
+            selected_scenarios = {
+                scenario["scenario_id"]: scenario
+                for scenario in scenario_documents
+                if scenario["scenario_id"] in run_manifest["scenario_ids"]
+            }
+            missing = set(run_manifest["scenario_ids"]) - set(selected_scenarios)
+            if missing:
+                raise ValueError(
+                    "run manifest scenarios are missing: "
+                    + ", ".join(sorted(missing))
+                )
+            if args.jobs < 1:
+                raise ValueError("jobs must be positive")
+            args.output_directory.mkdir(parents=True, exist_ok=True)
+            condition_manifest = validate_path(args.condition_manifest)
+            completed = 0
+            pending = []
+            for scenario_id in run_manifest["scenario_ids"]:
+                scenario = selected_scenarios[scenario_id]
+                output_path = args.output_directory / f"{scenario['scenario_id']}.json"
+                if output_path.exists() and args.resume:
+                    validate_path(output_path)
+                    completed += 1
+                    continue
+                if output_path.exists():
+                    raise ValueError(f"output already exists: {output_path}")
+                pending.append((scenario, output_path))
+            with ThreadPoolExecutor(max_workers=args.jobs) as executor:
+                futures = {
+                    executor.submit(
+                        run_scenario,
+                        scenario,
+                        condition_manifest,
+                        run_manifest,
+                        adapter,
+                        frozen_retrieval=args.frozen_retrieval,
+                    ): (scenario, output_path)
+                    for scenario, output_path in pending
+                }
+                for future in as_completed(futures):
+                    scenario, output_path = futures[future]
+                    artifact = future.result()
+                    output_path.write_text(
+                        artifact.model_dump_json(indent=2) + "\n",
+                        encoding="utf-8",
+                    )
+                    completed += 1
+                    print(f"{artifact.status}: {scenario['scenario_id']}")
+            print(f"study complete: {completed} scenario artifacts")
         elif args.command == "onboard":
             result = onboard_host(
                 args.host,
@@ -270,7 +419,78 @@ def main(argv: list[str] | None = None) -> int:
                 for failure in failures:
                     print(f"failure: {failure}")
                 return 1
-    except (ContractValidationError, OSError, ValueError) as error:
+        elif args.command == "blind-study":
+            packet, key, template = create_blinded_review(
+                args.scenarios,
+                args.run_directory,
+                packet_id=args.packet_id,
+                seed=args.seed,
+                reviewer_id=args.reviewer_id,
+            )
+            for path, artifact in (
+                (args.packet, packet),
+                (args.key, key),
+                (args.review_template, template),
+            ):
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_text(
+                    artifact.model_dump_json(indent=2) + "\n", encoding="utf-8"
+                )
+            print(f"blinded: {len(packet.items)} items in {args.packet}")
+            print(f"key: keep {args.key} hidden from reviewers")
+            print(f"review template: {args.review_template}")
+        elif args.command == "analyze-study":
+            analysis = analyze_pilot(
+                load_json(args.key),
+                [load_json(path) for path in args.reviews],
+                args.run_directory,
+                bootstrap_samples=args.bootstrap_samples,
+                seed=args.seed,
+            )
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(
+                analysis.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            if args.report is not None:
+                args.report.parent.mkdir(parents=True, exist_ok=True)
+                args.report.write_text(render_pilot_report(analysis), encoding="utf-8")
+            print(f"analyzed: {analysis.reviewed_items} blinded outputs")
+            print(f"status: {analysis.status}")
+        elif args.command == "review-study":
+            if args.output.exists() and not args.resume:
+                raise ValueError(f"output already exists: {args.output}")
+            adapter = (
+                OpenAIResponsesAdapter(
+                    args.model,
+                    api_key_env=args.api_key_env,
+                    base_url=args.base_url,
+                )
+                if args.provider == "openai"
+                else ClaudeCliAdapter(args.model)
+            )
+            review = review_packet_with_model(
+                load_json(args.packet),
+                adapter,
+                reviewer_id=args.reviewer_id,
+                batch_size=args.batch_size,
+                jobs=args.jobs,
+                seed=args.seed,
+                existing_review_document=(
+                    load_json(args.output)
+                    if args.output.exists() and args.resume
+                    else None
+                ),
+                checkpoint_path=args.output,
+                progress=lambda completed, total: print(
+                    f"reviewed: {completed}/{total}", flush=True
+                ),
+            )
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            args.output.write_text(
+                review.model_dump_json(indent=2) + "\n", encoding="utf-8"
+            )
+            print(f"reviewed: {len(review.ratings)} blinded outputs")
+    except (ContractValidationError, OSError, RuntimeError, ValueError) as error:
         print(f"error: {error}")
         return 1
     return 0

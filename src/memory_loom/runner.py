@@ -49,16 +49,28 @@ class ModelAdapter(Protocol):
     provider: str
     model: str
 
-    def generate(self, request: ModelRequest) -> str: ...
+    def generate(self, request: ModelRequest) -> ModelResponse: ...
+
+
+class ModelResponse(BaseModel):
+    model_config = ConfigDict(extra="forbid", frozen=True)
+
+    output_text: str
+    response_id: str | None = None
+    provider_model: str | None = None
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
+    total_tokens: int | None = Field(default=None, ge=0)
+    estimated_cost_usd: float | None = Field(default=None, ge=0)
 
 
 class NoModelAdapter:
     provider = "none"
     model = "no-model-contract-replay"
 
-    def generate(self, request: ModelRequest) -> str:
+    def generate(self, request: ModelRequest) -> ModelResponse:
         digest = hashlib.sha256(request.model_dump_json().encode()).hexdigest()
-        return f"NO_MODEL_OUTPUT sha256={digest}"
+        return ModelResponse(output_text=f"NO_MODEL_OUTPUT sha256={digest}")
 
 
 def configured_prompt_hashes() -> dict[str, str]:
@@ -91,7 +103,7 @@ def run_scenario(
     for query in scenario.queries:
         for repeat in range(1, run_manifest.repeats + 1):
             seed = run_manifest.seed + repeat - 1
-            for condition in run_manifest.condition_order:
+            for condition in _condition_order(run_manifest, scenario.scenario_id, repeat):
                 results.append(
                     _run_condition(
                         scenario,
@@ -189,7 +201,7 @@ def _run_condition(
     prompt_data = _prompt_data(context, user_prompt)
     started = timer()
     try:
-        output = adapter.generate(request)
+        response = adapter.generate(request)
     except Exception as error:
         return ConditionRunResult(
             **base,
@@ -201,8 +213,8 @@ def _run_condition(
         )
 
     latency_ms = _milliseconds(timer() - started)
-    if not isinstance(output, str):
-        error = TypeError("model adapter output must be a string")
+    if not isinstance(response, ModelResponse):
+        error = TypeError("model adapter output must be a ModelResponse")
         return ConditionRunResult(
             **base,
             **prompt_data,
@@ -215,9 +227,30 @@ def _run_condition(
         **base,
         **prompt_data,
         status="completed",
-        raw_output=output,
+        raw_output=response.output_text,
         latency_ms=latency_ms,
+        provider_response_id=response.response_id,
+        provider_model=response.provider_model,
+        input_tokens=response.input_tokens,
+        output_tokens=response.output_tokens,
+        total_tokens=response.total_tokens,
+        estimated_cost_usd=response.estimated_cost_usd,
         failure=None,
+    )
+
+
+def _condition_order(
+    run_manifest: RunManifest,
+    scenario_id: str,
+    repeat: int,
+) -> list[str]:
+    if run_manifest.condition_order_strategy == "fixed":
+        return list(run_manifest.condition_order)
+    return sorted(
+        run_manifest.condition_order,
+        key=lambda condition: _sha256(
+            f"{run_manifest.seed}:{scenario_id}:{repeat}:{condition}"
+        ),
     )
 
 

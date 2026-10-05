@@ -13,8 +13,9 @@ establish that memory improves assistant performance.
 - Codex or Claude Code with local stdio MCP support
 - macOS or Linux
 
-Gemini CLI onboarding, Windows validation, remote hosting, and the non-MCP JSON
-CLI are deferred.
+Gemini CLI onboarding, Windows validation, and remote hosting are deferred. A
+persistent JSON stdio fallback is available for hosts without MCP, but automatic
+host-specific registration is not included.
 
 ## Install
 

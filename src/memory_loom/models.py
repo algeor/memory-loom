@@ -464,6 +464,7 @@ class RunManifest(ContractModel):
     model: str = Field(min_length=1)
     prompt_hashes: PromptHashes
     condition_order: list[ConditionName]
+    condition_order_strategy: Literal["fixed", "deterministic-shuffle"] = "fixed"
     decoding: DecodingConfig
     seed: int = Field(ge=0)
     repeats: int = Field(ge=1)
@@ -473,8 +474,8 @@ class RunManifest(ContractModel):
     @model_validator(mode="after")
     def scenario_ids_are_unique(self) -> RunManifest:
         _require_unique(self.scenario_ids, "run scenario IDs")
-        if self.condition_order != ["B0", "B1", "B2", "B3"]:
-            raise ValueError("condition_order must be B0, B1, B2, B3")
+        if sorted(self.condition_order) != ["B0", "B1", "B2", "B3"]:
+            raise ValueError("condition_order must contain B0, B1, B2, and B3 once")
         return self
 
 
@@ -500,6 +501,12 @@ class ConditionRunResult(ContractModel):
     status: Literal["completed", "failed"]
     raw_output: str | None
     latency_ms: float | None = Field(default=None, ge=0)
+    provider_response_id: str | None = None
+    provider_model: str | None = None
+    input_tokens: int | None = Field(default=None, ge=0)
+    output_tokens: int | None = Field(default=None, ge=0)
+    total_tokens: int | None = Field(default=None, ge=0)
+    estimated_cost_usd: float | None = Field(default=None, ge=0)
     failure: RunFailure | None
 
     @model_validator(mode="after")
@@ -565,6 +572,148 @@ class RunArtifact(ContractModel):
         if self.status != expected_status:
             raise ValueError(f"run status must be {expected_status}")
         return self
+
+
+class BlindedReviewItem(ContractModel):
+    item_id: Identifier
+    scenario_id: Identifier
+    query_id: Identifier
+    repeat: int = Field(ge=1)
+    current_request: str = Field(min_length=1)
+    required_behavior: str = Field(min_length=1)
+    violating_behaviors: list[str]
+    response: str = Field(min_length=1)
+
+
+class BlindedReviewPacket(ContractModel):
+    artifact_type: Literal["blinded_review_packet"]
+    schema_version: ArtifactVersion
+    packet_id: Identifier
+    created_at: AwareDatetime
+    dataset_version: str = Field(min_length=1)
+    instructions: str = Field(min_length=1)
+    items: list[BlindedReviewItem] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def item_ids_are_unique(self) -> BlindedReviewPacket:
+        _require_unique([item.item_id for item in self.items], "review item IDs")
+        return self
+
+
+class BlindingKeyItem(ContractModel):
+    item_id: Identifier
+    scenario_id: Identifier
+    template_family: Identifier
+    query_id: Identifier
+    repeat: int = Field(ge=1)
+    condition: ConditionName
+    memory_needed: bool
+    relevant_memory_ids: list[UUID]
+    forbidden_memory_ids: list[UUID]
+    provider: str = Field(min_length=1)
+    model: str = Field(min_length=1)
+    provider_model: str | None = None
+
+
+class BlindingKey(ContractModel):
+    artifact_type: Literal["blinding_key"]
+    schema_version: ArtifactVersion
+    packet_id: Identifier
+    created_at: AwareDatetime
+    seed_hash: Sha256
+    items: list[BlindingKeyItem] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def item_ids_are_unique(self) -> BlindingKey:
+        _require_unique([item.item_id for item in self.items], "blinding key item IDs")
+        return self
+
+
+class BlindedRating(ContractModel):
+    item_id: Identifier
+    decision: Literal["adheres", "violates", "unclear", "unreviewed"]
+    task_success: bool | None = None
+    memory_override: bool | None = None
+    unsupported_memory_claim: bool | None = None
+    notes: str | None = None
+
+
+class BlindedReview(ContractModel):
+    artifact_type: Literal["blinded_review"]
+    schema_version: ArtifactVersion
+    packet_id: Identifier
+    reviewer_id: Identifier
+    created_at: AwareDatetime
+    reviewer_type: Literal["human", "model"]
+    provider: str | None = None
+    model: str | None = None
+    ratings: list[BlindedRating] = Field(min_length=1)
+
+    @model_validator(mode="after")
+    def reviewer_and_ratings_are_consistent(self) -> BlindedReview:
+        _require_unique([item.item_id for item in self.ratings], "review rating IDs")
+        if self.reviewer_type == "model" and (
+            self.provider is None or self.model is None
+        ):
+            raise ValueError("model reviews require provider and model")
+        if self.reviewer_type == "human" and (
+            self.provider is not None or self.model is not None
+        ):
+            raise ValueError("human reviews cannot declare provider or model")
+        return self
+
+
+class ConditionPilotMetrics(ContractModel):
+    condition: ConditionName
+    scored_items: int = Field(ge=0)
+    unclear_items: int = Field(ge=0)
+    preference_adherence: float | None = Field(default=None, ge=0, le=1)
+    task_success: float | None = Field(default=None, ge=0, le=1)
+    mean_context_tokens: float | None = Field(default=None, ge=0)
+    mean_latency_ms: float | None = Field(default=None, ge=0)
+    memory_override_count: int = Field(ge=0)
+    unsupported_memory_claim_count: int = Field(ge=0)
+    input_tokens: int = Field(ge=0)
+    output_tokens: int = Field(ge=0)
+    estimated_cost_usd: float | None = Field(default=None, ge=0)
+
+
+class PilotContrast(ContractModel):
+    comparison: Literal["B3-B0", "B3-B1", "B3-B2"]
+    estimate: float
+    simultaneous_ci_low: float
+    simultaneous_ci_high: float
+
+
+class FamilyPilotMetrics(ContractModel):
+    template_family: Identifier
+    condition: ConditionName
+    scored_items: int = Field(ge=0)
+    preference_adherence: float | None = Field(default=None, ge=0, le=1)
+    task_success: float | None = Field(default=None, ge=0, le=1)
+
+
+class PilotAnalysis(ContractModel):
+    artifact_type: Literal["pilot_analysis"]
+    schema_version: ArtifactVersion
+    packet_id: Identifier
+    created_at: AwareDatetime
+    status: Literal["exploratory_pilot"]
+    reviewer_types: list[Literal["human", "model"]]
+    generation_models: list[str]
+    reviewer_models: list[str]
+    reviewed_items: int = Field(ge=0)
+    reviewer_disagreements: int = Field(ge=0)
+    failed_runs: int = Field(ge=0)
+    memory_override_count: int = Field(ge=0)
+    unsupported_memory_claim_count: int = Field(ge=0)
+    forbidden_context_count: int = Field(ge=0)
+    no_memory_false_positive_count: int = Field(ge=0)
+    bootstrap_samples: int = Field(ge=1)
+    condition_metrics: list[ConditionPilotMetrics]
+    family_metrics: list[FamilyPilotMetrics]
+    contrasts: list[PilotContrast]
+    limitations: list[str] = Field(min_length=1)
 
 
 class RetrievalEvaluationQueryResult(ContractModel):

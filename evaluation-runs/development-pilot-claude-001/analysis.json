@@ -1,0 +1,280 @@
+{
+  "artifact_type": "pilot_analysis",
+  "schema_version": "1.0.0",
+  "packet_id": "development-pilot-claude-001",
+  "created_at": "2026-10-05T12:19:36.414963Z",
+  "status": "exploratory_pilot",
+  "reviewer_types": [
+    "model"
+  ],
+  "generation_models": [
+    "claude-cli:claude-haiku-4-5"
+  ],
+  "reviewer_models": [
+    "claude-cli:haiku"
+  ],
+  "reviewed_items": 192,
+  "reviewer_disagreements": 0,
+  "failed_runs": 0,
+  "memory_override_count": 10,
+  "unsupported_memory_claim_count": 12,
+  "forbidden_context_count": 0,
+  "no_memory_false_positive_count": 0,
+  "bootstrap_samples": 10000,
+  "condition_metrics": [
+    {
+      "condition": "B0",
+      "scored_items": 32,
+      "unclear_items": 10,
+      "preference_adherence": 0.34375,
+      "task_success": 0.25,
+      "mean_context_tokens": 0.0,
+      "mean_latency_ms": 5948.878305561569,
+      "memory_override_count": 0,
+      "unsupported_memory_claim_count": 0,
+      "input_tokens": 46776,
+      "output_tokens": 23950,
+      "estimated_cost_usd": 0.166526
+    },
+    {
+      "condition": "B1",
+      "scored_items": 32,
+      "unclear_items": 11,
+      "preference_adherence": 0.5625,
+      "task_success": 0.3333333333333333,
+      "mean_context_tokens": 58.791666666666664,
+      "mean_latency_ms": 6136.1810165083925,
+      "memory_override_count": 4,
+      "unsupported_memory_claim_count": 8,
+      "input_tokens": 60672,
+      "output_tokens": 22471,
+      "estimated_cost_usd": 0.173027
+    },
+    {
+      "condition": "B2",
+      "scored_items": 32,
+      "unclear_items": 9,
+      "preference_adherence": 0.625,
+      "task_success": 0.4583333333333333,
+      "mean_context_tokens": 25.458333333333332,
+      "mean_latency_ms": 5753.976710084923,
+      "memory_override_count": 5,
+      "unsupported_memory_claim_count": 2,
+      "input_tokens": 49403,
+      "output_tokens": 21554,
+      "estimated_cost_usd": 0.157173
+    },
+    {
+      "condition": "B3",
+      "scored_items": 32,
+      "unclear_items": 10,
+      "preference_adherence": 0.5625,
+      "task_success": 0.4166666666666667,
+      "mean_context_tokens": 25.833333333333332,
+      "mean_latency_ms": 6276.775776883976,
+      "memory_override_count": 1,
+      "unsupported_memory_claim_count": 2,
+      "input_tokens": 54324,
+      "output_tokens": 24009,
+      "estimated_cost_usd": 0.174369
+    }
+  ],
+  "family_metrics": [
+    {
+      "template_family": "deletion",
+      "condition": "B0",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.375
+    },
+    {
+      "template_family": "deletion",
+      "condition": "B1",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.125
+    },
+    {
+      "template_family": "deletion",
+      "condition": "B2",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.625
+    },
+    {
+      "template_family": "deletion",
+      "condition": "B3",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.625
+    },
+    {
+      "template_family": "direct-correction",
+      "condition": "B0",
+      "scored_items": 8,
+      "preference_adherence": 0.625,
+      "task_success": 0.5
+    },
+    {
+      "template_family": "direct-correction",
+      "condition": "B1",
+      "scored_items": 8,
+      "preference_adherence": 1.0,
+      "task_success": 1.0
+    },
+    {
+      "template_family": "direct-correction",
+      "condition": "B2",
+      "scored_items": 8,
+      "preference_adherence": 1.0,
+      "task_success": 1.0
+    },
+    {
+      "template_family": "direct-correction",
+      "condition": "B3",
+      "scored_items": 8,
+      "preference_adherence": 0.875,
+      "task_success": 1.0
+    },
+    {
+      "template_family": "global-preference",
+      "condition": "B0",
+      "scored_items": 8,
+      "preference_adherence": 0.5,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "global-preference",
+      "condition": "B1",
+      "scored_items": 8,
+      "preference_adherence": 0.375,
+      "task_success": 0.125
+    },
+    {
+      "template_family": "global-preference",
+      "condition": "B2",
+      "scored_items": 8,
+      "preference_adherence": 0.375,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "global-preference",
+      "condition": "B3",
+      "scored_items": 8,
+      "preference_adherence": 0.625,
+      "task_success": 0.25
+    },
+    {
+      "template_family": "hard-negative",
+      "condition": "B0",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.25
+    },
+    {
+      "template_family": "hard-negative",
+      "condition": "B1",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.25
+    },
+    {
+      "template_family": "hard-negative",
+      "condition": "B2",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.625
+    },
+    {
+      "template_family": "hard-negative",
+      "condition": "B3",
+      "scored_items": 0,
+      "preference_adherence": null,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "preference-change",
+      "condition": "B0",
+      "scored_items": 8,
+      "preference_adherence": 0.0,
+      "task_success": 0.375
+    },
+    {
+      "template_family": "preference-change",
+      "condition": "B1",
+      "scored_items": 8,
+      "preference_adherence": 0.5,
+      "task_success": 0.5
+    },
+    {
+      "template_family": "preference-change",
+      "condition": "B2",
+      "scored_items": 8,
+      "preference_adherence": 0.875,
+      "task_success": 0.5
+    },
+    {
+      "template_family": "preference-change",
+      "condition": "B3",
+      "scored_items": 8,
+      "preference_adherence": 0.625,
+      "task_success": 0.625
+    },
+    {
+      "template_family": "project-exception",
+      "condition": "B0",
+      "scored_items": 8,
+      "preference_adherence": 0.25,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "project-exception",
+      "condition": "B1",
+      "scored_items": 8,
+      "preference_adherence": 0.375,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "project-exception",
+      "condition": "B2",
+      "scored_items": 8,
+      "preference_adherence": 0.25,
+      "task_success": 0.0
+    },
+    {
+      "template_family": "project-exception",
+      "condition": "B3",
+      "scored_items": 8,
+      "preference_adherence": 0.125,
+      "task_success": 0.0
+    }
+  ],
+  "contrasts": [
+    {
+      "comparison": "B3-B0",
+      "estimate": 0.21875,
+      "simultaneous_ci_low": -0.0625,
+      "simultaneous_ci_high": 0.5
+    },
+    {
+      "comparison": "B3-B1",
+      "estimate": 0.0,
+      "simultaneous_ci_low": -0.28125,
+      "simultaneous_ci_high": 0.28125
+    },
+    {
+      "comparison": "B3-B2",
+      "estimate": -0.0625,
+      "simultaneous_ci_low": -0.34375,
+      "simultaneous_ci_high": 0.21875
+    }
+  ],
+  "limitations": [
+    "This development pilot is exploratory and not confirmatory evidence.",
+    "Synthetic scenarios may overstate preference clarity.",
+    "Model reviews are secondary and are not calibrated against blinded human review.",
+    "A single reviewer cannot estimate inter-reviewer disagreement.",
+    "Claude CLI did not expose temperature, top-p, seed, or output-token controls.",
+    "At least one generation used an alias or lacked a provider-reported model version."
+  ]
+}
