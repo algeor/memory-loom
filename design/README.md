@@ -51,7 +51,9 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 ## Documents
 
 - [`memory-model.md`](memory-model.md) — records, states, and revisions.
+- [`import-architecture.md`](import-architecture.md) — approval-gated memory admission diagrams.
 - [`retrieval.md`](retrieval.md) — lexical retrieval and context construction.
+- [`retrieval-architecture.md`](retrieval-architecture.md) — scoped retrieval, reranking, and provenance diagrams.
 - [`safety.md`](safety.md) — consent, scope, deletion, and threat boundaries.
 - [`implementation-plan.md`](implementation-plan.md) — build order and exit gates.
 - [`codex-mcp.md`](codex-mcp.md) — Codex installation, registration, and verification.
