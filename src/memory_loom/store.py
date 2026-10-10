@@ -14,6 +14,7 @@ from memory_loom.models import (
     RevisionEvent,
     Scenario,
 )
+from memory_loom.semantic_index import SemanticMemoryIndexer
 
 
 MIGRATION_DIRECTORY = Path(__file__).with_name("migrations")
@@ -43,8 +44,10 @@ class MemoryStore:
         self.connection = sqlite3.connect(self.database_path)
         self.connection.row_factory = sqlite3.Row
         self.connection.execute("PRAGMA foreign_keys = ON")
+        self.semantic_indexer = SemanticMemoryIndexer()
         try:
             self.migrate()
+            self._backfill_semantic_index_if_available()
         except Exception:
             self.connection.close()
             raise
@@ -193,6 +196,7 @@ class MemoryStore:
             self.connection.execute(
                 "DELETE FROM memory_fts WHERE memory_id = ?", (str(memory.id),)
             )
+            self._delete_semantic_index(memory.id)
             self._insert_evidence(evidence)
             self._insert_memory(memory)
             self._insert_revision(revision)
@@ -214,6 +218,7 @@ class MemoryStore:
             self.connection.execute(
                 "DELETE FROM memory_fts WHERE memory_id = ?", (str(memory_id),)
             )
+            self._delete_semantic_index(memory_id)
             self._insert_revision(revision)
 
     def delete(self, memory_id: UUID, revision: RevisionEvent) -> None:
@@ -237,6 +242,7 @@ class MemoryStore:
             self.connection.execute(
                 "DELETE FROM memory_fts WHERE memory_id = ?", (str(memory_id),)
             )
+            self._delete_semantic_index(memory_id)
             self._insert_revision(revision)
 
     def load_snapshot(
@@ -409,6 +415,25 @@ class MemoryStore:
         ).fetchone()
         return int(row["count"])
 
+    def semantic_chunk_count(self, memory_id: UUID) -> int:
+        if not self._table_exists("memory_semantic_chunks"):
+            return 0
+        row = self.connection.execute(
+            "SELECT COUNT(*) AS count FROM memory_semantic_chunks WHERE memory_id = ?",
+            (str(memory_id),),
+        ).fetchone()
+        return int(row["count"])
+
+    def semantic_chunk_count_for_version(self, memory_id: UUID, version: int) -> int:
+        if not self._table_exists("memory_semantic_chunks"):
+            return 0
+        row = self.connection.execute(
+            "SELECT COUNT(*) AS count FROM memory_semantic_chunks "
+            "WHERE memory_id = ? AND memory_version = ?",
+            (str(memory_id), version),
+        ).fetchone()
+        return int(row["count"])
+
     def _insert_evidence(self, evidence: EvidenceEvent) -> None:
         self.connection.execute(
             "INSERT INTO evidence_events("
@@ -495,6 +520,91 @@ class MemoryStore:
             "INSERT INTO memory_fts(memory_id, memory_version, statement) VALUES (?, ?, ?)",
             (str(memory.id), memory.version, memory.statement),
         )
+        self._replace_semantic_index(memory)
+
+    def _replace_semantic_index(self, memory: MemoryRecord) -> None:
+        if not self._table_exists("memory_semantic_chunks"):
+            return
+        self.connection.execute(
+            "DELETE FROM memory_semantic_chunks WHERE memory_id = ?",
+            (str(memory.id),),
+        )
+        now = _timestamp(datetime.now(UTC))
+        for entry in self.semantic_indexer.index_entries(memory):
+            chunk = entry.chunk
+            embedding = entry.embedding
+            self.connection.execute(
+                "INSERT INTO memory_semantic_chunks("
+                "chunk_id, memory_id, memory_version, chunk_index, chunk_kind, "
+                "content, token_count, content_sha256, created_at"
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                (
+                    str(chunk.chunk_id),
+                    str(chunk.memory_id),
+                    chunk.memory_version,
+                    chunk.chunk_index,
+                    chunk.chunk_kind,
+                    chunk.content,
+                    chunk.token_count,
+                    chunk.content_sha256,
+                    now,
+                ),
+            )
+            self.connection.executemany(
+                "INSERT INTO memory_semantic_facets(chunk_id, facet_type, facet_value) "
+                "VALUES (?, ?, ?)",
+                [
+                    (str(chunk.chunk_id), facet.facet_type, facet.facet_value)
+                    for facet in chunk.facets
+                ],
+            )
+            self.connection.execute(
+                "INSERT INTO memory_semantic_embeddings("
+                "chunk_id, embedding_model, embedding_dimension, vector_json, "
+                "content_sha256, created_at"
+                ") VALUES (?, ?, ?, ?, ?, ?)",
+                (
+                    str(embedding.chunk_id),
+                    embedding.embedding_model,
+                    embedding.embedding_dimension,
+                    embedding.vector_json,
+                    embedding.content_sha256,
+                    now,
+                ),
+            )
+
+    def _delete_semantic_index(self, memory_id: UUID) -> None:
+        if not self._table_exists("memory_semantic_chunks"):
+            return
+        self.connection.execute(
+            "DELETE FROM memory_semantic_chunks WHERE memory_id = ?",
+            (str(memory_id),),
+        )
+
+    def _backfill_semantic_index_if_available(self) -> None:
+        if not self._table_exists("memory_semantic_chunks"):
+            return
+        active_records = self.connection.execute(
+            "SELECT id, version FROM memory_records WHERE status = 'active'"
+        ).fetchall()
+        with self.connection:
+            for row in active_records:
+                memory = self.get_active(UUID(row["id"]))
+                if (
+                    memory is not None
+                    and self.semantic_chunk_count_for_version(
+                        memory.id, memory.version
+                    )
+                    == 0
+                ):
+                    self._replace_semantic_index(memory)
+
+    def _table_exists(self, table_name: str) -> bool:
+        row = self.connection.execute(
+            "SELECT 1 FROM sqlite_master WHERE type = 'table' AND name = ?",
+            (table_name,),
+        ).fetchone()
+        return row is not None
 
     def _row_to_memory(self, row: sqlite3.Row) -> MemoryRecord:
         evidence_ids = [

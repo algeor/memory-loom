@@ -11,6 +11,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - A 24-scenario synthetic development set covers six independent template families with four surface variants each.
 - All 24 pilot scenarios validate, use unique UUIDs, and reproduce their labeled B3 retrieval selections without calling a model.
 - The SQLite memory core implements approval, correction, supersession, deletion, restart persistence, and retrieval traces.
+- Approved active memories are decomposed into semantic chunks, facets, and local embedding vectors in SQLite for later hybrid retrieval experiments.
 - Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking and pluggable reranking.
 - The deterministic retrieval evaluator reports ranking, abstention, safety, and context-cost metrics from frozen labels without calling a model.
 - The resumable parallel runner executes B0-B3 through OpenAI Responses API, isolated Claude CLI, or deterministic no-model adapters and records prompts, contexts, usage, cost, latency, raw outputs, and failures.
@@ -37,7 +38,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Keep source observations, hypotheses, and engineering choices in separate documents.
 - Use no-memory, recent-history, rolling-summary, and structured-memory baselines.
 - Start with manual approval and deterministic retrieval.
-- Defer inferred traits, autonomous consolidation, vector retrieval, and fine-tuning.
+- Defer inferred traits, autonomous consolidation, vector retrieval as the default serving path, and fine-tuning.
 - Do not set numerical quality targets before a pilot establishes baseline distributions.
 - Build every baseline from the same frozen scenario timeline and context-budget contract.
 - Resolve scope specificity and conflicts before lexical ranking and reranking.

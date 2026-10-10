@@ -50,7 +50,7 @@ def test_backup_and_restore_preserve_memory(tmp_path: Path) -> None:
 
     assert restored.safety_backup_path is not None
     assert restored.safety_backup_path.is_file()
-    assert restored.schema_version == 3
+    assert restored.schema_version == 4
     with MemoryStore(database_path) as store:
         memory = store.get_active(memory_id)
         assert memory is not None

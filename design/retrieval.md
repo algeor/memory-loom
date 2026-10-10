@@ -12,6 +12,7 @@ query + user/project/task scope
   -> select active records
   -> resolve rule scope and conflicts
   -> lexical search
+  -> optional semantic candidates from stored embeddings
   -> candidate reranking
   -> context-budget selection
   -> context manifest and retrieval trace
@@ -53,6 +54,12 @@ Run a separate reranking stage over the eligible lexical candidates. The default
 
 Semantic or model-backed rerankers must be plugged in as separate experimental conditions. They must receive only records that passed scope, lifecycle, specificity, and conflict filters, and their rerank scores must be recorded in retrieval traces.
 
+## Semantic Index
+
+Approved active memories are also decomposed into semantic chunks, facets, and local embedding vectors in SQLite. This index is built only after approval and is removed when the memory is corrected, superseded, or deleted.
+
+The default retrieval condition still uses lexical candidates. Semantic or hybrid retrieval should be enabled only as a separate measured condition so it can be compared against the lexical baseline.
+
 ## Context Manifest
 
 ```yaml
@@ -85,6 +92,7 @@ Persist:
 - filtered counts by reason;
 - lexical scores for eligible candidates;
 - rerank scores for reranked candidates;
+- semantic chunk and embedding lifecycle state;
 - estimated context tokens;
 - retrieval and context-building latency;
 - the exact serialized context.

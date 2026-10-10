@@ -1,137 +1,162 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1000" viewBox="0 0 1800 1000" role="img" aria-labelledby="title desc">
+<svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1080" viewBox="0 0 1900 1080" role="img" aria-labelledby="title desc">
   <title id="title">Memory Loom Combined Import and Retrieval Architecture</title>
-  <desc id="desc">Combined architecture diagram showing approval-gated memory import on the left, shared SQLite memory store in the center, and scoped retrieval on the right.</desc>
+  <desc id="desc">Combined architecture diagram showing approval-gated import, SQLite storage with lexical and semantic indexes, and scoped retrieval with optional hybrid candidates.</desc>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
-      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4858" />
+      <path d="M2,2 L10,6 L2,10 Z" fill="#263849" />
     </marker>
-    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1f2933" flood-opacity="0.12"/>
+    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="7" stdDeviation="9" flood-color="#111827" flood-opacity="0.13"/>
     </filter>
     <style>
-      .bg { fill: #f7f8fb; }
-      .title { font-family: Inter, Arial, sans-serif; font-size: 44px; font-weight: 700; fill: #18212f; }
+      .bg { fill: #f7f9fc; }
+      .title { font-family: Inter, Arial, sans-serif; font-size: 46px; font-weight: 700; fill: #17202a; }
       .subtitle { font-family: Inter, Arial, sans-serif; font-size: 20px; fill: #526070; }
-      .panel { fill: #ffffff; stroke: #d7dde7; stroke-width: 2; rx: 28; filter: url(#softShadow); }
-      .storePanel { fill: #eef4f8; stroke: #6c8798; stroke-width: 2.5; rx: 28; filter: url(#softShadow); }
-      .box { fill: #ffffff; stroke: #b9c4d4; stroke-width: 2; rx: 18; filter: url(#softShadow); }
-      .blue { fill: #eaf3ff; stroke: #6aa3df; }
-      .green { fill: #eaf7f0; stroke: #64ad7f; }
-      .orange { fill: #fff1e4; stroke: #e59a4c; }
-      .purple { fill: #f0edff; stroke: #9278d6; }
-      .red { fill: #fff0f1; stroke: #d86f78; }
-      .label { font-family: Inter, Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #17202a; }
-      .section { font-family: Inter, Arial, sans-serif; font-size: 26px; font-weight: 700; fill: #17202a; }
+      .panel { fill: #ffffff; stroke: #d8e0ea; stroke-width: 2; rx: 24; filter: url(#shadow); }
+      .storePanel { fill: #eef6fb; stroke: #6b8fa5; stroke-width: 2.5; rx: 24; filter: url(#shadow); }
+      .box { fill: #ffffff; stroke: #b8c5d6; stroke-width: 2; rx: 14; filter: url(#shadow); }
+      .blue { fill: #eaf3ff; stroke: #6a9fd8; }
+      .green { fill: #e9f7ef; stroke: #61aa7a; }
+      .orange { fill: #fff1e3; stroke: #df9345; }
+      .purple { fill: #f2eeff; stroke: #9479d4; }
+      .red { fill: #fff0f1; stroke: #d66e77; }
+      .ink { fill: #17202a; }
+      .section { font-family: Inter, Arial, sans-serif; font-size: 25px; font-weight: 700; fill: #17202a; }
+      .label { font-family: Inter, Arial, sans-serif; font-size: 21px; font-weight: 700; fill: #17202a; }
       .small { font-family: Inter, Arial, sans-serif; font-size: 16px; fill: #465566; }
-      .tiny { font-family: Inter, Arial, sans-serif; font-size: 14px; fill: #526070; }
-      .arrow { stroke: #2f4858; stroke-width: 4; fill: none; marker-end: url(#arrow); }
-      .thin { stroke: #7a8898; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
-      .dash { stroke: #7a8898; stroke-width: 2.5; fill: none; stroke-dasharray: 7 7; marker-end: url(#arrow); }
+      .tiny { font-family: Inter, Arial, sans-serif; font-size: 13px; fill: #526070; }
+      .arrow { stroke: #263849; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .thin { stroke: #708195; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .dash { stroke: #708195; stroke-width: 2.5; fill: none; stroke-dasharray: 8 7; marker-end: url(#arrow); }
       .pill { fill: #17202a; rx: 16; }
       .pillText { font-family: Inter, Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #ffffff; }
     </style>
   </defs>
 
-  <rect class="bg" x="0" y="0" width="1800" height="1000"/>
+  <rect class="bg" x="0" y="0" width="1900" height="1080"/>
 
-  <text class="title" x="80" y="80">Memory Loom Architecture</text>
-  <text class="subtitle" x="80" y="116">Visible memory lifecycle: approval-gated import feeds scoped retrieval with provenance and audit traces.</text>
+  <text class="title" x="80" y="82">Memory Loom Architecture</text>
+  <text class="subtitle" x="80" y="118">Approval-gated memory import feeds scoped lexical retrieval, with semantic chunks and embeddings stored for measured hybrid experiments.</text>
 
-  <rect class="panel" x="60" y="160" width="665" height="610"/>
-  <text class="section" x="95" y="210">1. Import / Admission</text>
-  <text class="small" x="95" y="240">Only explicit preferences and corrections can become durable memory.</text>
+  <rect class="panel" x="55" y="165" width="585" height="650"/>
+  <text class="section" x="92" y="213">1. Import / Admission</text>
+  <text class="small" x="92" y="244">Only explicit preferences and corrections can become durable memory.</text>
 
-  <rect class="box blue" x="105" y="290" width="170" height="95"/>
-  <text class="label" x="130" y="327">User</text>
-  <text class="small" x="130" y="356">states preference</text>
+  <rect class="box blue" x="105" y="300" width="180" height="92"/>
+  <text class="label" x="130" y="336">User</text>
+  <text class="small" x="130" y="364">preference or correction</text>
 
-  <rect class="box" x="335" y="290" width="170" height="95"/>
-  <text class="label" x="360" y="327">Host</text>
-  <text class="small" x="360" y="356">binds scope</text>
+  <rect class="box" x="405" y="300" width="180" height="92"/>
+  <text class="label" x="430" y="336">Host</text>
+  <text class="small" x="430" y="364">binds scope</text>
 
-  <rect class="box orange" x="105" y="455" width="190" height="100"/>
-  <text class="label" x="130" y="493">Propose</text>
-  <text class="small" x="130" y="522">ephemeral only</text>
+  <rect class="box orange" x="105" y="470" width="180" height="96"/>
+  <text class="label" x="130" y="507">Propose</text>
+  <text class="small" x="130" y="535">ephemeral draft</text>
 
-  <rect class="box purple" x="365" y="455" width="190" height="100"/>
-  <text class="label" x="390" y="493">Review</text>
-  <text class="small" x="390" y="522">user approves</text>
+  <rect class="box purple" x="405" y="470" width="180" height="96"/>
+  <text class="label" x="430" y="507">Review</text>
+  <text class="small" x="430" y="535">explicit approval</text>
 
-  <rect class="box green" x="225" y="620" width="210" height="95"/>
-  <text class="label" x="250" y="657">Commit</text>
-  <text class="small" x="250" y="686">only durable write</text>
+  <rect class="box green" x="255" y="645" width="200" height="92"/>
+  <text class="label" x="280" y="681">Commit</text>
+  <text class="small" x="280" y="709">only durable write</text>
 
-  <path class="arrow" d="M275 338 H335"/>
-  <path class="arrow" d="M420 385 C420 420 200 420 200 455"/>
-  <path class="arrow" d="M295 505 H365"/>
-  <path class="arrow" d="M460 555 C460 595 330 585 330 620"/>
+  <path class="arrow" d="M285 346 H405"/>
+  <path class="arrow" d="M495 392 C495 430 195 428 195 470"/>
+  <path class="arrow" d="M285 518 H405"/>
+  <path class="arrow" d="M495 566 C495 620 355 600 355 645"/>
 
-  <rect class="storePanel" x="755" y="250" width="290" height="440"/>
-  <text class="section" x="795" y="300">Shared Store</text>
-  <text class="small" x="795" y="330">SQLite-backed durable state</text>
+  <rect class="storePanel" x="705" y="165" width="490" height="650"/>
+  <text class="section" x="745" y="213">2. Durable Store</text>
+  <text class="small" x="745" y="244">SQLite tables keep content, provenance, lifecycle, and indexes together.</text>
 
-  <rect class="box" x="800" y="375" width="200" height="58"/>
-  <text class="small" x="833" y="411">Evidence events</text>
+  <rect class="box" x="750" y="298" width="180" height="62"/>
+  <text class="small" x="782" y="334">Evidence events</text>
 
-  <rect class="box" x="800" y="465" width="200" height="58"/>
-  <text class="small" x="833" y="501">Memory records</text>
+  <rect class="box" x="970" y="298" width="180" height="62"/>
+  <text class="small" x="1002" y="334">Memory records</text>
 
-  <rect class="box" x="800" y="555" width="200" height="58"/>
-  <text class="small" x="833" y="591">Revision history</text>
+  <rect class="box" x="750" y="392" width="180" height="62"/>
+  <text class="small" x="782" y="428">Revision history</text>
 
-  <rect class="box green" x="800" y="645" width="200" height="58"/>
-  <text class="small" x="843" y="681">FTS5 index</text>
+  <rect class="box green" x="970" y="392" width="180" height="62"/>
+  <text class="small" x="1017" y="428">FTS5 index</text>
 
-  <path class="arrow" d="M435 668 C610 668 620 470 755 470"/>
+  <rect class="box purple" x="750" y="515" width="400" height="168"/>
+  <text class="label" x="785" y="555">Semantic index</text>
+  <text class="small" x="785" y="584">built only after approval</text>
 
-  <rect class="panel" x="1075" y="160" width="665" height="610"/>
-  <text class="section" x="1110" y="210">2. Retrieval / Use</text>
-  <text class="small" x="1110" y="240">Policy filters run before lexical search and reranking.</text>
+  <rect class="box" x="785" y="612" width="105" height="42"/>
+  <text class="tiny" x="806" y="637">Chunks</text>
 
-  <rect class="box blue" x="1120" y="290" width="170" height="95"/>
-  <text class="label" x="1145" y="327">Request</text>
-  <text class="small" x="1145" y="356">current task</text>
+  <rect class="box" x="912" y="612" width="105" height="42"/>
+  <text class="tiny" x="939" y="637">Facets</text>
 
-  <rect class="box purple" x="1350" y="290" width="170" height="95"/>
-  <text class="label" x="1375" y="327">Scope</text>
-  <text class="small" x="1375" y="356">user/project/task</text>
+  <rect class="box" x="1039" y="612" width="105" height="42"/>
+  <text class="tiny" x="1056" y="637">Embeddings</text>
 
-  <rect class="box orange" x="1120" y="455" width="170" height="100"/>
-  <text class="label" x="1145" y="493">Policy</text>
-  <text class="small" x="1145" y="522">filter first</text>
+  <rect class="box red" x="815" y="725" width="270" height="58"/>
+  <text class="small" x="842" y="751">Delete / correction removes</text>
+  <text class="tiny" x="875" y="771">FTS and semantic rows</text>
 
-  <rect class="box green" x="1350" y="455" width="170" height="100"/>
-  <text class="label" x="1375" y="493">FTS5</text>
-  <text class="small" x="1375" y="522">BM25 search</text>
+  <path class="arrow" d="M455 691 C600 691 598 490 705 490"/>
+  <path class="thin" d="M930 329 H970"/>
+  <path class="thin" d="M930 423 H970"/>
+  <path class="thin" d="M1060 454 C1060 490 950 488 950 515"/>
 
-  <rect class="box green" x="1120" y="620" width="170" height="95"/>
-  <text class="label" x="1145" y="657">Rerank</text>
-  <text class="small" x="1145" y="686">candidate order</text>
+  <rect class="panel" x="1260" y="165" width="585" height="650"/>
+  <text class="section" x="1297" y="213">3. Retrieval / Use</text>
+  <text class="small" x="1297" y="244">Filters run before ranking; semantic retrieval remains optional.</text>
 
-  <rect class="box blue" x="1350" y="620" width="170" height="95"/>
-  <text class="label" x="1375" y="657">Context</text>
-  <text class="small" x="1375" y="686">fallible memory</text>
+  <rect class="box blue" x="1310" y="300" width="180" height="92"/>
+  <text class="label" x="1335" y="336">Request</text>
+  <text class="small" x="1335" y="364">current task</text>
 
-  <path class="arrow" d="M1290 338 H1350"/>
-  <path class="arrow" d="M1435 385 C1435 425 1205 420 1205 455"/>
-  <path class="arrow" d="M1290 505 H1350"/>
-  <path class="arrow" d="M1435 555 C1435 600 1205 585 1205 620"/>
-  <path class="arrow" d="M1290 668 H1350"/>
+  <rect class="box purple" x="1610" y="300" width="180" height="92"/>
+  <text class="label" x="1635" y="336">Scope</text>
+  <text class="small" x="1635" y="364">user/project/task</text>
 
-  <path class="arrow" d="M1045 675 C1090 675 1085 505 1120 505"/>
-  <rect class="storePanel" x="330" y="820" width="1140" height="95"/>
-  <text class="section" x="365" y="858">Audit and provenance</text>
-  <text class="small" x="365" y="888">Retrieval returns memory_id, rule_key, version, reason_code, and evidence_ids; traces keep filter reasons, lexical scores, rerank scores, and positions.</text>
+  <rect class="box orange" x="1310" y="470" width="180" height="96"/>
+  <text class="label" x="1335" y="507">Policy</text>
+  <text class="small" x="1335" y="535">filter first</text>
 
-  <path class="dash" d="M900 690 V820"/>
-  <path class="dash" d="M1435 715 C1435 785 1180 780 1180 820"/>
+  <rect class="box green" x="1610" y="470" width="180" height="96"/>
+  <text class="label" x="1635" y="507">Lexical</text>
+  <text class="small" x="1635" y="535">BM25 candidates</text>
 
-  <rect class="pill" x="95" y="940" width="290" height="32"/>
-  <text class="pillText" x="116" y="961">No memory write before approval</text>
-  <rect class="pill" x="430" y="940" width="310" height="32"/>
-  <text class="pillText" x="451" y="961">Scope supplied outside model text</text>
-  <rect class="pill" x="785" y="940" width="295" height="32"/>
-  <text class="pillText" x="806" y="961">Policy filters before ranking</text>
-  <rect class="pill" x="1125" y="940" width="330" height="32"/>
-  <text class="pillText" x="1146" y="961">Evidence IDs make retrieval explainable</text>
+  <rect class="box purple" x="1310" y="645" width="180" height="92"/>
+  <text class="label" x="1335" y="681">Hybrid</text>
+  <text class="small" x="1335" y="709">optional candidates</text>
+
+  <rect class="box green" x="1610" y="645" width="180" height="92"/>
+  <text class="label" x="1635" y="681">Rerank</text>
+  <text class="small" x="1635" y="709">deterministic default</text>
+
+  <path class="arrow" d="M1490 346 H1610"/>
+  <path class="arrow" d="M1700 392 C1700 430 1400 428 1400 470"/>
+  <path class="arrow" d="M1490 518 H1610"/>
+  <path class="dash" d="M1700 566 C1700 620 1400 600 1400 645"/>
+  <path class="arrow" d="M1490 691 H1610"/>
+
+  <path class="arrow" d="M1195 423 C1228 423 1228 518 1310 518"/>
+  <path class="dash" d="M1150 600 C1215 600 1235 691 1310 691"/>
+
+  <rect class="storePanel" x="255" y="860" width="1390" height="98"/>
+  <text class="section" x="295" y="899">Audit and citations</text>
+  <text class="small" x="295" y="930">Retrieval returns memory_id, rule_key, version, reason_code, and evidence_ids; traces keep filter reasons, lexical scores, rerank scores, positions, and semantic lifecycle state.</text>
+
+  <path class="dash" d="M950 815 V860"/>
+  <path class="dash" d="M1700 737 C1700 830 1360 820 1360 860"/>
+
+  <rect class="pill" x="80" y="1000" width="275" height="34"/>
+  <text class="pillText" x="101" y="1022">No write before approval</text>
+  <rect class="pill" x="405" y="1000" width="305" height="34"/>
+  <text class="pillText" x="426" y="1022">Scope outside model text</text>
+  <rect class="pill" x="760" y="1000" width="310" height="34"/>
+  <text class="pillText" x="781" y="1022">Lexical retrieval is default</text>
+  <rect class="pill" x="1120" y="1000" width="340" height="34"/>
+  <text class="pillText" x="1141" y="1022">Semantic index is experimental</text>
+  <rect class="pill" x="1510" y="1000" width="310" height="34"/>
+  <text class="pillText" x="1531" y="1022">Evidence IDs act as citations</text>
 </svg>

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from datetime import UTC, datetime, timedelta
 from uuid import UUID
 
@@ -32,6 +33,14 @@ def test_approval_correction_and_deletion_survive_restart(tmp_path) -> None:
         store.approve(evidence_one, memory_one, approval)
         assert store.get_active(MEMORY_ID) == memory_one
         assert str(MEMORY_ID) in store.indexed_memory_ids()
+        assert store.semantic_chunk_count(MEMORY_ID) == 3
+        embedding = store.connection.execute(
+            "SELECT embedding_model, embedding_dimension, vector_json "
+            "FROM memory_semantic_embeddings LIMIT 1"
+        ).fetchone()
+        assert embedding["embedding_model"] == "local-hash-embedding-v1"
+        assert embedding["embedding_dimension"] == 64
+        assert len(json.loads(embedding["vector_json"])) == 64
 
     correction_time = BASE_TIME + timedelta(days=1)
     evidence_two = _evidence(
@@ -94,6 +103,7 @@ def test_approval_correction_and_deletion_survive_restart(tmp_path) -> None:
         assert store.evidence_content(EVIDENCE_ONE) == (None, "erased")
         assert store.evidence_content(EVIDENCE_TWO) == (None, "erased")
         assert str(MEMORY_ID) not in store.indexed_memory_ids()
+        assert store.semantic_chunk_count(MEMORY_ID) == 0
         result = LexicalRetriever(store).retrieve(
             "query-after-delete",
             "Give me a concise review",
@@ -129,6 +139,7 @@ def test_supersession_removes_memory_from_search(tmp_path) -> None:
         store.supersede(MEMORY_ID, supersession)
         assert store.get_active(MEMORY_ID) is None
         assert str(MEMORY_ID) not in store.indexed_memory_ids()
+        assert store.semantic_chunk_count(MEMORY_ID) == 0
 
 
 def _evidence(evidence_id: UUID, content: str, recorded_at: datetime) -> EvidenceEvent:
