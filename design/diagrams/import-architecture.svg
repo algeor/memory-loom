@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title desc">
+  <title id="title">Memory Loom Import Architecture</title>
+  <desc id="desc">Diagram showing approval-gated import from user statement through proposal, approval, durable commit, SQLite storage, and FTS5 indexing.</desc>
+  <defs>
+    <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
+      <path d="M2,2 L10,6 L2,10 Z" fill="#2f4858" />
+    </marker>
+    <filter id="softShadow" x="-10%" y="-10%" width="120%" height="120%">
+      <feDropShadow dx="0" dy="6" stdDeviation="8" flood-color="#1f2933" flood-opacity="0.12"/>
+    </filter>
+    <style>
+      .bg { fill: #f7f8fb; }
+      .title { font-family: Inter, Arial, sans-serif; font-size: 42px; font-weight: 700; fill: #18212f; }
+      .subtitle { font-family: Inter, Arial, sans-serif; font-size: 20px; fill: #526070; }
+      .lane { fill: #ffffff; stroke: #d7dde7; stroke-width: 2; rx: 24; filter: url(#softShadow); }
+      .box { fill: #ffffff; stroke: #b9c4d4; stroke-width: 2; rx: 18; filter: url(#softShadow); }
+      .box-blue { fill: #eaf3ff; stroke: #6aa3df; }
+      .box-green { fill: #eaf7f0; stroke: #64ad7f; }
+      .box-orange { fill: #fff1e4; stroke: #e59a4c; }
+      .box-purple { fill: #f0edff; stroke: #9278d6; }
+      .db { fill: #eef4f8; stroke: #6c8798; stroke-width: 2; rx: 20; filter: url(#softShadow); }
+      .label { font-family: Inter, Arial, sans-serif; font-size: 22px; font-weight: 700; fill: #17202a; }
+      .small { font-family: Inter, Arial, sans-serif; font-size: 17px; fill: #465566; }
+      .tiny { font-family: Inter, Arial, sans-serif; font-size: 15px; fill: #526070; }
+      .arrow { stroke: #2f4858; stroke-width: 4; fill: none; marker-end: url(#arrow); }
+      .thin { stroke: #7a8898; stroke-width: 2.5; fill: none; marker-end: url(#arrow); }
+      .pill { fill: #17202a; rx: 16; }
+      .pillText { font-family: Inter, Arial, sans-serif; font-size: 15px; font-weight: 700; fill: #ffffff; }
+    </style>
+  </defs>
+
+  <rect class="bg" x="0" y="0" width="1600" height="900"/>
+
+  <text class="title" x="80" y="82">Import Architecture</text>
+  <text class="subtitle" x="80" y="118">Approval-gated memory admission: explicit statement -> proposal -> user approval -> durable memory.</text>
+
+  <rect class="lane" x="64" y="165" width="1472" height="390"/>
+  <text class="small" x="92" y="206">Write path</text>
+
+  <rect class="box box-blue" x="100" y="245" width="190" height="140"/>
+  <text class="label" x="130" y="292">User</text>
+  <text class="small" x="130" y="324">explicit preference</text>
+  <text class="small" x="130" y="350">or correction</text>
+
+  <rect class="box" x="340" y="245" width="200" height="140"/>
+  <text class="label" x="370" y="292">Agent Host</text>
+  <text class="small" x="370" y="324">detects candidate</text>
+  <text class="small" x="370" y="350">binds scope</text>
+
+  <rect class="box box-orange" x="590" y="245" width="230" height="140"/>
+  <text class="label" x="620" y="292">Propose</text>
+  <text class="small" x="620" y="324">memory_loom_</text>
+  <text class="small" x="620" y="350">propose_change</text>
+
+  <rect class="box box-purple" x="870" y="245" width="230" height="140"/>
+  <text class="label" x="900" y="292">Ephemeral</text>
+  <text class="small" x="900" y="324">proposal store</text>
+  <text class="small" x="900" y="350">expires if unused</text>
+
+  <rect class="box box-green" x="1150" y="245" width="230" height="140"/>
+  <text class="label" x="1180" y="292">Approval</text>
+  <text class="small" x="1180" y="324">user confirms</text>
+  <text class="small" x="1180" y="350">unchanged proposal</text>
+
+  <rect class="box box-green" x="1150" y="430" width="230" height="90"/>
+  <text class="label" x="1180" y="466">Commit</text>
+  <text class="small" x="1180" y="493">only durable write</text>
+
+  <path class="arrow" d="M290 315 H340"/>
+  <path class="arrow" d="M540 315 H590"/>
+  <path class="arrow" d="M820 315 H870"/>
+  <path class="arrow" d="M1100 315 H1150"/>
+  <path class="arrow" d="M1265 385 V430"/>
+
+  <rect class="db" x="190" y="615" width="1220" height="190"/>
+  <text class="label" x="230" y="660">SQLite durable state</text>
+  <text class="small" x="230" y="690">Everything committed here is inspectable, versioned, and scoped.</text>
+
+  <rect class="box" x="250" y="720" width="210" height="58"/>
+  <text class="small" x="280" y="756">Evidence event</text>
+
+  <rect class="box" x="520" y="720" width="210" height="58"/>
+  <text class="small" x="550" y="756">Memory record</text>
+
+  <rect class="box" x="790" y="720" width="210" height="58"/>
+  <text class="small" x="820" y="756">Revision event</text>
+
+  <rect class="box" x="1060" y="720" width="210" height="58"/>
+  <text class="small" x="1090" y="756">FTS5 index row</text>
+
+  <path class="arrow" d="M1265 520 C1265 580 800 575 800 615"/>
+  <path class="thin" d="M460 749 H520"/>
+  <path class="thin" d="M730 749 H790"/>
+  <path class="thin" d="M1000 749 H1060"/>
+
+  <rect class="pill" x="95" y="832" width="265" height="32"/>
+  <text class="pillText" x="116" y="853">No durable write before approval</text>
+  <rect class="pill" x="398" y="832" width="310" height="32"/>
+  <text class="pillText" x="419" y="853">Scope supplied outside model text</text>
+  <rect class="pill" x="746" y="832" width="315" height="32"/>
+  <text class="pillText" x="767" y="853">Delete removes content and index rows</text>
+  <rect class="pill" x="1098" y="832" width="300" height="32"/>
+  <text class="pillText" x="1119" y="853">Every memory keeps provenance IDs</text>
+</svg>
