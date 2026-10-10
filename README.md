@@ -1,12 +1,51 @@
 # Memory Loom
 
-Memory Loom is a research project about **external memory for coding assistants**.
+[![CI](https://github.com/algeor/memory-loom/actions/workflows/ci.yml/badge.svg)](https://github.com/algeor/memory-loom/actions/workflows/ci.yml)
+[![Release](https://github.com/algeor/memory-loom/actions/workflows/release.yml/badge.svg)](https://github.com/algeor/memory-loom/actions/workflows/release.yml)
+[![License: GPL-3.0](https://img.shields.io/badge/license-GPL--3.0-blue.svg)](LICENSE)
 
-The first question is deliberately narrow:
+**Local, approval-based memory for coding agents.**
+
+Memory Loom gives Codex and Claude Code a small explicit memory store for
+user-approved preferences and corrections. It is designed to make memory
+inspectable, correctable, deletable, and testable instead of hidden in chat
+history.
+
+It is also a research project. The core question is deliberately narrow:
 
 > Does a small store of explicit, user-approved preferences improve behavior across sessions compared with no memory, recent history, or a rolling summary?
 
-This repository contains a research protocol, a reference design, and a local reference implementation for controlled experiments. It does **not** contain a production memory service or confirmatory evidence.
+This repository contains:
+
+- a local SQLite-backed reference implementation;
+- five MCP lifecycle tools: retrieve, propose, commit, discard, inspect;
+- onboarding for Codex and Claude Code;
+- deterministic replay and retrieval evaluation fixtures;
+- a documented development pilot with inconclusive results.
+
+Memory Loom does **not** contain a production memory service or confirmatory
+evidence that memory improves coding-agent behavior.
+
+## Try It
+
+Install the tagged wheel with `uv`, then onboard the coding-agent host inside
+the project where memory should be available:
+
+```zsh
+uv python install 3.14
+uv tool install --python 3.14 \
+  https://github.com/algeor/memory-loom/releases/download/v0.1.0/memory_loom-0.1.0-py3-none-any.whl
+memory-loom onboard codex --project-id your-project
+memory-loom doctor --database ~/.local/share/memory-loom/your-project.db
+```
+
+Claude Code is also supported:
+
+```zsh
+memory-loom onboard claude --project-id your-project
+```
+
+Read [`EARLY_TESTERS.md`](EARLY_TESTERS.md) before using real preferences.
 
 ## Current Maturity
 
@@ -75,22 +114,6 @@ These layers are intentionally separate:
 2. Check the [claim register](research/claims.md) before repeating a claim.
 3. Use the [experiment protocol](research/protocol.md) for study design.
 4. Use the [reference design](design/README.md) only when implementing the system under test.
-
-## Early Tester Install
-
-Install the tagged wheel with `uv`, then run onboarding inside the project where
-the assistant should use Memory Loom:
-
-```zsh
-uv python install 3.14
-uv tool install --python 3.14 \
-  https://github.com/algeor/memory-loom/releases/download/v0.1.0/memory_loom-0.1.0-py3-none-any.whl
-memory-loom onboard codex --project-id your-project
-memory-loom doctor --database ~/.local/share/memory-loom/your-project.db
-```
-
-Claude Code is also supported. Read [`EARLY_TESTERS.md`](EARLY_TESTERS.md)
-before using real preferences.
 
 ## Contract Replay
 
