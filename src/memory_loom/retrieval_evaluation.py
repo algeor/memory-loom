@@ -44,7 +44,7 @@ def evaluate_retrieval(
     return RetrievalEvaluationArtifact(
         artifact_type="retrieval_evaluation",
         schema_version="1.0.0",
-        evaluator="sqlite-fts5-lexical-v1",
+        evaluator="sqlite-hybrid-local-v1",
         dataset_path=str(scenario_path),
         condition_manifest_id=condition_manifest.manifest_id,
         limit=limit,

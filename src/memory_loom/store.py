@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import sqlite3
 from collections.abc import Iterable
 from dataclasses import dataclass
@@ -379,6 +380,44 @@ class MemoryStore:
         ).fetchall()
         return [(UUID(row["memory_id"]), float(row["score"])) for row in rows]
 
+    def rank_semantic_eligible(
+        self,
+        records: list[MemoryRecord],
+        query: str,
+        *,
+        min_score: float = 0.25,
+    ) -> list[tuple[UUID, float]]:
+        if not records or not self._table_exists("memory_semantic_embeddings"):
+            return []
+        query_vector = self.semantic_indexer.embed_text(query)
+        if not any(query_vector):
+            return []
+
+        eligible_versions = {(str(record.id), record.version) for record in records}
+        rows = self.connection.execute(
+            "SELECT chunk.memory_id, chunk.memory_version, embedding.vector_json "
+            "FROM memory_semantic_chunks AS chunk "
+            "JOIN memory_semantic_embeddings AS embedding "
+            "ON chunk.chunk_id = embedding.chunk_id"
+        ).fetchall()
+
+        scores: dict[str, float] = {}
+        for row in rows:
+            key = (row["memory_id"], row["memory_version"])
+            if key not in eligible_versions:
+                continue
+            vector = json.loads(row["vector_json"])
+            score = _dot_product(query_vector, vector)
+            if score >= min_score:
+                scores[row["memory_id"]] = max(score, scores.get(row["memory_id"], 0.0))
+
+        return [
+            (UUID(memory_id), score)
+            for memory_id, score in sorted(
+                scores.items(), key=lambda item: (-item[1], item[0])
+            )
+        ]
+
     def replace_retrieval_traces(
         self, query_id: str, decisions: Iterable[tuple[RetrievalDecision, int]]
     ) -> None:
@@ -729,6 +768,10 @@ def _execute_sql_script(connection: sqlite3.Connection, script: str) -> None:
 def _fts_query(query: str) -> str:
     terms = [term for term in _tokenize(query) if len(term) > 1]
     return " OR ".join(f'"{term}"' for term in terms)
+
+
+def _dot_product(left: Iterable[float], right: Iterable[float]) -> float:
+    return sum(left_value * right_value for left_value, right_value in zip(left, right))
 
 
 def _tokenize(value: str) -> list[str]:

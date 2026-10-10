@@ -759,7 +759,7 @@ class RetrievalAggregateMetrics(ContractModel):
 class RetrievalEvaluationArtifact(ContractModel):
     artifact_type: Literal["retrieval_evaluation"]
     schema_version: ArtifactVersion
-    evaluator: Literal["sqlite-fts5-lexical-v1"]
+    evaluator: Literal["sqlite-hybrid-local-v1"]
     dataset_path: str = Field(min_length=1)
     condition_manifest_id: Identifier
     limit: int = Field(ge=1)

@@ -53,7 +53,7 @@ The initial study does not test:
 
 - inferred or sensitive personal attributes;
 - autonomous promotion or consolidation;
-- semantic vector retrieval;
+- provider-backed semantic embeddings;
 - fine-tuning;
 - production-scale latency or reliability;
 - legal compliance;

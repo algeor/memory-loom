@@ -19,9 +19,9 @@ Estimate whether explicit, user-approved structured memory changes later assista
 | B0 | No cross-session memory |
 | B1 | Most recent conversation history within the same token budget |
 | B2 | Rolling summary within the same token budget |
-| B3 | Approved structured memory using deterministic lexical retrieval |
+| B3 | Approved structured memory using deterministic hybrid retrieval |
 
-Vector retrieval, autonomous consolidation, and fine-tuning are later experiments. They are not part of the initial comparison.
+Provider-backed embeddings, autonomous consolidation, and fine-tuning are later experiments. They are not part of the initial comparison.
 
 ### Condition Construction
 

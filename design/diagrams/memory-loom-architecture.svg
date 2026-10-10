@@ -1,6 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="1900" height="1080" viewBox="0 0 1900 1080" role="img" aria-labelledby="title desc">
   <title id="title">Memory Loom Combined Import and Retrieval Architecture</title>
-  <desc id="desc">Combined architecture diagram showing approval-gated import, SQLite storage with lexical and semantic indexes, and scoped retrieval with optional hybrid candidates.</desc>
+  <desc id="desc">Combined architecture diagram showing approval-gated import, SQLite storage with lexical and semantic indexes, and scoped hybrid retrieval.</desc>
   <defs>
     <marker id="arrow" markerWidth="12" markerHeight="12" refX="10" refY="6" orient="auto" markerUnits="strokeWidth">
       <path d="M2,2 L10,6 L2,10 Z" fill="#263849" />
@@ -36,7 +36,7 @@
   <rect class="bg" x="0" y="0" width="1900" height="1080"/>
 
   <text class="title" x="80" y="82">Memory Loom Architecture</text>
-  <text class="subtitle" x="80" y="118">Approval-gated memory import feeds scoped lexical retrieval, with semantic chunks and embeddings stored for measured hybrid experiments.</text>
+  <text class="subtitle" x="80" y="118">Approval-gated memory import feeds scoped hybrid retrieval using lexical search, semantic chunks, and local embeddings.</text>
 
   <rect class="panel" x="55" y="165" width="585" height="650"/>
   <text class="section" x="92" y="213">1. Import / Admission</text>
@@ -107,7 +107,7 @@
 
   <rect class="panel" x="1260" y="165" width="585" height="650"/>
   <text class="section" x="1297" y="213">3. Retrieval / Use</text>
-  <text class="small" x="1297" y="244">Filters run before ranking; semantic retrieval remains optional.</text>
+  <text class="small" x="1297" y="244">Filters run before ranking; retrieval combines lexical and semantic candidates.</text>
 
   <rect class="box blue" x="1310" y="300" width="180" height="92"/>
   <text class="label" x="1335" y="336">Request</text>
@@ -127,7 +127,7 @@
 
   <rect class="box purple" x="1310" y="645" width="180" height="92"/>
   <text class="label" x="1335" y="681">Hybrid</text>
-  <text class="small" x="1335" y="709">optional candidates</text>
+  <text class="small" x="1335" y="709">vector candidates</text>
 
   <rect class="box green" x="1610" y="645" width="180" height="92"/>
   <text class="label" x="1635" y="681">Rerank</text>
@@ -154,9 +154,9 @@
   <rect class="pill" x="405" y="1000" width="305" height="34"/>
   <text class="pillText" x="426" y="1022">Scope outside model text</text>
   <rect class="pill" x="760" y="1000" width="310" height="34"/>
-  <text class="pillText" x="781" y="1022">Lexical retrieval is default</text>
+  <text class="pillText" x="781" y="1022">Hybrid retrieval is default</text>
   <rect class="pill" x="1120" y="1000" width="340" height="34"/>
-  <text class="pillText" x="1141" y="1022">Semantic index is experimental</text>
+  <text class="pillText" x="1141" y="1022">Provider embeddings are future work</text>
   <rect class="pill" x="1510" y="1000" width="310" height="34"/>
   <text class="pillText" x="1531" y="1022">Evidence IDs act as citations</text>
 </svg>

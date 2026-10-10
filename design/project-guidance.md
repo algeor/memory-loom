@@ -47,12 +47,12 @@ retrieval, and deletion lifecycle:
 ## Retrieval Boundary
 
 The assistant should query for guidance relevant to the current request. Scope
-and lifecycle filters run before lexical ranking, and the current request keeps
+and lifecycle filters run before hybrid ranking, and the current request keeps
 priority over retrieved records.
 
 This is durable scoped memory, not model training and not bulk document RAG.
-Adding document ingestion, chunking, embeddings, or hybrid retrieval would be a
-separate design and evaluation milestone.
+Adding document ingestion or provider-backed embeddings would be a separate
+design and evaluation milestone.
 
 ## Authoring Guidance
 
@@ -64,4 +64,3 @@ separate design and evaluation milestone.
   user-wide rule.
 - Link to canonical project documentation instead of copying large documents
   into memory.
-

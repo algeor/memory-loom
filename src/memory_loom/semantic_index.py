@@ -76,6 +76,9 @@ class SemanticMemoryIndexer:
             SemanticIndexEntry(chunk, self._embedding(chunk)) for chunk in chunks
         )
 
+    def embed_text(self, text: str) -> tuple[float, ...]:
+        return tuple(_hash_embedding(text, self.embedding_dimension))
+
     def _chunks(self, memory: MemoryRecord) -> tuple[SemanticChunk, ...]:
         contents = [
             ("statement", item)

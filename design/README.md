@@ -2,7 +2,7 @@
 
 ## Status
 
-This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, lexical retrieval path, synchronous baseline runner, and all five v1 MCP tools exist. Automated Codex and Claude Code onboarding is implemented; the JSON CLI fallback remains incomplete. The system has not produced experimental results.
+This is a **design decision** with a partial reference implementation. The experiment contracts, SQLite lifecycle core, hybrid retrieval path, synchronous baseline runner, and all five v1 MCP tools exist. Automated Codex and Claude Code onboarding is implemented; the JSON CLI fallback remains incomplete. The system has not produced experimental results.
 
 Its purpose is to create the smallest system capable of running the initial experiment in [`../research/protocol.md`](../research/protocol.md).
 
@@ -17,11 +17,11 @@ coding CLI -> local MCP boundary -> memory API
 experiment runner -------------> memory API
                                   -> policy checks
                                   -> SQLite records and revisions
-                                  -> lexical retrieval
+                                  -> hybrid retrieval
                                   -> bounded context manifest
 ```
 
-The core remains one process or library. Local stdio MCP is the chosen client-neutral boundary. A network daemon, vector index, remote model calls inside Memory Loom, and background consolidation remain unnecessary.
+The core remains one process or library. Local stdio MCP is the chosen client-neutral boundary. A network daemon, remote model calls inside Memory Loom, and background consolidation remain unnecessary.
 
 ## Components
 
@@ -30,7 +30,7 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 | Memory API | Approve, retrieve, correct, supersede, and delete records |
 | Policy module | Enforce consent, scope, state, and operation rules |
 | Store | Persist evidence, records, revisions, and retrieval traces |
-| Lexical retriever | Return eligible records using deterministic text search |
+| Hybrid retriever | Return eligible records using deterministic lexical and local-vector search |
 | Context builder | Produce a bounded, labeled context manifest |
 | MCP boundary | Expose retrieval and user-controlled lifecycle operations to compatible hosts |
 | Experiment adapter | Run identical scenarios across experimental conditions |
@@ -52,7 +52,7 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 
 - [`memory-model.md`](memory-model.md) — records, states, and revisions.
 - [`import-architecture.md`](import-architecture.md) — approval-gated memory admission diagrams.
-- [`retrieval.md`](retrieval.md) — lexical retrieval and context construction.
+- [`retrieval.md`](retrieval.md) — hybrid retrieval and context construction.
 - [`retrieval-architecture.md`](retrieval-architecture.md) — scoped retrieval, reranking, and provenance diagrams.
 - [`safety.md`](safety.md) — consent, scope, deletion, and threat boundaries.
 - [`implementation-plan.md`](implementation-plan.md) — build order and exit gates.
@@ -68,7 +68,7 @@ The core remains one process or library. Local stdio MCP is the chosen client-ne
 
 These require evidence from the first study or a separate experiment:
 
-- vector or hybrid retrieval;
+- provider-backed embeddings or model-backed reranking;
 - inferred preferences or personal facts;
 - confidence scoring;
 - autonomous admission and consolidation;

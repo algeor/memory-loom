@@ -12,7 +12,7 @@ query + user/project/task scope
   -> select active records
   -> resolve rule scope and conflicts
   -> lexical search
-  -> optional semantic candidates from stored embeddings
+  -> semantic candidates from stored embeddings
   -> candidate reranking
   -> context-budget selection
   -> context manifest and retrieval trace
@@ -42,23 +42,25 @@ Apply the `rule_key` procedure in [`memory-model.md`](memory-model.md) before te
 
 This step is mandatory rather than a ranking preference. A broad rule cannot displace its applicable narrow exception because of a higher lexical score.
 
-## Initial Ranking
+## Candidate Ranking
 
-Use a documented lexical method such as SQLite FTS5/BM25. After pre-ranking resolution, break score ties deterministically by scope specificity, then recency, then stable record ID.
+Use SQLite FTS5/BM25 for lexical candidates and stored local vectors for semantic candidates. Both candidate sources receive only records that passed scope, lifecycle, specificity, and conflict filters.
 
-Do not add hand-tuned confidence, importance, freshness, or usefulness multipliers to the first experiment. They would introduce uncalibrated variables and make the baseline harder to interpret.
+Semantic matches are deterministic local vector comparisons over approved-memory chunks. They are used for retrieval, not as a separate model-backed reranker.
+
+Do not add hand-tuned confidence, importance, freshness, or usefulness multipliers to the first experiment. They would introduce uncalibrated variables and make the comparison harder to interpret.
 
 ## Candidate Reranking
 
-Run a separate reranking stage over the eligible lexical candidates. The default reranker preserves the Phase 1 lexical baseline: BM25 score first, then scope specificity, recency, and stable record ID.
+Run a deterministic reranking stage over the eligible hybrid candidates. The default ordering is lexical match first, then semantic-only match, then scope specificity, recency, and stable record ID. Retrieval traces mark selected records as `highest-lexical-score`, `hybrid-score`, or `semantic-score`.
 
-Semantic or model-backed rerankers must be plugged in as separate experimental conditions. They must receive only records that passed scope, lifecycle, specificity, and conflict filters, and their rerank scores must be recorded in retrieval traces.
+Model-backed rerankers must be plugged in as separate experimental conditions. They must receive only records that passed scope, lifecycle, specificity, and conflict filters, and their rerank scores must be recorded in retrieval traces.
 
 ## Semantic Index
 
 Approved active memories are also decomposed into semantic chunks, facets, and local embedding vectors in SQLite. This index is built only after approval and is removed when the memory is corrected, superseded, or deleted.
 
-The default retrieval condition still uses lexical candidates. Semantic or hybrid retrieval should be enabled only as a separate measured condition so it can be compared against the lexical baseline.
+The default retrieval condition uses both lexical and semantic candidates. This is an implemented design choice, not evidence that embeddings improve outcomes.
 
 ## Context Manifest
 
@@ -103,6 +105,6 @@ Trace text is erasable. A deletion keeps non-content IDs, scores, positions, and
 
 ## Later Retrieval Experiments
 
-After the lexical baseline works, compare vector and hybrid retrieval as separate experimental conditions. Use the same eligible set, scope rules, token budget, dataset, and generation model.
+Compare local vectors, provider-backed embeddings, thresholds, and model-backed rerankers as separate experimental conditions. Use the same eligible set, scope rules, token budget, dataset, and generation model.
 
-Vector retrieval should be adopted only if it improves memory-dependent outcomes or semantic recall without unacceptable hard-negative, scope, latency, or context-cost regressions.
+Provider-backed vector retrieval should be adopted only if it improves memory-dependent outcomes or semantic recall without unacceptable hard-negative, scope, latency, or context-cost regressions.

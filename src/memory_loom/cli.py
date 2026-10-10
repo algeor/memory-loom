@@ -169,7 +169,7 @@ def build_parser() -> argparse.ArgumentParser:
 
     evaluation_parser = subparsers.add_parser(
         "evaluate-retrieval",
-        help="evaluate lexical retrieval against frozen scenario labels",
+        help="evaluate hybrid retrieval against frozen scenario labels",
     )
     evaluation_parser.add_argument("scenarios", type=Path)
     evaluation_parser.add_argument(

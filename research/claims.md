@@ -51,10 +51,10 @@ development pilot, but that model-reviewed run was not confirmatory.
 |---|---|---|
 | D1 | Begin with explicit, user-approved preferences only. | Scope choice intended to reduce ambiguity and risk |
 | D2 | Use an external local store rather than model-weight updates. | Makes inspection, correction, and deletion testable |
-| D3 | Start with deterministic lexical retrieval. | Provides an interpretable baseline before adding vectors |
+| D3 | Use deterministic hybrid retrieval over lexical BM25 and local vector candidates. | Defines the implemented serving path; effectiveness remains to be measured |
 | D4 | Keep append-only provenance metadata and revision events while storing user-authored content in erasable fields. | Supports replay and testable deletion; effectiveness remains to be measured |
 | D5 | Integrate through replaceable adapters. | Prevents one client implementation from defining the research claim |
-| D6 | Store semantic chunks, facets, and local embedding vectors for approved active memories. | Enables later hybrid-retrieval experiments; it does not establish that embeddings improve outcomes |
+| D6 | Store semantic chunks, facets, and local embedding vectors for approved active memories. | Enables vector candidates; it does not establish that embeddings improve outcomes |
 
 ## Prohibited Claims
 

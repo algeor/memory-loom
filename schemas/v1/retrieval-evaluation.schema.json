@@ -352,7 +352,7 @@
       "type": "string"
     },
     "evaluator": {
-      "const": "sqlite-fts5-lexical-v1",
+      "const": "sqlite-hybrid-local-v1",
       "title": "Evaluator",
       "type": "string"
     },

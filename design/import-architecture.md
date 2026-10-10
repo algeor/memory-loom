@@ -98,7 +98,7 @@ flowchart TB
 | Evidence event | Records the approved source text and host source event ID |
 | Memory record | Stores the active preference or correction used during retrieval |
 | Revision event | Records approve, correct, supersede, or delete operations |
-| FTS index row | Makes active memory searchable by lexical retrieval |
+| FTS index row | Makes active memory searchable by lexical candidate retrieval |
 
 ## Guardrails
 

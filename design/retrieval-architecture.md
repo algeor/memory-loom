@@ -3,7 +3,7 @@
 ## Status
 
 - Classification: design decision
-- Implementation status: implemented for scoped lexical retrieval with pluggable reranking
+- Implementation status: implemented for scoped hybrid retrieval with pluggable reranking
 - Boundary: local MCP or JSON stdio from host into SQLite
 - Scientific result: no
 
@@ -22,6 +22,7 @@ flowchart LR
     Store[(SQLite memory store)]
     Policy[Eligibility filters]
     Lexical[FTS5 lexical search\nBM25 score]
+    Semantic[Local vector search\nchunk embeddings]
     Rerank[Candidate reranker]
     Budget[Context budget]
     Context[Bounded memory context]
@@ -34,12 +35,15 @@ flowchart LR
     Retrieve --> Store
     Store --> Policy
     Policy --> Lexical
+    Policy --> Semantic
     Lexical --> Rerank
+    Semantic --> Rerank
     Rerank --> Budget
     Budget --> Context
     Context --> Model
     Policy --> Trace
     Lexical --> Trace
+    Semantic --> Trace
     Rerank --> Trace
     Budget --> Trace
 ```
@@ -55,6 +59,7 @@ flowchart TB
     Specificity[Keep narrowest matching scope]
     Conflict{Equal-scope conflict?}
     Search[FTS5 MATCH over eligible statements]
+    Vector[Vector match over semantic chunks]
     Rerank[Pluggable reranker]
     Select[Select top N]
 
@@ -68,8 +73,10 @@ flowchart TB
     Specificity --> Conflict
     Conflict -->|yes| ConflictOut[conflict_filtered]
     Conflict -->|no| Search
-    Search -->|no match| LexicalOut[lexical_filtered]
-    Search -->|matched candidates| Rerank
+    Conflict -->|no| Vector
+    Search --> Rerank
+    Vector --> Rerank
+    Rerank -->|no match| LexicalOut[lexical_filtered]
     Rerank --> Select
     Select -->|inside limit| Selected[selected]
     Select -->|outside limit| BudgetOut[budget_filtered]

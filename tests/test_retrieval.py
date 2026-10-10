@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+from datetime import UTC, datetime
+from uuid import UUID
+
 from memory_loom.contracts import FIXTURE_DIRECTORY, load_json
-from memory_loom.models import EvidenceEvent, MemoryRecord, RevisionEvent, Scenario
+from memory_loom.models import EvidenceEvent, MemoryRecord, RevisionEvent, Scenario, Scope
 from memory_loom.reranking import RerankedCandidate, RetrievalCandidate
 from memory_loom.retrieval import LexicalRetriever
 from memory_loom.store import MemoryStore
@@ -41,6 +44,12 @@ def test_live_retrieval_reproduces_fixture_decisions() -> None:
             )
             for decision in result.decisions
         }
+        expected[scenario.memory_records[1].id] = (
+            True,
+            "selected",
+            "hybrid-score",
+            1,
+        )
         assert actual == expected
         assert [record.id for record in result.selected_records] == [
             scenario.memory_records[1].id
@@ -147,6 +156,66 @@ def test_custom_reranker_can_reorder_lexical_candidates() -> None:
             ("query-rerank", str(preferred_candidate.id)),
         ).fetchone()
         assert trace["rerank_score"] == 1.0
+
+
+def test_semantic_candidates_are_used_when_statement_has_no_lexical_match() -> None:
+    memory_id = UUID("40000000-0000-4000-8000-000000000001")
+    evidence_id = UUID("50000000-0000-4000-8000-000000000001")
+    revision_id = UUID("60000000-0000-4000-8000-000000000001")
+    timestamp = datetime(2026, 10, 10, 9, 0, tzinfo=UTC)
+    scope = Scope(user_id="user-a", project_id="memory-loom", task_id=None)
+    evidence = EvidenceEvent(
+        id=evidence_id,
+        scenario_id="semantic-retrieval-test",
+        kind="explicit_preference",
+        content="Prefer short answers.",
+        content_state="present",
+        scope=scope,
+        recorded_at=timestamp,
+        consent="approved",
+    )
+    memory = MemoryRecord(
+        id=memory_id,
+        rule_key="response.conciseness",
+        statement="Prefer short answers.",
+        kind="preference",
+        scope=scope,
+        status="active",
+        evidence_ids=[evidence_id],
+        created_at=timestamp,
+        valid_from=timestamp,
+        valid_until=None,
+        version=1,
+    )
+    revision = RevisionEvent.model_validate(
+        {
+            "id": revision_id,
+            "memory_id": memory_id,
+            "operation": "approve",
+            "from_version": None,
+            "to_version": 1,
+            "evidence_ids": [evidence_id],
+            "actor": "research_fixture",
+            "reason_code": "explicit-user-approval",
+            "created_at": timestamp,
+        }
+    )
+
+    with MemoryStore() as store:
+        store.approve(evidence, memory, revision)
+        result = LexicalRetriever(store).retrieve(
+            "semantic-query",
+            "response conciseness",
+            scope,
+            timestamp,
+        )
+
+        assert [record.id for record in result.selected_records] == [memory_id]
+        selected = next(
+            decision for decision in result.decisions if decision.position == 1
+        )
+        assert selected.reason_code == "semantic-score"
+        assert selected.rerank_score is not None and selected.rerank_score > 0
 
 
 class _PreferVerdictReranker:

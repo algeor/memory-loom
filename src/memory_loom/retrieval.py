@@ -104,23 +104,34 @@ class LexicalRetriever:
                     "duplicate-rule-collapsed",
                 )
 
-        scores = dict(self.store.rank_eligible(rankable, query))
+        lexical_scores = dict(self.store.rank_eligible(rankable, query))
+        semantic_scores = dict(self.store.rank_semantic_eligible(rankable, query))
+        candidate_ids = set(lexical_scores) | set(semantic_scores)
         ranked = self.reranker.rerank(
             query,
             tuple(
-                RetrievalCandidate(record=record, lexical_score=scores[record.id])
+                RetrievalCandidate(
+                    record=record,
+                    lexical_score=_candidate_score(
+                        lexical_scores.get(record.id), semantic_scores.get(record.id)
+                    ),
+                    semantic_score=semantic_scores.get(record.id),
+                    reason_code=_candidate_reason(
+                        lexical_scores.get(record.id), semantic_scores.get(record.id)
+                    ),
+                )
                 for record in rankable
-                if record.id in scores
+                if record.id in candidate_ids
             ),
         )
         for record in rankable:
-            if record.id not in scores:
+            if record.id not in candidate_ids:
                 decisions[record.id] = _decision(
                     query_id,
                     record.id,
                     True,
                     "lexical_filtered",
-                    "no-lexical-match",
+                    "no-hybrid-match",
                 )
 
         selected_candidates = ranked[:limit]
@@ -212,3 +223,23 @@ def _state_reason(record: MemoryRecord) -> str:
 
 def _specificity(scope: Scope) -> int:
     return 1 + int(scope.project_id is not None) + int(scope.task_id is not None)
+
+
+def _candidate_score(
+    lexical_score: float | None, semantic_score: float | None
+) -> float:
+    if lexical_score is not None:
+        return lexical_score
+    if semantic_score is not None:
+        return -semantic_score
+    raise ValueError("candidate requires a lexical or semantic score")
+
+
+def _candidate_reason(
+    lexical_score: float | None, semantic_score: float | None
+) -> str:
+    if lexical_score is not None and semantic_score is not None:
+        return "hybrid-score"
+    if semantic_score is not None:
+        return "semantic-score"
+    return "highest-lexical-score"
