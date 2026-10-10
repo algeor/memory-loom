@@ -6,6 +6,11 @@ from datetime import datetime
 from uuid import UUID
 
 from memory_loom.models import MemoryRecord, RetrievalDecision, Scope
+from memory_loom.reranking import (
+    CandidateReranker,
+    LexicalScoreReranker,
+    RetrievalCandidate,
+)
 from memory_loom.store import MemoryStore
 
 
@@ -16,8 +21,11 @@ class RetrievalResult:
 
 
 class LexicalRetriever:
-    def __init__(self, store: MemoryStore) -> None:
+    def __init__(
+        self, store: MemoryStore, reranker: CandidateReranker | None = None
+    ) -> None:
         self.store = store
+        self.reranker = reranker or LexicalScoreReranker()
 
     def retrieve(
         self,
@@ -97,13 +105,12 @@ class LexicalRetriever:
                 )
 
         scores = dict(self.store.rank_eligible(rankable, query))
-        ranked = sorted(
-            (record for record in rankable if record.id in scores),
-            key=lambda record: (
-                scores[record.id],
-                -_specificity(record.scope),
-                -record.valid_from.timestamp(),
-                str(record.id),
+        ranked = self.reranker.rerank(
+            query,
+            tuple(
+                RetrievalCandidate(record=record, lexical_score=scores[record.id])
+                for record in rankable
+                if record.id in scores
             ),
         )
         for record in rankable:
@@ -116,25 +123,29 @@ class LexicalRetriever:
                     "no-lexical-match",
                 )
 
-        selected_records = ranked[:limit]
-        for position, record in enumerate(selected_records, 1):
+        selected_candidates = ranked[:limit]
+        for position, candidate in enumerate(selected_candidates, 1):
+            record = candidate.record
             decisions[record.id] = _decision(
                 query_id,
                 record.id,
                 True,
                 "selected",
-                "highest-lexical-score",
-                lexical_score=scores[record.id],
+                candidate.reason_code,
+                lexical_score=candidate.lexical_score,
+                rerank_score=candidate.rerank_score,
                 position=position,
             )
-        for record in ranked[limit:]:
+        for candidate in ranked[limit:]:
+            record = candidate.record
             decisions[record.id] = _decision(
                 query_id,
                 record.id,
                 True,
                 "budget_filtered",
                 "result-limit",
-                lexical_score=scores[record.id],
+                lexical_score=candidate.lexical_score,
+                rerank_score=candidate.rerank_score,
             )
 
         ordered_decisions = tuple(decisions[record.id] for record in records)
@@ -145,7 +156,10 @@ class LexicalRetriever:
                 for decision in ordered_decisions
             ),
         )
-        return RetrievalResult(ordered_decisions, tuple(selected_records))
+        return RetrievalResult(
+            ordered_decisions,
+            tuple(candidate.record for candidate in selected_candidates),
+        )
 
 
 def _decision(
@@ -155,6 +169,7 @@ def _decision(
     decision: str,
     reason_code: str,
     lexical_score: float | None = None,
+    rerank_score: float | None = None,
     position: int | None = None,
 ) -> RetrievalDecision:
     return RetrievalDecision.model_validate(
@@ -164,6 +179,7 @@ def _decision(
             "eligible": eligible,
             "decision": decision,
             "lexical_score": lexical_score,
+            "rerank_score": rerank_score,
             "reason_code": reason_code,
             "position": position,
         }

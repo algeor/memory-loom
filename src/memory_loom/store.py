@@ -383,8 +383,8 @@ class MemoryStore:
             self.connection.executemany(
                 "INSERT INTO retrieval_traces("
                 "query_id, memory_id, memory_version, eligible, decision, "
-                "lexical_score, reason_code, position, created_at"
-                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
+                "lexical_score, rerank_score, reason_code, position, created_at"
+                ") VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
                 [
                     (
                         decision.query_id,
@@ -393,6 +393,7 @@ class MemoryStore:
                         int(decision.eligible),
                         decision.decision,
                         decision.lexical_score,
+                        decision.rerank_score,
                         decision.reason_code,
                         decision.position,
                         _timestamp(datetime.now(UTC)),

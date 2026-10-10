@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from memory_loom.contracts import FIXTURE_DIRECTORY, load_json
 from memory_loom.models import EvidenceEvent, MemoryRecord, RevisionEvent, Scenario
+from memory_loom.reranking import RerankedCandidate, RetrievalCandidate
 from memory_loom.retrieval import LexicalRetriever
 from memory_loom.store import MemoryStore
 
@@ -91,3 +92,79 @@ def test_equal_scope_conflicts_never_reach_ranking() -> None:
     }
     assert conflict_ids == {scenario.memory_records[1].id, conflicting.id}
     assert result.selected_records == ()
+
+
+def test_custom_reranker_can_reorder_lexical_candidates() -> None:
+    scenario = Scenario.model_validate(load_json(SCENARIO_PATH))
+    first_candidate = scenario.memory_records[1]
+    preferred_candidate = MemoryRecord.model_validate(
+        {
+            **first_candidate.model_dump(),
+            "id": "20000000-0000-4000-8000-000000000006",
+            "rule_key": "response.verdict",
+            "statement": "For Memory Loom documentation reviews, return a short verdict.",
+            "evidence_ids": ["10000000-0000-4000-8000-000000000006"],
+        }
+    )
+    preferred_evidence = EvidenceEvent.model_validate(
+        {
+            **scenario.evidence_events[1].model_dump(),
+            "id": "10000000-0000-4000-8000-000000000006",
+            "content": preferred_candidate.statement,
+        }
+    )
+    preferred_revision = RevisionEvent.model_validate(
+        {
+            **scenario.revision_events[1].model_dump(),
+            "id": "30000000-0000-4000-8000-000000000006",
+            "memory_id": preferred_candidate.id,
+            "evidence_ids": [preferred_evidence.id],
+        }
+    )
+
+    with MemoryStore() as store:
+        store.load_snapshot(
+            [*scenario.evidence_events, preferred_evidence],
+            [*scenario.memory_records, preferred_candidate],
+            [*scenario.revision_events, preferred_revision],
+        )
+        query = scenario.queries[0]
+        result = LexicalRetriever(store, reranker=_PreferVerdictReranker()).retrieve(
+            "query-rerank", query.content, query.scope, query.occurred_at, limit=1
+        )
+
+        assert result.selected_records[0].id == preferred_candidate.id
+        selected_decision = next(
+            decision
+            for decision in result.decisions
+            if decision.memory_id == preferred_candidate.id
+        )
+        assert selected_decision.reason_code == "semantic-reranker"
+        assert selected_decision.rerank_score == 1.0
+        trace = store.connection.execute(
+            "SELECT rerank_score FROM retrieval_traces WHERE query_id = ? "
+            "AND memory_id = ?",
+            ("query-rerank", str(preferred_candidate.id)),
+        ).fetchone()
+        assert trace["rerank_score"] == 1.0
+
+
+class _PreferVerdictReranker:
+    def rerank(
+        self, query: str, candidates: tuple[RetrievalCandidate, ...]
+    ) -> tuple[RerankedCandidate, ...]:
+        del query
+        ranked = sorted(
+            candidates,
+            key=lambda candidate: "verdict" in (candidate.record.statement or ""),
+            reverse=True,
+        )
+        return tuple(
+            RerankedCandidate(
+                record=candidate.record,
+                lexical_score=candidate.lexical_score,
+                rerank_score=1.0 if candidate is ranked[0] else 0.0,
+                reason_code="semantic-reranker",
+            )
+            for candidate in ranked
+        )

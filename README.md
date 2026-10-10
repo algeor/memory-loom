@@ -54,7 +54,7 @@ Read [`EARLY_TESTERS.md`](EARLY_TESTERS.md) before using real preferences.
 | Source-backed agent-harness patterns | Documented from one source repository |
 | Research questions and hypotheses | Defined; exercised in one exploratory development pilot |
 | Experimental protocol | Implemented and exercised with blinded model review |
-| Reference implementation | SQLite memory core, retrieval, JSON/MCP lifecycle boundaries, and provider-backed runner implemented |
+| Reference implementation | SQLite memory core, lexical retrieval with pluggable reranking, JSON/MCP lifecycle boundaries, and provider-backed runner implemented |
 | Development pilot dataset | 24 synthetic scenarios across 6 template families |
 | Client integration | Five model-neutral MCP 2.x tools, persistent JSON stdio fallback, and automated Codex/Claude onboarding implemented |
 | Scientific conclusions | No confirmatory conclusion; development-pilot contrasts were inconclusive |

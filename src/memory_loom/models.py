@@ -126,6 +126,7 @@ class RetrievalDecision(ContractModel):
         "budget_filtered",
     ]
     lexical_score: float | None
+    rerank_score: float | None = None
     reason_code: Identifier
     position: int | None = Field(default=None, ge=1)
 

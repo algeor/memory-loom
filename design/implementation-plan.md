@@ -10,6 +10,7 @@ Build only what the next experiment needs. Add complexity as a new controlled co
 - Phase 1 completed on 2026-09-23.
 - Phase 2 completed on 2026-09-24.
 - Phase 3 is active; the development dataset is complete.
+- Retrieval now has a separate reranking extension point; the default reranker preserves the lexical baseline.
 - The model-neutral MCP contract was drafted on 2026-09-30; all five stdio tools are implemented.
 
 ## Phase 0: Experiment Contracts
@@ -40,6 +41,7 @@ Deliver:
 - approval, correction, supersession, and deletion operations;
 - scope and lifecycle policy;
 - retrieval traces;
+- pluggable reranking after lexical candidate search;
 - unit and contract tests.
 
 Exit gate:
@@ -58,7 +60,7 @@ Deliver:
 - no-memory condition;
 - recent-history condition;
 - rolling-summary condition;
-- structured lexical-memory condition;
+- structured lexical-memory condition with explicit reranking;
 - fixed-budget context assembly;
 - raw output and configuration capture.
 
@@ -116,7 +118,7 @@ Freeze the protocol, dataset split, prompts, conditions, and analysis before run
 - autonomous extraction or promotion;
 - inferred facts and sensitive attributes;
 - confidence-weighted consolidation;
-- vector and hybrid retrieval;
+- semantic reranking, vector retrieval, and hybrid retrieval as non-default experimental conditions;
 - network daemon and remote service hosting;
 - host-specific enforcement wrappers;
 - real-user data;

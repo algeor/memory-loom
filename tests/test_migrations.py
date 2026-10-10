@@ -35,6 +35,11 @@ def test_real_migration_preserves_v1_records_and_creates_backup(tmp_path: Path) 
         assert [item.operation for item in store.revisions_for_lineage(active.id)] == [
             "approve"
         ]
+        trace_columns = {
+            row[1]
+            for row in store.connection.execute("PRAGMA table_info(retrieval_traces)")
+        }
+        assert "rerank_score" in trace_columns
 
     assert backup_path.is_file()
     with sqlite3.connect(backup_path) as backup:
@@ -59,13 +64,13 @@ def test_failed_migration_rolls_back_and_keeps_backup(tmp_path: Path) -> None:
         connection.commit()
 
     migrations = _copy_current_migrations(tmp_path)
-    (migrations / "003_failure.sql").write_text(
+    (migrations / "004_failure.sql").write_text(
         "ALTER TABLE memory_lineages ADD COLUMN test_marker TEXT;\n"
         "THIS IS NOT VALID SQL;\n",
         encoding="utf-8",
     )
 
-    with pytest.raises(MemoryStoreError, match="migration 3 failed"):
+    with pytest.raises(MemoryStoreError, match="migration 4 failed"):
         MemoryStore(database_path, migration_directory=migrations)
 
     backups = list((tmp_path / "memory.db.backups").glob("*.db"))
@@ -78,7 +83,7 @@ def test_failed_migration_rolls_back_and_keeps_backup(tmp_path: Path) -> None:
             row[0] for row in connection.execute("SELECT version FROM schema_migrations")
         }
         assert "test_marker" not in columns
-        assert versions == {1, 2}
+        assert versions == {1, 2, 3}
         assert connection.execute("SELECT id FROM memory_lineages").fetchone() == (
             MEMORY_ID,
         )
@@ -103,7 +108,7 @@ def test_newer_database_schema_is_rejected_without_changes(tmp_path: Path) -> No
         versions = {
             row[0] for row in connection.execute("SELECT version FROM schema_migrations")
         }
-    assert versions == {1, 2, 999}
+    assert versions == {1, 2, 3, 999}
 
 
 def test_current_database_does_not_create_redundant_backup(tmp_path: Path) -> None:
@@ -128,7 +133,7 @@ def test_migrate_cli_reports_backup_and_preserves_database(
     assert main(["migrate", "--database", str(database_path)]) == 0
 
     output = capsys.readouterr().out
-    assert f"ready: {database_path} (schema 2)" in output
+    assert f"ready: {database_path} (schema 3)" in output
     assert "backup:" in output
     with MemoryStore(database_path) as store:
         active = store.get_active(_uuid(MEMORY_ID))

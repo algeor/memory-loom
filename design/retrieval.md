@@ -12,7 +12,7 @@ query + user/project/task scope
   -> select active records
   -> resolve rule scope and conflicts
   -> lexical search
-  -> deterministic tie-break
+  -> candidate reranking
   -> context-budget selection
   -> context manifest and retrieval trace
 ```
@@ -47,6 +47,12 @@ Use a documented lexical method such as SQLite FTS5/BM25. After pre-ranking reso
 
 Do not add hand-tuned confidence, importance, freshness, or usefulness multipliers to the first experiment. They would introduce uncalibrated variables and make the baseline harder to interpret.
 
+## Candidate Reranking
+
+Run a separate reranking stage over the eligible lexical candidates. The default reranker preserves the Phase 1 lexical baseline: BM25 score first, then scope specificity, recency, and stable record ID.
+
+Semantic or model-backed rerankers must be plugged in as separate experimental conditions. They must receive only records that passed scope, lifecycle, specificity, and conflict filters, and their rerank scores must be recorded in retrieval traces.
+
 ## Context Manifest
 
 ```yaml
@@ -78,6 +84,7 @@ Persist:
 - all selected memory IDs and positions;
 - filtered counts by reason;
 - lexical scores for eligible candidates;
+- rerank scores for reranked candidates;
 - estimated context tokens;
 - retrieval and context-building latency;
 - the exact serialized context.

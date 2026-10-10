@@ -11,7 +11,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - A 24-scenario synthetic development set covers six independent template families with four surface variants each.
 - All 24 pilot scenarios validate, use unique UUIDs, and reproduce their labeled B3 retrieval selections without calling a model.
 - The SQLite memory core implements approval, correction, supersession, deletion, restart persistence, and retrieval traces.
-- Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking.
+- Live retrieval applies scope, lifecycle, specificity, and conflict filters before candidate-only FTS5 ranking and pluggable reranking.
 - The deterministic retrieval evaluator reports ranking, abstention, safety, and context-cost metrics from frozen labels without calling a model.
 - The resumable parallel runner executes B0-B3 through OpenAI Responses API, isolated Claude CLI, or deterministic no-model adapters and records prompts, contexts, usage, cost, latency, raw outputs, and failures.
 - A frozen Claude development pilot completed 192 runs across 24 scenarios, with condition-blind model review and paired cluster-bootstrap analysis.
@@ -40,7 +40,7 @@ Test whether explicit, user-approved external memory improves coding-assistant b
 - Defer inferred traits, autonomous consolidation, vector retrieval, and fine-tuning.
 - Do not set numerical quality targets before a pilot establishes baseline distributions.
 - Build every baseline from the same frozen scenario timeline and context-budget contract.
-- Resolve scope specificity and conflicts before lexical ranking.
+- Resolve scope specificity and conflicts before lexical ranking and reranking.
 - Treat provenance metadata as append-only while keeping user-authored content erasable.
 - Resample independent scenario-construction clusters rather than queries or repeated model runs.
 - Use local stdio MCP as the primary client integration boundary, with a JSON CLI fallback for hosts without MCP.
