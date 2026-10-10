@@ -48,6 +48,9 @@ def test_retrieve_tool_uses_host_bound_scope(
     assert [item["memory_id"] for item in content["selected"]] == [
         PROJECT_MEMORY_ID
     ]
+    assert content["selected"][0]["evidence_ids"] == [
+        "51000000-0000-4000-8000-000000000002"
+    ]
     assert PROJECT_MEMORY_ID in content["context"]
     assert GLOBAL_MEMORY_ID not in content["context"]
 

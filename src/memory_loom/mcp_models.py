@@ -20,6 +20,7 @@ class SelectedMemory(ContractModel):
     kind: Literal["preference", "correction"]
     scope: Scope
     version: int = Field(ge=1)
+    evidence_ids: list[UUID]
     reason_code: Identifier
 
 

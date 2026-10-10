@@ -90,6 +90,7 @@ def retrieve_memory(query: QueryText, limit: ResultLimit = 5) -> RetrieveRespons
             kind=record.kind,
             scope=record.scope,
             version=record.version,
+            evidence_ids=record.evidence_ids,
             reason_code=reasons[record.id],
         )
         for record in result.selected_records

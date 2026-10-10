@@ -25,6 +25,9 @@
           "task_id": null
         },
         "version": 1,
+        "evidence_ids": [
+          "41000000-0000-4000-8000-000000000001"
+        ],
         "reason_code": "highest-lexical-score"
       }
     ]

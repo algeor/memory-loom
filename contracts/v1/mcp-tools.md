@@ -67,9 +67,9 @@ Request and response examples live in [`mcp/`](mcp/README.md).
 The server generates the query identifier and timestamp. It binds user,
 project, and task scope from host configuration or the local session; none are
 accepted from model-controlled tool arguments. The tool returns the generated
-query identifier, active scope, bounded context string, and selected records. Full
-retrieval decisions remain in the local audit trace. The host response must not
-expose identifiers or content from out-of-scope records.
+query identifier, active scope, bounded context string, and selected records with
+their evidence IDs. Full retrieval decisions remain in the local audit trace.
+The host response must not expose identifiers or content from out-of-scope records.
 
 An empty result is successful and must return an empty context.
 
